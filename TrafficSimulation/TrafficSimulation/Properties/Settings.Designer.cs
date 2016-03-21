@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TrafficSimulator.Properties
+namespace TrafficSimulation.Properties
 {
 
 
