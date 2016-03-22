@@ -13,9 +13,9 @@ namespace TrafficSimulation
 
 
         List<Direction> routes;
-        List<> = new List<>();
-        public int NoOfCars;
-        public int NoOfTrafficLights;
+        List<TrafficLight> TrafficLlist= new List<TrafficLight>();
+        public int NoOfCars { get; set; }
+        public int NoOfTrafficLights { get; set; }
         public
 
         //populates the list of the crossroad's available directions

@@ -8,7 +8,7 @@ namespace TrafficSimulation
 {
     class CrossroadA
     {
-        public int noOfPedestrians { get; set; }
-        public bool sensor { get; set; }
+        public int NoOfPedestrians { get; set; }
+        public bool Sensor { get; set; }
     }
 }
