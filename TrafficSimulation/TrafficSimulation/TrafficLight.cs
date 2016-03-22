@@ -13,9 +13,11 @@ namespace TrafficSimulation
         public int Time { get; set; }
         public Color State { get; set; }
 
-        public TrafficLight()
+        public TrafficLight(int id, int time, Color state)
         {
-
+            Id = id;
+            Time = time;
+            State = state;
         }
 
         public void ChangeState(Color state)
