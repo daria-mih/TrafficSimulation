@@ -13,11 +13,21 @@ namespace TrafficSimulation
 
 
         List<Direction> routes;
+        List<> = new List<>();
+        public int NoOfCars;
+        public int NoOfTrafficLights;
+        public
+
         //populates the list of the crossroad's available directions
         public List<Point> AddNewDirection()
         {
             return direction;
         }
-
+        public void Connect()
+        { }
+        public int NextDirection()
+        {
+            return 0;
+        }
     }
 }

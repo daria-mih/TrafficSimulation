@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TrafficSimulation
 {
-    class Grid
+    class CrossroadA
     {
-
+        public int noOfPedestrians { get; set; }
+        public bool sensor { get; set; }
     }
 }

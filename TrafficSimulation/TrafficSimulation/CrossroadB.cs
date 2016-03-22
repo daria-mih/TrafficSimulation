@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficSimulation
 {
-    class Grid
+    class CrossroadB
     {
-
     }
 }
