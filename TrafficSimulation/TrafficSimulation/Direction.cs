@@ -11,9 +11,7 @@ namespace TrafficSimulation
     {
         List<Point> direction;
 
-        public List<Point> PopulateList(Point endpoint)
-        {
-            return direction;
-        }
+
+        
     }
 }

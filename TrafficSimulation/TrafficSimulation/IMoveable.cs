@@ -15,6 +15,10 @@ namespace TrafficSimulation
         Point currentPosition { get; set; }
         List<Direction> route { get; set; }
 
+
+        //takes a route from the list for a moveable to follow
+
+
        void Move(Direction direction);
       
     }
