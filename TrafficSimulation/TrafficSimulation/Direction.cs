@@ -9,9 +9,16 @@ namespace TrafficSimulation
 {
     public class Direction
     {
-        List<Point> direction;
 
+        //one path inside of a crossroad
+        List<Point> points;
 
+        //constructor
+        public Direction()
+        {
+            points = new List<Point>();
+        }
+        
         
     }
 }
