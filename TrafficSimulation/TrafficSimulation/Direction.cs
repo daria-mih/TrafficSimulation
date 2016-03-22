@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TrafficSimulation
 {
     public class Direction
     {
+        List<Point> direction;
+
+        public List<Point> PopulateList(Point endpoint)
+        {
+            return direction;
+        }
     }
 }
