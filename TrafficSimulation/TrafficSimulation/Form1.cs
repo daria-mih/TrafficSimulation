@@ -158,6 +158,21 @@ namespace TrafficSimulation
             btnClose.Image = Properties.Resources.close;
         }
 
-        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            List<TrafficLight> trafficLights = new List<TrafficLight>();
+            List<TrafficLight> temp = trafficLights;
+            foreach (TrafficLight trafficlight in trafficLights)
+            {
+                trafficlight.Interval--;
+                break;
+                if (trafficlight.Interval.Equals(0))
+                {
+                    Simulation.ChangeTrafficLights();
+                    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
+                }
+            }
+        }
     }
 }
