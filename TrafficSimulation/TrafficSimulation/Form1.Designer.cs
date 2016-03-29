@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -63,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -119,7 +118,6 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.grid1);
             this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(127, 5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(800, 601);
@@ -136,18 +134,6 @@
             this.btnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnClose_MouseClick);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.AllowDrop = true;
-            this.pictureBox1.BackgroundImage = global::TrafficSimulation.Properties.Resources.grid;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 88);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 602);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
-            this.pictureBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragEnter);
             // 
             // panel2
             // 
@@ -369,7 +355,6 @@
             // 
             // crossroadB1
             // 
-            this.crossroadB1.AllowDrop = true;
             this.crossroadB1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad2bw;
             this.crossroadB1.East = null;
             this.crossroadB1.Location = new System.Drawing.Point(4, 126);
@@ -389,7 +374,6 @@
             // 
             // crossroadA1
             // 
-            this.crossroadA1.AllowDrop = true;
             this.crossroadA1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
             this.crossroadA1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.crossroadA1.East = null;
@@ -412,12 +396,16 @@
             // 
             // grid1
             // 
+            this.grid1.AllowDrop = true;
             this.grid1.BackgroundImage = global::TrafficSimulation.Properties.Resources.grid;
-            this.grid1.Location = new System.Drawing.Point(178, 28);
+            this.grid1.Location = new System.Drawing.Point(-1, -1);
             this.grid1.Name = "grid1";
+            this.grid1.Placeholders = ((System.Collections.Generic.List<System.Drawing.Rectangle>)(resources.GetObject("grid1.Placeholders")));
             this.grid1.Size = new System.Drawing.Size(800, 602);
             this.grid1.TabIndex = 2;
             this.grid1.Text = "grid1";
+            this.grid1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
+            this.grid1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragEnter);
             // 
             // Form1
             // 
@@ -439,7 +427,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -480,7 +467,6 @@
         private System.Windows.Forms.PictureBox btnStart;
         private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.PictureBox btnStop;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private CrossroadA crossroadA1;

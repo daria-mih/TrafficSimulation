@@ -75,8 +75,6 @@ namespace TrafficSimulation
             this.Close();
         }
 
-        
-
         private void btnOpen_MouseEnter(object sender, EventArgs e)
         {
             this.Cursor = Cursors.Hand;
@@ -142,8 +140,6 @@ namespace TrafficSimulation
             btnClose.Image = Properties.Resources.close;
         }
 
-
-
         //DRAG & DROP
 
         //Grid Events
@@ -158,29 +154,45 @@ namespace TrafficSimulation
                 {
                     Crossroad A = new Crossroad();
                     A.BackgroundImage = Properties.Resources.Crossroad1;
-                    A.Location = pictureBox1.PointToClient(Cursor.Position);
+                   
                     A.Width = 200;
                     A.Height = 200;
                     A.BackgroundImageLayout = ImageLayout.Stretch;
                     A.MouseClick += crossroadA1_MouseDown;
                     A.MouseUp += crossroadA1_MouseUp;
-                    pictureBox1.Controls.Add(A);
+
+                    //Places the crossroad in the placeholder
+                    foreach (var placeholder in grid1.Placeholders)
+                    {
+                        if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
+                        {
+                            A.Location = placeholder.Location;
+                        }
+                    }
+
+                    //adds the crossroad to the grid
+                    grid1.Controls.Add(A);
                 }
                 else if (c.Name == "crossroadB1")
                 {
                     Crossroad B = new CrossroadB();
                     B.BackgroundImage = Properties.Resources.Crossroad2;
-                    B.Location = pictureBox1.PointToClient(Cursor.Position);
+                    B.Location = grid1.PointToClient(Cursor.Position);
                     B.Width = 200;
                     B.Height = 200;
                     B.BackgroundImageLayout = ImageLayout.Stretch;
-
                     B.MouseClick += crossroadB1_MouseDown;
                     B.MouseUp += crossroadB1_MouseUp;
 
+                    foreach (var placeholder in grid1.Placeholders)
+                    {
+                        if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
+                        {
+                            B.Location = placeholder.Location;
+                        }
+                    }
 
-
-                    pictureBox1.Controls.Add(B);
+                    grid1.Controls.Add(B);
                 }
             }
         }
