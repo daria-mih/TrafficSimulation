@@ -166,6 +166,7 @@ namespace TrafficSimulation
             btnClose.Image = Properties.Resources.close;
         }
 
+<<<<<<< HEAD
         //DRAG & DROP
 
         //Grid Events
@@ -251,5 +252,23 @@ namespace TrafficSimulation
         }
 
        
+=======
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            List<TrafficLight> trafficLights = new List<TrafficLight>();
+            List<TrafficLight> temp = trafficLights;
+            foreach (TrafficLight trafficlight in trafficLights)
+            {
+                trafficlight.Interval--;
+                break;
+                if (trafficlight.Interval.Equals(0))
+                {
+                    Simulation.ChangeTrafficLights();
+                    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
+                }
+            }
+        }
+>>>>>>> 7fce1bc945763c9db590314bc2ed37886ffd1189
     }
 }
