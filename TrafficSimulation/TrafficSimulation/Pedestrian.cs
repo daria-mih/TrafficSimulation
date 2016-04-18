@@ -24,7 +24,8 @@ namespace TrafficSimulation
 
         public void Move(Direction direction)
         {
-            throw new NotImplementedException();
+           
+            
         }
     }
 }
