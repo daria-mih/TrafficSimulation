@@ -207,6 +207,7 @@ namespace TrafficSimulation
         private void crossroadA1_MouseDown(object sender, MouseEventArgs e)
         {
             crossroadA1.DoDragDrop(crossroadA1, DragDropEffects.Copy);
+            
         }
 
         private void crossroadB1_MouseDown(object sender, MouseEventArgs e)
