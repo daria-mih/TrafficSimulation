@@ -27,36 +27,12 @@ namespace TrafficSimulation
             this.ControlBox = false;
             this.Text = String.Empty; 
             InitializeComponent();
-<<<<<<< HEAD
-        }
-        public void StopSimulation()
-        {
-
-        }
-        //public bool Save(Grid grid)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public Grid  Load()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public void SelectCrossroad(object sender, EventArgs e)
-        {
-
-        }
-        private void btnCrossroad1_MouseHover(object sender, EventArgs e)
-        {
-            
-=======
 
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
             //A.Width = 101;
             //pictureBox1.Controls.Add(A);
->>>>>>> remotes/origin/jose-armin
         }
 
 
@@ -166,7 +142,6 @@ namespace TrafficSimulation
             btnClose.Image = Properties.Resources.close;
         }
 
-<<<<<<< HEAD
         //DRAG & DROP
 
         //Grid Events
@@ -253,7 +228,6 @@ namespace TrafficSimulation
         }
 
        
-=======
         private void timer1_Tick(object sender, EventArgs e)
         {
             
@@ -261,15 +235,15 @@ namespace TrafficSimulation
             List<TrafficLight> temp = trafficLights;
             foreach (TrafficLight trafficlight in trafficLights)
             {
-                trafficlight.Interval--;
-                break;
-                if (trafficlight.Interval.Equals(0))
-                {
-                    Simulation.ChangeTrafficLights();
-                    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
-                }
+                //trafficlight.Interval--;
+                //break;
+                //if (trafficlight.Interval.Equals(0))
+                //{
+                //    Simulation.ChangeTrafficLights();
+                //    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
+                //}
             }
         }
->>>>>>> 7fce1bc945763c9db590314bc2ed37886ffd1189
+
     }
 }

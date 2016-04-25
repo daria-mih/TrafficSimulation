@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
+
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-=======
+
             this.components = new System.ComponentModel.Container();
->>>>>>> 7fce1bc945763c9db590314bc2ed37886ffd1189
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.PictureBox();
@@ -59,13 +58,13 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.PictureBox();
             this.btnStart = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
+
             this.crossroadB1 = new TrafficSimulation.CrossroadB();
             this.crossroadA1 = new TrafficSimulation.CrossroadA();
             this.grid1 = new TrafficSimulation.Grid();
-=======
+
             this.timer1 = new System.Windows.Forms.Timer(this.components);
->>>>>>> 7fce1bc945763c9db590314bc2ed37886ffd1189
+
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).BeginInit();
@@ -361,7 +360,6 @@
             this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
             this.btnStart.MouseLeave += new System.EventHandler(this.btnStart_MouseLeave);
             // 
-<<<<<<< HEAD
             // crossroadB1
             // 
             this.crossroadB1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad2bw;
@@ -415,11 +413,9 @@
             this.grid1.Text = "grid1";
             this.grid1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
             this.grid1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragEnter);
-=======
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
->>>>>>> 7fce1bc945763c9db590314bc2ed37886ffd1189
             // 
             // Form1
             // 
@@ -483,13 +479,10 @@
         private System.Windows.Forms.PictureBox btnStop;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-<<<<<<< HEAD
         private CrossroadA crossroadA1;
         private CrossroadB crossroadB1;
         private Grid grid1;
-=======
         private System.Windows.Forms.Timer timer1;
->>>>>>> 7fce1bc945763c9db590314bc2ed37886ffd1189
     }
 }
 
