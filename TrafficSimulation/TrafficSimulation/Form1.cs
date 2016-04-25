@@ -15,7 +15,8 @@ namespace TrafficSimulation
     {
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
-
+       // Crossroad currentRoad;
+        Point mousePoint;
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
@@ -26,12 +27,36 @@ namespace TrafficSimulation
             this.ControlBox = false;
             this.Text = String.Empty; 
             InitializeComponent();
+<<<<<<< HEAD
+        }
+        public void StopSimulation()
+        {
+
+        }
+        //public bool Save(Grid grid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //public Grid  Load()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public void SelectCrossroad(object sender, EventArgs e)
+        {
+
+        }
+        private void btnCrossroad1_MouseHover(object sender, EventArgs e)
+        {
+            
+=======
 
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
             //A.Width = 101;
             //pictureBox1.Controls.Add(A);
+>>>>>>> remotes/origin/jose-armin
         }
 
 
@@ -64,6 +89,7 @@ namespace TrafficSimulation
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
