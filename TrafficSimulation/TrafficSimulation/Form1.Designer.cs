@@ -95,6 +95,7 @@
             this.btnSave.Size = new System.Drawing.Size(56, 53);
             this.btnSave.TabIndex = 2;
             this.btnSave.TabStop = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             this.btnSave.MouseEnter += new System.EventHandler(this.btnSave_MouseEnter);
             this.btnSave.MouseLeave += new System.EventHandler(this.btnSave_MouseLeave);
             // 
@@ -106,6 +107,7 @@
             this.btnOpen.Size = new System.Drawing.Size(56, 53);
             this.btnOpen.TabIndex = 1;
             this.btnOpen.TabStop = false;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             this.btnOpen.MouseEnter += new System.EventHandler(this.btnOpen_MouseEnter);
             this.btnOpen.MouseLeave += new System.EventHandler(this.btnOpen_MouseLeave);
             // 

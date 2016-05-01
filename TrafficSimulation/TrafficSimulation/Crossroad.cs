@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     class Crossroad : Control
     {
         //guys, we first put this method in direction but thought it would be better to use it in this class
