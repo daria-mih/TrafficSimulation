@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     class TrafficLight
     {
         public int Id { get; set; }

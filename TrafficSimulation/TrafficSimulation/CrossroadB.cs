@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     class CrossroadB : Crossroad
     {
         public CrossroadB()

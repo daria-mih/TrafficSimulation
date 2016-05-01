@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     public class Direction
     {
 

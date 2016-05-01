@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,9 +16,14 @@ namespace TrafficSimulation
 {
     public partial class Form1 : Form
     {
+        FileStream fs;
+        BinaryFormatter bf;
+        private SaveFileDialog saveGrid = new SaveFileDialog();
+        private OpenFileDialog openGrid = new OpenFileDialog();
+        public bool saved = false;
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
-       // Crossroad currentRoad;
+        // Crossroad currentRoad;
         Point mousePoint;
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -25,7 +33,7 @@ namespace TrafficSimulation
         {
 
             this.ControlBox = false;
-            this.Text = String.Empty; 
+            this.Text = String.Empty;
             InitializeComponent();
 
             //Crossroad A = new CrossroadA();
@@ -156,7 +164,7 @@ namespace TrafficSimulation
                 {
                     Crossroad A = new Crossroad();
                     A.BackgroundImage = Properties.Resources.Crossroad1;
-                   
+
                     A.Width = 200;
                     A.Height = 200;
                     A.BackgroundImageLayout = ImageLayout.Stretch;
@@ -209,7 +217,7 @@ namespace TrafficSimulation
         private void crossroadA1_MouseDown(object sender, MouseEventArgs e)
         {
             crossroadA1.DoDragDrop(crossroadA1, DragDropEffects.Copy);
-            
+
         }
 
         private void crossroadB1_MouseDown(object sender, MouseEventArgs e)
@@ -227,10 +235,10 @@ namespace TrafficSimulation
 
         }
 
-       
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+
             List<TrafficLight> trafficLights = new List<TrafficLight>();
             List<TrafficLight> temp = trafficLights;
             foreach (TrafficLight trafficlight in trafficLights)
@@ -245,5 +253,110 @@ namespace TrafficSimulation
             }
         }
 
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            if(grid1.Controls.Count == 0)
+            {
+                grid1 = Load();
+            }
+            else
+            {
+                if (!saved)
+                {
+                    DialogResult dr = MessageBox.Show("Do you want to save the current diagram before opening?",
+                        "Save As", MessageBoxButtons.YesNoCancel);
+                    if (dr == DialogResult.Yes)
+                    {
+                        Save(grid1);
+                        saved = true;
+                    }
+                    if (dr == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                    if (dr == DialogResult.No)
+                    {
+                        grid1 = Load();
+                    }
+                }
+                this.Refresh();
+            }
+        }
+        /// <summary>
+        /// To save a grid to file.
+        /// </summary>
+        /// <param name="grid"></param>
+        private bool Save(Grid grid)
+        {
+            bf = null;
+            fs = null;
+            if (!saved)
+            {
+                saveGrid.FileName = "UntitledGrid.trf";
+                saveGrid.Filter = "Traffic Simulation file(*.trf)|*.trf";
+                DialogResult dr = saveGrid.ShowDialog();
+                if (saveGrid.FileName != "*.trf")
+                {
+                    try
+                    {
+                        if (dr.ToString() == "OK")
+                        {
+                            fs = new FileStream(saveGrid.FileName, FileMode.Create, FileAccess.Write);
+                            bf = new BinaryFormatter();
+                            bf.Serialize(fs, grid);
+                            return true;
+                        }
+                    }
+                    catch (SerializationException)
+                    { }
+
+                    finally
+                    {
+                        if (fs != null) fs.Close();
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// To load a grid from file
+        /// </summary>
+        /// <returns></returns>
+        private Grid Load()
+        {
+            bf = null;
+            fs = null;
+            try
+            {
+                DialogResult dr = openGrid.ShowDialog();
+                if (dr.ToString() == "OK")
+                {
+                    fs = new FileStream(openGrid.FileName, FileMode.Open, FileAccess.Read);
+                    bf = new BinaryFormatter();
+                    fs.Position = 0;
+                    Grid _grid = ((Grid)(bf.Deserialize(fs)));
+                    return _grid;
+                }
+            }
+            catch (SerializationException) { }
+            finally
+            {
+                if (fs != null) fs.Close();
+            }
+            saved = true;
+            return null;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if(grid1.Controls.Count != 0)
+            {
+                saved = Save(grid1);
+
+            }
+            else { MessageBox.Show("There are no crossroads on the grid to save"); }
+            this.Refresh();
+        }
     }
 }
