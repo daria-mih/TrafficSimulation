@@ -30,6 +30,7 @@ namespace TrafficSimulation
             this.South = null;
             this.East = null;
             this.West = null;
+            this.AllowDrop = false;
             //routes = new List<Direction>();
         }
 
@@ -54,6 +55,7 @@ namespace TrafficSimulation
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
+           
 
         }
 
@@ -61,6 +63,7 @@ namespace TrafficSimulation
         {
             base.OnMouseDown(e);
            
+            
         }
 
 

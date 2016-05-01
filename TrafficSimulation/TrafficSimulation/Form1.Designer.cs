@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.PictureBox();
@@ -55,9 +58,13 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.PictureBox();
             this.btnStart = new System.Windows.Forms.PictureBox();
+
             this.crossroadB1 = new TrafficSimulation.CrossroadB();
             this.crossroadA1 = new TrafficSimulation.CrossroadA();
             this.grid1 = new TrafficSimulation.Grid();
+
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).BeginInit();
@@ -406,6 +413,9 @@
             this.grid1.Text = "grid1";
             this.grid1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
             this.grid1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragEnter);
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -472,6 +482,7 @@
         private CrossroadA crossroadA1;
         private CrossroadB crossroadB1;
         private Grid grid1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

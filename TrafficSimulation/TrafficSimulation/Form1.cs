@@ -27,36 +27,12 @@ namespace TrafficSimulation
             this.ControlBox = false;
             this.Text = String.Empty; 
             InitializeComponent();
-<<<<<<< HEAD
-        }
-        public void StopSimulation()
-        {
-
-        }
-        //public bool Save(Grid grid)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public Grid  Load()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public void SelectCrossroad(object sender, EventArgs e)
-        {
-
-        }
-        private void btnCrossroad1_MouseHover(object sender, EventArgs e)
-        {
-            
-=======
 
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
             //A.Width = 101;
             //pictureBox1.Controls.Add(A);
->>>>>>> remotes/origin/jose-armin
         }
 
 
@@ -233,6 +209,7 @@ namespace TrafficSimulation
         private void crossroadA1_MouseDown(object sender, MouseEventArgs e)
         {
             crossroadA1.DoDragDrop(crossroadA1, DragDropEffects.Copy);
+            
         }
 
         private void crossroadB1_MouseDown(object sender, MouseEventArgs e)
@@ -251,5 +228,22 @@ namespace TrafficSimulation
         }
 
        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            List<TrafficLight> trafficLights = new List<TrafficLight>();
+            List<TrafficLight> temp = trafficLights;
+            foreach (TrafficLight trafficlight in trafficLights)
+            {
+                //trafficlight.Interval--;
+                //break;
+                //if (trafficlight.Interval.Equals(0))
+                //{
+                //    Simulation.ChangeTrafficLights();
+                //    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
+                //}
+            }
+        }
+
     }
 }
