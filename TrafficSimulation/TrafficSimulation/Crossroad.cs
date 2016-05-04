@@ -11,6 +11,7 @@ namespace TrafficSimulation
     [Serializable()]
     class Crossroad : Control
     {
+        public MenuItem delete { get; set; }
         //guys, we first put this method in direction but thought it would be better to use it in this class
 
         //We need to talk about this direction part.
@@ -31,7 +32,7 @@ namespace TrafficSimulation
             this.South = null;
             this.East = null;
             this.West = null;
-            this.AllowDrop = false;
+            delete = new MenuItem();
             //routes = new List<Direction>();
         }
 
@@ -67,6 +68,20 @@ namespace TrafficSimulation
             
         }
 
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                ContextMenu cm = new ContextMenu();
+                delete.Text = "Delete";
+                cm.MenuItems.Add(delete);
+                ContextMenu = cm;
+            }
+              
+            base.OnMouseUp(e);
+        }
 
+
+   
     }
 }
