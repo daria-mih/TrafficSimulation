@@ -15,7 +15,7 @@ namespace TrafficSimulation
         Graphics icon { get; set; }
         Point currentPosition { get; set; }
 
-        //the whole route that the moveable should follow 
+        //the whole route that the moveable should follow.
         List<Direction> route { get; set; }
 
 
