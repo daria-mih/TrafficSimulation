@@ -26,31 +26,33 @@ namespace TrafficSimulation
             this.ControlBox = false;
             this.Text = String.Empty; 
             InitializeComponent();
+
+            //Crossroad A = new CrossroadA();
+            //A.BackgroundImage = Properties.Resources.Crossroad2bw;
+            //A.Height = 107;
+            //A.Width = 101;
+            //pictureBox1.Controls.Add(A);
         }
 
-        private void btnCrossroad1_MouseHover(object sender, EventArgs e)
-        {
-            
-        }
 
         private void btnCrossroad1_MouseEnter(object sender, EventArgs e)
         {
-            btnCrossroad1.Image = Properties.Resources.Crossroad1;
+            crossroadA1.BackgroundImage = Properties.Resources.Crossroad1;
         }
 
         private void btnCrossroad1_MouseLeave(object sender, EventArgs e)
         {
-            btnCrossroad1.Image = Properties.Resources.Crossroad1bw;
+            crossroadA1.BackgroundImage = Properties.Resources.Crossroad1bw;
         }
 
         private void btnCrossroad2_MouseEnter(object sender, EventArgs e)
         {
-            btnCrossroad2.Image = Properties.Resources.Crossroad2;
+            crossroadB1.BackgroundImage = Properties.Resources.Crossroad2;
         }
 
         private void btnCrossroad2_MouseLeave(object sender, EventArgs e)
         {
-            btnCrossroad2.Image = Properties.Resources.Crossroad2bw;
+            crossroadB1.BackgroundImage = Properties.Resources.Crossroad2bw;
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -72,8 +74,6 @@ namespace TrafficSimulation
         {
             this.Close();
         }
-
-        
 
         private void btnOpen_MouseEnter(object sender, EventArgs e)
         {
@@ -140,6 +140,91 @@ namespace TrafficSimulation
             btnClose.Image = Properties.Resources.close;
         }
 
-        
+        //DRAG & DROP
+
+        //Grid Events
+        private void pictureBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            Crossroad c = (Crossroad)(e.Data.GetData(e.Data.GetFormats()[0]));
+
+            if (c != null)
+            {
+
+                if (c.Name == "crossroadA1")
+                {
+                    Crossroad A = new Crossroad();
+                    A.BackgroundImage = Properties.Resources.Crossroad1;
+                   
+                    A.Width = 200;
+                    A.Height = 200;
+                    A.BackgroundImageLayout = ImageLayout.Stretch;
+                    A.MouseClick += crossroadA1_MouseDown;
+                    A.MouseUp += crossroadA1_MouseUp;
+
+                    //Places the crossroad in the placeholder
+                    foreach (var placeholder in grid1.Placeholders)
+                    {
+                        if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
+                        {
+                            A.Location = placeholder.Location;
+                        }
+                    }
+
+                    //adds the crossroad to the grid
+                    grid1.Controls.Add(A);
+                }
+                else if (c.Name == "crossroadB1")
+                {
+                    Crossroad B = new CrossroadB();
+                    B.BackgroundImage = Properties.Resources.Crossroad2;
+                    B.Location = grid1.PointToClient(Cursor.Position);
+                    B.Width = 200;
+                    B.Height = 200;
+                    B.BackgroundImageLayout = ImageLayout.Stretch;
+                    B.MouseClick += crossroadB1_MouseDown;
+                    B.MouseUp += crossroadB1_MouseUp;
+
+                    foreach (var placeholder in grid1.Placeholders)
+                    {
+                        if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
+                        {
+                            B.Location = placeholder.Location;
+                        }
+                    }
+
+                    grid1.Controls.Add(B);
+                }
+            }
+        }
+
+        private void pictureBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        //Crossroad Events
+
+        private void crossroadA1_MouseDown(object sender, MouseEventArgs e)
+        {
+            crossroadA1.DoDragDrop(crossroadA1, DragDropEffects.Copy);
+            
+        }
+
+        private void crossroadB1_MouseDown(object sender, MouseEventArgs e)
+        {
+            crossroadB1.DoDragDrop(crossroadB1, DragDropEffects.Copy);
+        }
+
+        private void crossroadA1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //pump.DoDragDrop(pump, DragDropEffects.Copy);
+        }
+
+        private void crossroadB1_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
+       
     }
 }

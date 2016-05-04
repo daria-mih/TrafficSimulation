@@ -117,4 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="grid1.Placeholders" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAKABU3lzdGVtLkRyYXdpbmcsIFZlcnNpb249NC4wLjAuMCwgQ3Vs
+        dHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iMDNmNWY3ZjExZDUwYTNhXV0sIG1zY29ybGliLCBW
+        ZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0
+        ZTA4OQwDAAAAUVN5c3RlbS5EcmF3aW5nLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwg
+        UHVibGljS2V5VG9rZW49YjAzZjVmN2YxMWQ1MGEzYQUBAAAAO1N5c3RlbS5Db2xsZWN0aW9ucy5HZW5l
+        cmljLkxpc3RgMVtbU3lzdGVtLkRyYXdpbmcuUmVjdGFuZ2xlAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNp
+        b24EAAAaU3lzdGVtLkRyYXdpbmcuUmVjdGFuZ2xlW10DAAAACAgCAAAACQQAAAAMAAAADAAAAAcEAAAA
+        AAEAAAAQAAAABBhTeXN0ZW0uRHJhd2luZy5SZWN0YW5nbGUDAAAABfv///8YU3lzdGVtLkRyYXdpbmcu
+        UmVjdGFuZ2xlBAAAAAF4AXkFd2lkdGgGaGVpZ2h0AAAAAAgICAgDAAAAAAAAAAAAAADIAAAAyAAAAAH6
+        ////+////8gAAAAAAAAAyAAAAMgAAAAB+f////v///+QAQAAAAAAAMgAAADIAAAAAfj////7////WAIA
+        AAAAAADIAAAAyAAAAAH3////+////wAAAADIAAAAyAAAAMgAAAAB9v////v////IAAAAyAAAAMgAAADI
+        AAAAAfX////7////kAEAAMgAAADIAAAAyAAAAAH0////+////1gCAADIAAAAyAAAAMgAAAAB8/////v/
+        //8AAAAAkAEAAMgAAADIAAAAAfL////7////yAAAAJABAADIAAAAyAAAAAHx////+////5ABAACQAQAA
+        yAAAAMgAAAAB8P////v///9YAgAAkAEAAMgAAADIAAAAAe/////7////AAAAAAAAAAAAAAAAAAAAAAHu
+        ////+////wAAAAAAAAAAAAAAAAAAAAAB7f////v///8AAAAAAAAAAAAAAAAAAAAAAez////7////AAAA
+        AAAAAAAAAAAAAAAAAAs=
+</value>
+  </data>
 </root>

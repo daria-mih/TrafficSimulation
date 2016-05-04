@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TrafficSimulation
 {
-    class CrossroadB
+    class CrossroadB : Crossroad
     {
+        public CrossroadB()
+        {
+
+        }
     }
 }

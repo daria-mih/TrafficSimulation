@@ -28,16 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnCrossroad2 = new System.Windows.Forms.Button();
-            this.btnCrossroad1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -57,12 +55,14 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.PictureBox();
             this.btnStart = new System.Windows.Forms.PictureBox();
+            this.crossroadB1 = new TrafficSimulation.CrossroadB();
+            this.crossroadA1 = new TrafficSimulation.CrossroadA();
+            this.grid1 = new TrafficSimulation.Grid();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -116,8 +116,8 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.grid1);
             this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(127, 5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(800, 601);
@@ -135,48 +135,16 @@
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::TrafficSimulation.Properties.Resources.grid;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 602);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.btnCrossroad2);
-            this.panel2.Controls.Add(this.btnCrossroad1);
+            this.panel2.Controls.Add(this.crossroadB1);
+            this.panel2.Controls.Add(this.crossroadA1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(4, 72);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(117, 234);
             this.panel2.TabIndex = 0;
-            // 
-            // btnCrossroad2
-            // 
-            this.btnCrossroad2.Image = global::TrafficSimulation.Properties.Resources.Crossroad2bw;
-            this.btnCrossroad2.Location = new System.Drawing.Point(4, 127);
-            this.btnCrossroad2.Name = "btnCrossroad2";
-            this.btnCrossroad2.Size = new System.Drawing.Size(107, 101);
-            this.btnCrossroad2.TabIndex = 1;
-            this.btnCrossroad2.UseVisualStyleBackColor = true;
-            this.btnCrossroad2.MouseEnter += new System.EventHandler(this.btnCrossroad2_MouseEnter);
-            this.btnCrossroad2.MouseLeave += new System.EventHandler(this.btnCrossroad2_MouseLeave);
-            // 
-            // btnCrossroad1
-            // 
-            this.btnCrossroad1.Image = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
-            this.btnCrossroad1.Location = new System.Drawing.Point(4, 20);
-            this.btnCrossroad1.Name = "btnCrossroad1";
-            this.btnCrossroad1.Size = new System.Drawing.Size(107, 101);
-            this.btnCrossroad1.TabIndex = 0;
-            this.btnCrossroad1.UseVisualStyleBackColor = true;
-            this.btnCrossroad1.MouseEnter += new System.EventHandler(this.btnCrossroad1_MouseEnter);
-            this.btnCrossroad1.MouseLeave += new System.EventHandler(this.btnCrossroad1_MouseLeave);
-            this.btnCrossroad1.MouseHover += new System.EventHandler(this.btnCrossroad1_MouseHover);
             // 
             // label1
             // 
@@ -272,7 +240,7 @@
             this.checkBox1.ForeColor = System.Drawing.SystemColors.Control;
             this.checkBox1.Location = new System.Drawing.Point(21, 129);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(49, 21);
+            this.checkBox1.Size = new System.Drawing.Size(50, 21);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Top";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -385,6 +353,60 @@
             this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
             this.btnStart.MouseLeave += new System.EventHandler(this.btnStart_MouseLeave);
             // 
+            // crossroadB1
+            // 
+            this.crossroadB1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad2bw;
+            this.crossroadB1.East = null;
+            this.crossroadB1.Location = new System.Drawing.Point(4, 126);
+            this.crossroadB1.Name = "crossroadB1";
+            this.crossroadB1.NoOfCars = 0;
+            this.crossroadB1.NoOfTrafficLights = 0;
+            this.crossroadB1.North = null;
+            this.crossroadB1.Size = new System.Drawing.Size(107, 101);
+            this.crossroadB1.South = null;
+            this.crossroadB1.TabIndex = 3;
+            this.crossroadB1.Text = "crossroadB1";
+            this.crossroadB1.West = null;
+            this.crossroadB1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.crossroadB1_MouseDown);
+            this.crossroadB1.MouseEnter += new System.EventHandler(this.btnCrossroad2_MouseEnter);
+            this.crossroadB1.MouseLeave += new System.EventHandler(this.btnCrossroad2_MouseLeave);
+            this.crossroadB1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.crossroadB1_MouseUp);
+            // 
+            // crossroadA1
+            // 
+            this.crossroadA1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
+            this.crossroadA1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.crossroadA1.East = null;
+            this.crossroadA1.Location = new System.Drawing.Point(4, 21);
+            this.crossroadA1.Name = "crossroadA1";
+            this.crossroadA1.NoOfCars = 0;
+            this.crossroadA1.NoOfPedestrians = 0;
+            this.crossroadA1.NoOfTrafficLights = 0;
+            this.crossroadA1.North = null;
+            this.crossroadA1.Sensor = false;
+            this.crossroadA1.Size = new System.Drawing.Size(107, 101);
+            this.crossroadA1.South = null;
+            this.crossroadA1.TabIndex = 2;
+            this.crossroadA1.Text = "crossroadA1";
+            this.crossroadA1.West = null;
+            this.crossroadA1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.crossroadA1_MouseDown);
+            this.crossroadA1.MouseEnter += new System.EventHandler(this.btnCrossroad1_MouseEnter);
+            this.crossroadA1.MouseLeave += new System.EventHandler(this.btnCrossroad1_MouseLeave);
+            this.crossroadA1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.crossroadA1_MouseUp);
+            // 
+            // grid1
+            // 
+            this.grid1.AllowDrop = true;
+            this.grid1.BackgroundImage = global::TrafficSimulation.Properties.Resources.grid;
+            this.grid1.Location = new System.Drawing.Point(-1, -1);
+            this.grid1.Name = "grid1";
+            this.grid1.Placeholders = ((System.Collections.Generic.List<System.Drawing.Rectangle>)(resources.GetObject("grid1.Placeholders")));
+            this.grid1.Size = new System.Drawing.Size(800, 602);
+            this.grid1.TabIndex = 2;
+            this.grid1.Text = "grid1";
+            this.grid1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
+            this.grid1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragEnter);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,7 +427,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -426,8 +447,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCrossroad1;
-        private System.Windows.Forms.Button btnCrossroad2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox btnOpen;
         private System.Windows.Forms.PictureBox btnSave;
@@ -448,9 +467,11 @@
         private System.Windows.Forms.PictureBox btnStart;
         private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.PictureBox btnStop;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private CrossroadA crossroadA1;
+        private CrossroadB crossroadB1;
+        private Grid grid1;
     }
 }
 
