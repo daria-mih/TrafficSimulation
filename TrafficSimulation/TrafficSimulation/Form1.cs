@@ -162,14 +162,21 @@ namespace TrafficSimulation
 
                 if (c.Name == "crossroadA1")
                 {
-                    Crossroad A = new Crossroad();
+                    Crossroad A = new CrossroadA();
+                    A.AllowDrop = true;
+                    A.DragOver += Crossroad_DragOver;
                     A.BackgroundImage = Properties.Resources.Crossroad1;
 
                     A.Width = 200;
                     A.Height = 200;
+
                     A.BackgroundImageLayout = ImageLayout.Stretch;
                     A.MouseClick += crossroadA1_MouseDown;
                     A.MouseUp += crossroadA1_MouseUp;
+                    A.delete.Click += (sender2, eventArgs2) =>
+                    {
+                        grid1.Controls.Remove(A);
+                    };
 
                     //Places the crossroad in the placeholder
                     foreach (var placeholder in grid1.Placeholders)
@@ -186,13 +193,17 @@ namespace TrafficSimulation
                 else if (c.Name == "crossroadB1")
                 {
                     Crossroad B = new CrossroadB();
+                    B.AllowDrop = true;
+                    B.DragOver += Crossroad_DragOver;
                     B.BackgroundImage = Properties.Resources.Crossroad2;
                     B.Location = grid1.PointToClient(Cursor.Position);
                     B.Width = 200;
                     B.Height = 200;
                     B.BackgroundImageLayout = ImageLayout.Stretch;
-                    B.MouseClick += crossroadB1_MouseDown;
-                    B.MouseUp += crossroadB1_MouseUp;
+                    B.delete.Click += (sender2, eventArgs2) =>
+                    {
+                        grid1.Controls.Remove(B);
+                    };
 
                     foreach (var placeholder in grid1.Placeholders)
                     {
@@ -207,9 +218,14 @@ namespace TrafficSimulation
             }
         }
 
-        private void pictureBox1_DragEnter(object sender, DragEventArgs e)
+        private void Crossroad_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;
+            e.Effect = DragDropEffects.None;
+        }
+
+        private void grid1_DragEnter(object sender, DragEventArgs e)
+        {
+             e.Effect = DragDropEffects.Copy;
         }
 
         //Crossroad Events

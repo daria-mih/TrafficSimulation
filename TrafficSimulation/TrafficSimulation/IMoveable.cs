@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace TrafficSimulation
 {
-    [Serializable()]
+    //[Serializable()]
     public interface IMoveable
     {
         int size { get; set; }
