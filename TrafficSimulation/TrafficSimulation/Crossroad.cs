@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     class Crossroad : Control
     {
         public MenuItem delete { get; set; }
