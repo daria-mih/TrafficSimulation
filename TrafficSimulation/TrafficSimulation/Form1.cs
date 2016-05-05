@@ -17,6 +17,8 @@ namespace TrafficSimulation
     public partial class Form1 : Form
     {
         FileStream fs;
+        List<CrossroadProperties> properties;
+        Crossroad selectedCrossroad;
         BinaryFormatter bf;
         private SaveFileDialog saveGrid = new SaveFileDialog();
         private OpenFileDialog openGrid = new OpenFileDialog();
@@ -31,7 +33,7 @@ namespace TrafficSimulation
         public static extern bool ReleaseCapture();
         public Form1()
         {
-
+            selectedCrossroad = new Crossroad();
             this.ControlBox = false;
             this.Text = String.Empty;
             InitializeComponent();
@@ -175,6 +177,7 @@ namespace TrafficSimulation
                     A.MouseUp += crossroadA1_MouseUp;
                     A.delete.Click += (sender2, eventArgs2) =>
                     {
+                        selectedCrossroad = A;
                         grid1.Controls.Remove(A);
                     };
 
@@ -189,6 +192,7 @@ namespace TrafficSimulation
 
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
+
                 }
                 else if (c.Name == "crossroadB1")
                 {
@@ -202,6 +206,7 @@ namespace TrafficSimulation
                     B.BackgroundImageLayout = ImageLayout.Stretch;
                     B.delete.Click += (sender2, eventArgs2) =>
                     {
+                        selectedCrossroad = B;
                         grid1.Controls.Remove(B);
                     };
 
@@ -214,8 +219,56 @@ namespace TrafficSimulation
                     }
 
                     grid1.Controls.Add(B);
+
+
+                }
+
+            }
+        }
+
+        private void AssignNeighbours(Crossroad c)
+        {
+            Point Location = c.PointToScreen(Point.Empty);
+            Point CenterPoint = new Point(Location.X + 100, Location.Y + 100);
+            if (c.North == null || c.South == null || c.West == null || c.East == null)
+            {
+                foreach (Control control in grid1.Controls.OfType<Crossroad>())
+                {
+                    Point locationOnForm = control.PointToScreen(Point.Empty);
+                    Rectangle crossroadArea = new Rectangle(locationOnForm.X, locationOnForm.Y, 200, 200);
+
+                    if (crossroadArea.Contains(new Point(CenterPoint.X, CenterPoint.Y - 200)))
+                    {
+                        c.North = (Crossroad)control;
+                    }
+                    else if (crossroadArea.Contains(new Point(CenterPoint.X, CenterPoint.Y + 200)))
+                    {
+                        c.South = (Crossroad)control;
+                    }
+                    else if (crossroadArea.Contains(new Point(CenterPoint.X - 200, CenterPoint.Y)))
+                    {
+                        c.East = (Crossroad)control;
+                    }
+                    else if (crossroadArea.Contains(new Point(CenterPoint.X + 200, CenterPoint.Y)))
+                    {
+                        c.West = (Crossroad)control;
+                    }
+
+
                 }
             }
+            if (c.North != null)
+
+                Console.WriteLine(c.North);
+            if (c.South != null)
+
+                Console.WriteLine(c.South);
+            if (c.East != null)
+
+                Console.WriteLine(c.East);
+            if (c.West != null)
+
+                Console.WriteLine(c.West);
         }
 
         private void Crossroad_DragOver(object sender, DragEventArgs e)
@@ -225,7 +278,7 @@ namespace TrafficSimulation
 
         private void grid1_DragEnter(object sender, DragEventArgs e)
         {
-             e.Effect = DragDropEffects.Copy;
+            e.Effect = DragDropEffects.Copy;
         }
 
         //Crossroad Events
@@ -271,9 +324,9 @@ namespace TrafficSimulation
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            if(grid1.Controls.Count == 0)
+            if (grid1.Controls.Count == 0)
             {
-                grid1 = Load();
+                Load();
             }
             else
             {
@@ -283,7 +336,7 @@ namespace TrafficSimulation
                         "Save As", MessageBoxButtons.YesNoCancel);
                     if (dr == DialogResult.Yes)
                     {
-                        Save(grid1);
+                        Save();
                         saved = true;
                     }
                     if (dr == DialogResult.Cancel)
@@ -292,20 +345,36 @@ namespace TrafficSimulation
                     }
                     if (dr == DialogResult.No)
                     {
-                        grid1 = Load();
+                        Load();
+                        saved = false;
                     }
                 }
-                this.Refresh();
+                //  this.Refresh();
             }
         }
         /// <summary>
-        /// To save a grid to file.
+        /// To save a properties to file.
         /// </summary>
-        /// <param name="grid"></param>
-        private bool Save(Grid grid)
+        private bool Save()
         {
             bf = null;
             fs = null;
+            properties = new List<CrossroadProperties>();
+            foreach (Control c in grid1.Controls)
+            {
+                if (c is Crossroad)
+                {
+                    if (c is CrossroadA)
+                    {
+                        //this is only a test, will update all properties such as noOfCars etc when everything has been fully implemented
+                        properties.Add(new CrossroadProperties() { Location = c.Location, Type = 1 });
+                    }
+                    else
+                    {
+                        properties.Add(new CrossroadProperties() { Location = c.Location, Type = 2 });
+                    }
+                }
+            }
             if (!saved)
             {
                 saveGrid.FileName = "UntitledGrid.trf";
@@ -319,7 +388,7 @@ namespace TrafficSimulation
                         {
                             fs = new FileStream(saveGrid.FileName, FileMode.Create, FileAccess.Write);
                             bf = new BinaryFormatter();
-                            bf.Serialize(fs, grid);
+                            bf.Serialize(fs, properties);
                             return true;
                         }
                     }
@@ -339,8 +408,9 @@ namespace TrafficSimulation
         /// To load a grid from file
         /// </summary>
         /// <returns></returns>
-        private Grid Load()
+        private void Load()
         {
+            List<CrossroadProperties> newProperties = new List<CrossroadProperties>();
             bf = null;
             fs = null;
             try
@@ -351,8 +421,57 @@ namespace TrafficSimulation
                     fs = new FileStream(openGrid.FileName, FileMode.Open, FileAccess.Read);
                     bf = new BinaryFormatter();
                     fs.Position = 0;
-                    Grid _grid = ((Grid)(bf.Deserialize(fs)));
-                    return _grid;
+
+                    newProperties = ((List<CrossroadProperties>)(bf.Deserialize(fs)));
+
+                }
+                if (newProperties.Count > 0)
+                {
+
+                    grid1.Controls.Clear();
+                    foreach (CrossroadProperties prop in newProperties)
+                    {
+                        if (prop.Type == 1)
+                        {
+                            Crossroad A = new CrossroadA();
+                            A.AllowDrop = true;
+                            A.DragOver += Crossroad_DragOver;
+                            A.BackgroundImage = Properties.Resources.Crossroad1;
+
+                            A.Width = 200;
+                            A.Height = 200;
+
+                            A.BackgroundImageLayout = ImageLayout.Stretch;
+                            A.MouseClick += crossroadA1_MouseDown;
+                            A.MouseUp += crossroadA1_MouseUp;
+                            A.delete.Click += (sender2, eventArgs2) =>
+                            {
+                                grid1.Controls.Remove(A);
+                            };
+                            A.Location = prop.Location;
+                            grid1.Controls.Add(A);
+                        }
+                        else
+                        {
+                            Crossroad B = new CrossroadB();
+                            B.AllowDrop = true;
+                            B.DragOver += Crossroad_DragOver;
+                            B.BackgroundImage = Properties.Resources.Crossroad2;
+                            B.Location = grid1.PointToClient(Cursor.Position);
+                            B.Width = 200;
+                            B.Height = 200;
+                            B.BackgroundImageLayout = ImageLayout.Stretch;
+                            B.delete.Click += (sender2, eventArgs2) =>
+                            {
+                                grid1.Controls.Remove(B);
+                            };
+                            B.Location = prop.Location;
+                            grid1.Controls.Add(B);
+
+                        }
+                    }
+                    int controls = grid1.Controls.Count;
+
                 }
             }
             catch (SerializationException) { }
@@ -361,18 +480,58 @@ namespace TrafficSimulation
                 if (fs != null) fs.Close();
             }
             saved = true;
-            return null;
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(grid1.Controls.Count != 0)
+            if (grid1.Controls.Count != 0)
             {
-                saved = Save(grid1);
-
+                saved = Save();
             }
             else { MessageBox.Show("There are no crossroads on the grid to save"); }
             this.Refresh();
+        }
+
+        private void grid1_ControlAdded(object sender, ControlEventArgs e)
+        {
+            saved = false;
+            foreach (Control control in grid1.Controls.OfType<Crossroad>())
+            {
+                AssignNeighbours((Crossroad)control);
+            }
+        }
+
+        private void grid1_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            saved = false;
+            RemoveNeighbours(selectedCrossroad);
+        }
+
+
+        private void RemoveNeighbours(Crossroad crossroad)
+        {
+            foreach (Control control in grid1.Controls.OfType<Crossroad>())
+            {
+                if (((Crossroad)control).East == crossroad)
+                {
+                    ((Crossroad)control).East = null;
+                }
+                else if (((Crossroad)control).West == crossroad)
+                {
+                    ((Crossroad)control).West = null;
+                }
+                else if (((Crossroad)control).North == crossroad)
+                {
+                    ((Crossroad)control).North = null;
+                }
+                else if (((Crossroad)control).South == crossroad)
+                {
+                    ((Crossroad)control).South = null;
+                }
+            }
+            selectedCrossroad = null;
+
         }
     }
 }

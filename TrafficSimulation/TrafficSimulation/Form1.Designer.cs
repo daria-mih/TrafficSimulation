@@ -137,6 +137,8 @@
             this.grid1.Size = new System.Drawing.Size(800, 602);
             this.grid1.TabIndex = 2;
             this.grid1.Text = "grid1";
+            this.grid1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.grid1_ControlAdded);
+            this.grid1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.grid1_ControlRemoved);
             this.grid1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
             this.grid1.DragEnter += new System.Windows.Forms.DragEventHandler(this.grid1_DragEnter);
             // 
@@ -301,7 +303,7 @@
             this.checkBox1.ForeColor = System.Drawing.SystemColors.Control;
             this.checkBox1.Location = new System.Drawing.Point(21, 129);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(50, 21);
+            this.checkBox1.Size = new System.Drawing.Size(49, 21);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Top";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -425,7 +427,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(6, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 13);
+            this.label2.Size = new System.Drawing.Size(157, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Traffic Simulation Application";
             // 
