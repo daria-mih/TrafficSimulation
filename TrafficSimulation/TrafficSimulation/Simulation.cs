@@ -82,6 +82,11 @@ namespace TrafficSimulation
                     {
                         openNodes.Add(neighbour);
                     }
+                    if (neighbour.parent == null)
+                    {
+                        neighbour.parent = current;
+                        neighbour.SetDistance(startPoint, endPoint);
+                    }
                 }
 
             }

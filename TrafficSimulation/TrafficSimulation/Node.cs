@@ -55,7 +55,10 @@ namespace TrafficSimulation
         }
         public void SetDistance(Node startNode, Node finishNode)
         {
-            sDistance = Math.Abs( Convert.ToDouble( (crossNode.Location.X + crossNode.Location.Y) - (parent.crossNode.Location.X + parent.crossNode.Location.Y)));
+            if (parent != null)
+                sDistance = Math.Abs(Convert.ToDouble((crossNode.Location.X + crossNode.Location.Y) - (parent.crossNode.Location.X + parent.crossNode.Location.Y)));
+            else
+                sDistance = 0;
             fDistance = Math.Abs(Convert.ToDouble((crossNode.Location.X + crossNode.Location.Y) - (finishNode.crossNode.Location.X + finishNode.crossNode.Location.Y)));
         }
 
