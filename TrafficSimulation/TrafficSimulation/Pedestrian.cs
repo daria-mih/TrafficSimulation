@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     public class Pedestrian : IMoveable
     {
         public Point currentPosition

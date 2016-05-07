@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     static class Simulation
     {
         //fields
