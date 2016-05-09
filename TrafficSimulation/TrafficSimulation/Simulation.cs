@@ -12,25 +12,25 @@ namespace TrafficSimulation
     static class Simulation
     {
         //fields
-        static public bool ShouldStop;
+        static public bool ShouldStop =false;
         //static private List<IMovables> Moveables;
         static List<Point> EndPoints;
-
-        private static List<Node> listOfNotes = new List<Node>();
+        public static Grid grid;
+        private static List<Node> listOfNodes = new List<Node>();
         
         //properties
         // public Grid FromGrid { get; set; }
 
         //methods
-        static private void GetNodes(Grid gridOfCrossroads)
+        static private void GetNodes()
         {
-            foreach (Crossroad cRoad in gridOfCrossroads.Controls)
+            foreach (Crossroad cRoad in grid.Controls)
             {
-                listOfNotes.Add(new Node(cRoad));
+                listOfNodes.Add(new Node(cRoad));
             }
-            foreach (Node node in listOfNotes)
+            foreach (Node node in listOfNodes)
             {
-                node.SetNeighbours(listOfNotes);
+                node.SetNeighbours(listOfNodes);
             }
             
         }
@@ -53,7 +53,7 @@ namespace TrafficSimulation
                         current = node;
                         continue;
                     }
-                    if (current.Distance > node.Distance)
+                    if (current.fDistance >= node.fDistance)
                     {
                         current = node;
                     }
@@ -78,14 +78,19 @@ namespace TrafficSimulation
                 //checking the neighbours
                 foreach (Node neighbour in current.neighbours)
                 {
-                    if (!openNodes.Contains(neighbour))
+                    if (neighbour != current.parent)
                     {
-                        openNodes.Add(neighbour);
-                    }
-                    if (neighbour.parent == null)
-                    {
-                        neighbour.parent = current;
-                        neighbour.SetDistance(startPoint, endPoint);
+
+                        if (!openNodes.Contains(neighbour) && !closedNodes.Contains(neighbour))
+                        {
+                            openNodes.Add(neighbour);
+                        }
+                        if (neighbour.parent == null)
+                        {
+                            neighbour.parent = current;
+                            neighbour.SetDistance(startPoint, endPoint);
+                        }
+
                     }
                 }
 
@@ -94,7 +99,15 @@ namespace TrafficSimulation
         }
         static private void CreateMovables()
         {
-
+            
+            Random random = new Random();
+            Node startpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
+            Node endpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
+            foreach (Node node in listOfNodes)
+            {
+                node.SetDistance(startpnt, endpnt);
+            }
+            GetShortestRoute(startpnt, endpnt);
         }
 
         static private void ChangeTrafficLights()
@@ -104,16 +117,40 @@ namespace TrafficSimulation
 
         static public void Run()
         {
+            GetNodes();
+            //FillEndPoints();
             while (!ShouldStop)
             {
                 CreateMovables();
-                MoveMovables();
-                ChangeTrafficLights();
+                //MoveMovables();
+                //ChangeTrafficLights();
             }
         }
         static public void FillEndPoints()
         {
-
+            foreach (Crossroad crossrd in grid.Controls)
+            {
+                if (crossrd.North == null)
+                {
+                    // this is an end point
+                    // add it to the list
+                }
+                if (crossrd.West == null)
+                {
+                    // this is an end point
+                    // add it to the list
+                }
+                if (crossrd.South == null)
+                {
+                    // this is an end point
+                    // add it to the list
+                }
+                if (crossrd.East == null)
+                {
+                    // this is an end point
+                    // add it to the list
+                }
+            }
         }
 
         static public void MoveMovables()

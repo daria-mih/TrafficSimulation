@@ -12,7 +12,7 @@ namespace TrafficSimulation
         public Crossroad crossNode;
         public double fDistance;
         public double sDistance;
-        public List<Node> neighbours;
+        public List<Node> neighbours = new List<Node>();
         //properties
         public double Distance
         {
@@ -25,6 +25,8 @@ namespace TrafficSimulation
             public Node(Crossroad nodeRoad)
         {
             crossNode = nodeRoad;
+            
+            
         }
         //methods
         public void SetNeighbours(List<Node> allNodes)

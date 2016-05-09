@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,13 +32,15 @@ namespace TrafficSimulation
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
+        Thread simulation;
+        
         public Form1()
         {
             selectedCrossroad = new Crossroad();
             this.ControlBox = false;
             this.Text = String.Empty;
             InitializeComponent();
-
+            Simulation.grid = grid1;
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
@@ -532,6 +535,18 @@ namespace TrafficSimulation
             }
             selectedCrossroad = null;
 
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Simulation.ShouldStop = false;
+            simulation = new Thread(Simulation.Run);
+            simulation.Start();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            Simulation.ShouldStop = true;
         }
     }
 }
