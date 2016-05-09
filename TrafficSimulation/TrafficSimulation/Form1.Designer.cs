@@ -117,15 +117,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.grid1);
-            this.panel3.Location = new System.Drawing.Point(127, 24);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 601);
-            this.panel3.TabIndex = 2;
+            
             // 
             // grid1
             // 
@@ -141,6 +133,15 @@
             this.grid1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.grid1_ControlRemoved);
             this.grid1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
             this.grid1.DragEnter += new System.Windows.Forms.DragEventHandler(this.grid1_DragEnter);
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.grid1);
+            this.panel3.Location = new System.Drawing.Point(127, 24);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(800, 601);
+            this.panel3.TabIndex = 2;
             // 
             // btnClose
             // 
