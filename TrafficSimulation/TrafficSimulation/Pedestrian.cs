@@ -23,6 +23,24 @@ namespace TrafficSimulation
         public int size
         { get; set; }
 
+        List<Point> IMoveable.route
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void Move()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Move(Direction direction)
         {
            
