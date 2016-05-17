@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 
@@ -182,14 +180,8 @@ namespace TrafficSimulation
                 {
                     //time to create the Route
                     //you are at the end so you will have to put the list from end to start
-                    List<Direction> templist = new List<Direction>();
-                    // templist.Insert(0, current.crossNode.the direction);
-                    while (current.parent != null)
-                    {
-                        // templist.Insert(0, current.crossNode.the direction);
-                        current = current.parent;
-                    }
-                    return templist;
+                    List<Direction> templist = new List<Direction>(ReconstructPath(current));
+                     return templist;
                 }
 
                 //checking the neighbours

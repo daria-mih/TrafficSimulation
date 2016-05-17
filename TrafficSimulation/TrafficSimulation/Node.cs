@@ -11,25 +11,29 @@ namespace TrafficSimulation
         //fields
         public Crossroad crossroad;
         public double fDistance;
-       // public double sDistance;
+        // public double sDistance;
         public List<Node> neighbours = new List<Node>();
         //properties
         //public double Distance
         //{
         //    get { return /*sDistance +*/ fDistance; }
         //}
-
         public Node parent;
 
         //constructors
             public Node(Crossroad nodeRoad)
-        {
+            {
             crossroad = nodeRoad;
-            
-            
-        }
+            }
+
         //methods
 
+        /// <summary>
+        /// returns the cardinal direction form the current node to the next node
+        /// </summary>
+        /// <param name="allNodes">the list that contains all the nodes</param>
+        /// <param name="nextNode">the node on which direction you want to know of</param>
+        /// <returns>"North", "East", "South" or "West"</returns>
         public string WhichNeighbour(List<Node> allNodes, Node nextNode)
         {
             foreach (Node node in allNodes)
@@ -53,7 +57,10 @@ namespace TrafficSimulation
             }
             return null;
         }
-        
+        /// <summary>
+        /// finds the neighbours by checking the crossroads
+        /// </summary>
+        /// <param name="allNodes">the list of all the nodes</param>
         public void SetNeighbours(List<Node> allNodes)
         {
             foreach (Node node in allNodes)
@@ -80,6 +87,11 @@ namespace TrafficSimulation
                 }
             }
         }
+        /// <summary>
+        /// Sets the Distance from this to the Finishing node
+        /// </summary>
+        /// <param name="startNode">*Not needed right now*</param>
+        /// <param name="finishNode">the node the check the distance with</param>
         public void SetDistance(Node startNode, Node finishNode)
         {
             /*if (parent != null)
