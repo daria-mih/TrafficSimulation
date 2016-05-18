@@ -533,5 +533,14 @@ namespace TrafficSimulation
             selectedCrossroad = null;
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            foreach (var c in grid1.Controls)
+            {
+                listBox1.Items.Add(c.ToString());
+            }
+        }
     }
 }

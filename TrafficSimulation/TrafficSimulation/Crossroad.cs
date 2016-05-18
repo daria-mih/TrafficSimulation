@@ -56,9 +56,8 @@ namespace TrafficSimulation
 
         protected override void OnPaint(PaintEventArgs pe)
         {
-            base.OnPaint(pe);
            
-
+            base.OnPaint(pe);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -81,7 +80,30 @@ namespace TrafficSimulation
             base.OnMouseUp(e);
         }
 
+        public override string ToString()
+        {
+            string s = this.Location.ToString() ;
+            if (this.South != null)
+            {
+                s += "\n\t south: " + this.South.Location.ToString();
+            }
+            if (this.West != null)
+            {
+                s += "\n\t West: " + this.West.Location.ToString();
+            }
+            if (this.East != null)
+            {
+                s += "\n\t East: " + this.East.Location.ToString();
+            }
+            if (this.North != null)
+            {
+                s += "\n\t North: " + this.North.Location.ToString();
+            }
+            return s;
 
-   
+        }
+
+
+
     }
 }
