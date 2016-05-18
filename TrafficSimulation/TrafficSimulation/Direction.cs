@@ -10,7 +10,8 @@ namespace TrafficSimulation
     [Serializable()]
     public class Direction
     {
-
+        //name for easy tracking example:"North-South"
+        public string name;
         //one path inside of a crossroad
         List<Point> points;
 

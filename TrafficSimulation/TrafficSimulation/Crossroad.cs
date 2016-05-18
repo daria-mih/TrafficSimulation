@@ -15,7 +15,7 @@ namespace TrafficSimulation
         //guys, we first put this method in direction but thought it would be better to use it in this class
 
         //We need to talk about this direction part.
-        //List<Direction> routes { get; set; }
+        public List<Direction> Directions { get; set; }
 
         public int NoOfCars { get; set; }
         public int NoOfTrafficLights { get; set; }
@@ -34,6 +34,23 @@ namespace TrafficSimulation
             this.West = null;
             delete = new MenuItem();
             //routes = new List<Direction>();
+        }
+
+        
+
+        /// <summary>
+        /// Gives the directions with the specific name
+        /// </summary>
+        /// <param name="name">name of the crossroad, EXAMPLE:"North-East"</param>
+        /// <returns></returns>
+        public Direction FindDirection(string name)
+        {
+            foreach (Direction dir in Directions)
+            {
+                if (dir.name.Contains(name))
+                    return dir;
+            }
+            return null;
         }
 
         //populates the list of the crossroad's available directions
