@@ -37,8 +37,7 @@ namespace TrafficSimulation
         public void AddDirections()
         {
             //something like this
-            //routes.Add(new Direction([Point(0,0), Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0)]));
-          
+            routes.Add(new Direction( new Point(0,0), new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0,0), new Point()));
         }
         public void Connect()
         { }

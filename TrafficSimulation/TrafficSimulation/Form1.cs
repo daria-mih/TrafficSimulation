@@ -152,14 +152,20 @@ namespace TrafficSimulation
 
                 if (c.Name == "crossroadA1")
                 {
-                    Crossroad A = new Crossroad();
+                    Crossroad A = new CrossroadA();
+                    A.AllowDrop = true;           
+                    A.DragOver += Crossroad_DragOver;
                     A.BackgroundImage = Properties.Resources.Crossroad1;
-                   
                     A.Width = 200;
                     A.Height = 200;
                     A.BackgroundImageLayout = ImageLayout.Stretch;
-                    A.MouseClick += crossroadA1_MouseDown;
-                    A.MouseUp += crossroadA1_MouseUp;
+
+                    A.delete.Click += (sender2, eventArgs2) =>
+                    {
+                        grid1.Controls.Remove(A);
+
+                    };
+
 
                     //Places the crossroad in the placeholder
                     foreach (var placeholder in grid1.Placeholders)
@@ -176,13 +182,18 @@ namespace TrafficSimulation
                 else if (c.Name == "crossroadB1")
                 {
                     Crossroad B = new CrossroadB();
+                    B.AllowDrop = true;
+                    B.DragOver += Crossroad_DragOver;
                     B.BackgroundImage = Properties.Resources.Crossroad2;
                     B.Location = grid1.PointToClient(Cursor.Position);
                     B.Width = 200;
                     B.Height = 200;
                     B.BackgroundImageLayout = ImageLayout.Stretch;
-                    B.MouseClick += crossroadB1_MouseDown;
-                    B.MouseUp += crossroadB1_MouseUp;
+                    B.delete.Click += (sender2, eventArgs2) =>
+                    {
+                        grid1.Controls.Remove(B);
+
+                    };
 
                     foreach (var placeholder in grid1.Placeholders)
                     {
@@ -195,11 +206,12 @@ namespace TrafficSimulation
                     grid1.Controls.Add(B);
                 }
             }
+
         }
 
-        private void pictureBox1_DragEnter(object sender, DragEventArgs e)
+        private void Crossroad_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;
+            e.Effect = DragDropEffects.None;
         }
 
         //Crossroad Events
@@ -207,24 +219,26 @@ namespace TrafficSimulation
         private void crossroadA1_MouseDown(object sender, MouseEventArgs e)
         {
             crossroadA1.DoDragDrop(crossroadA1, DragDropEffects.Copy);
-            
         }
 
         private void crossroadB1_MouseDown(object sender, MouseEventArgs e)
         {
             crossroadB1.DoDragDrop(crossroadB1, DragDropEffects.Copy);
         }
-
-        private void crossroadA1_MouseUp(object sender, MouseEventArgs e)
-        {
-            //pump.DoDragDrop(pump, DragDropEffects.Copy);
-        }
-
-        private void crossroadB1_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
        
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            foreach (Crossroad item in grid1.Controls)
+            {
+                listBox1.Items.Add(item.Location.ToString() + " --- " + item.GetType().Name);
+            }
+        }
+
+        private void grid1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Drawing;
 
 namespace TrafficSimulation
 {
+    [Serializable()]
     class Grid : Control
     {
         //guys u get the Crossroads now from grid1.Controls
@@ -47,6 +48,33 @@ namespace TrafficSimulation
         public void RemoveCrossroad(Crossroad crossroad)
         {
            // Crossroads.Remove(crossroad);
+        }
+
+        public void AddNeighbors()
+        {
+            //json dictionary
+         // [
+	        //"0,0": {
+
+         //       north: null,
+         //       south: "200,0",
+         //       east: "0,200",
+         //       west: null
+         //   }, 
+         //   "0,200": {
+		       // north: "0,0",
+		       // south: "0,400",
+		       // east: "200,200",
+		       // west: null
+	        //}
+         //   ]
+            foreach (Crossroad c in Controls)
+            {
+                if (true)
+                {
+
+                }
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
