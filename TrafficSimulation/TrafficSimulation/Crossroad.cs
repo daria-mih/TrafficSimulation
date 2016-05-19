@@ -61,13 +61,13 @@ namespace TrafficSimulation
             List<Point> sw = new List<Point>(new Point[] { new Point(110, 190), new Point(110, 160), new Point(95, 100), new Point(80, 95 ), new Point(40, 85), new Point(10, 85) });
             List<Point> se = new List<Point>(new Point[] { new Point(130, 190), new Point(130, 150), new Point(135, 135), new Point(145, 130), new Point(170, 130), new Point(190, 130) });
             //East
-            List<Point> en = new List<Point>(new Point[] { new Point(190, 65), new Point(155, 65), new Point(100, 120), new Point(100, 80), new Point(130, 120), new Point(192, 120) });
-            List<Point> es = new List<Point>(new Point[] { new Point(190, 85), new Point(155, 85), new Point(100, 120), new Point(100, 80), new Point(130, 120), new Point(192, 120) });
-            List<Point> ew = new List<Point>(new Point[] { new Point(100, 0), new Point(100, 120), new Point(100, 120), new Point(100, 80), new Point(130, 120), new Point(192, 120) });
+            List<Point> en = new List<Point>(new Point[] { new Point(190, 65), new Point(155, 65), new Point(130, 55), new Point(125, 40), new Point(125, 20), new Point(125, 10) });
+            List<Point> es = new List<Point>(new Point[] { new Point(190, 85), new Point(170, 85), new Point(120, 95), new Point(85, 120), new Point(85, 150), new Point(85, 190) });
+            List<Point> ew = new List<Point>(new Point[] { new Point(190, 65), new Point(170, 65), new Point(110, 65), new Point(90, 65), new Point(40, 65), new Point(20, 65) });
             //West
-            List<Point> we = new List<Point>(new Point[] { new Point(10, 110), new Point(40, 110), new Point(100, 120), new Point(100, 80), new Point(130, 120), new Point(192, 120) });
-            List<Point> ws = new List<Point>(new Point[] { new Point(40, 130), new Point(100, 120), new Point(100, 120), new Point(100, 80), new Point(130, 120), new Point(192, 120) });
-            List<Point> wn = new List<Point>(new Point[] { new Point(10, 130), new Point(100, 120), new Point(100, 120), new Point(100, 80), new Point(130, 120), new Point(192, 120) });
+            List<Point> we = new List<Point>(new Point[] { new Point(5, 125), new Point(30, 125), new Point(80, 125), new Point(110, 125), new Point(150, 125), new Point(190, 125) });
+            List<Point> ws = new List<Point>(new Point[] { new Point(5, 125), new Point(30, 125), new Point(50, 130), new Point(65, 140), new Point(65, 155), new Point(65, 190) });
+            List<Point> wn = new List<Point>(new Point[] { new Point(5, 110), new Point(25, 110), new Point(60, 110), new Point(100, 90), new Point(110, 50), new Point(110, 10) });
             //North
             List<Point> ns = new List<Point>(new Point[] { new Point(85, 10), new Point(85, 40), new Point(85, 70), new Point(85, 100), new Point(85, 150), new Point(85, 190) });
             List<Point> ne = new List<Point>(new Point[] { new Point(85, 10), new Point(85, 40), new Point(95, 70), new Point(105, 100), new Point(145, 130), new Point(192, 130) });
@@ -84,13 +84,13 @@ namespace TrafficSimulation
             //Directions.Add(new Direction(es, "ES"));
             //Directions.Add(new Direction(ew, "EW"));
             ////West
-            //Directions.Add(new Direction(we, "WE"));
-            //Directions.Add(new Direction(ws, "WS"));
-            //Directions.Add(new Direction(wn, "WN"));
+            // Directions.Add(new Direction(we, "WE"));
+            // Directions.Add(new Direction(ws, "WS"));
+            // Directions.Add(new Direction(wn, "WN"));
             //North
-            //Directions.Add(new Direction(ns, "NS"));
-            //Directions.Add(new Direction(ne, "NE"));
-            //Directions.Add(new Direction(nw, "NW"));
+            Directions.Add(new Direction(ns, "NS"));
+            Directions.Add(new Direction(ne, "NE"));
+            Directions.Add(new Direction(nw, "NW"));
 
 
         }

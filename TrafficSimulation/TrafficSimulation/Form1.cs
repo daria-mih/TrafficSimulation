@@ -246,7 +246,7 @@ namespace TrafficSimulation
                 Rectangle borderRectangle = cr.ClientRectangle;
                 borderRectangle.Inflate(-3, -3);
                 ControlPaint.DrawBorder3D(cr.CreateGraphics(), borderRectangle,
-                    Border3DStyle.Sunken);
+                    Border3DStyle.Etched);
             }
 
 
