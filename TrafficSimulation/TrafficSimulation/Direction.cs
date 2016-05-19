@@ -11,14 +11,15 @@ namespace TrafficSimulation
     public class Direction
     {
         //name for easy tracking example:"North-South"
-        public string name;
+        public string Name { get; set; }
         //one path inside of a crossroad
-        List<Point> points;
+        public List<Point> Points { get; set; }
 
         //constructor
-        public Direction()
+        public Direction(List<Point> points, string name)
         {
-            points = new List<Point>();
+            Name = name;
+            Points = points;
         }
         
         

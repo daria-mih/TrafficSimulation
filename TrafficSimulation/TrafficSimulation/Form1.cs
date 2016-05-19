@@ -36,7 +36,7 @@ namespace TrafficSimulation
         
         public Form1()
         {
-            selectedCrossroad = new Crossroad();
+            //selectedCrossroad = new Crossroad();
             this.ControlBox = false;
             this.Text = String.Empty;
             InitializeComponent();
@@ -176,7 +176,9 @@ namespace TrafficSimulation
                     A.Height = 200;
 
                     A.BackgroundImageLayout = ImageLayout.Stretch;
-                    A.MouseClick += crossroadA1_MouseDown;
+
+                    A.MouseDown += Crossroad_MouseDown;
+
                     A.MouseUp += crossroadA1_MouseUp;
                     A.delete.Click += (sender2, eventArgs2) =>
                     {
@@ -207,6 +209,7 @@ namespace TrafficSimulation
                     B.Width = 200;
                     B.Height = 200;
                     B.BackgroundImageLayout = ImageLayout.Stretch;
+                    B.MouseDown += Crossroad_MouseDown;
                     B.delete.Click += (sender2, eventArgs2) =>
                     {
                         selectedCrossroad = B;
@@ -222,11 +225,32 @@ namespace TrafficSimulation
                     }
 
                     grid1.Controls.Add(B);
-
-
                 }
 
             }
+        }
+
+        private void Crossroad_MouseDown(object sender, MouseEventArgs e)
+        {
+            Crossroad cr = (Crossroad)sender;
+            
+            if (e.Button == MouseButtons.Left)
+            {
+                //deletes the selected rectangle in all the other crossroads
+                foreach (Crossroad c in grid1.Controls)
+                {
+                    c.Invalidate();
+                    c.Update();
+                }
+                //paints the border to the selected crossroad
+                Rectangle borderRectangle = cr.ClientRectangle;
+                borderRectangle.Inflate(-3, -3);
+                ControlPaint.DrawBorder3D(cr.CreateGraphics(), borderRectangle,
+                    Border3DStyle.Sunken);
+            }
+
+
+           
         }
 
         private void AssignNeighbours(Crossroad c)
@@ -273,6 +297,8 @@ namespace TrafficSimulation
 
                 Console.WriteLine(c.West);
         }
+
+       
 
         private void Crossroad_DragOver(object sender, DragEventArgs e)
         {
