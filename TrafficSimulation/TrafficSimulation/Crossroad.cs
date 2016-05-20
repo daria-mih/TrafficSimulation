@@ -76,21 +76,21 @@ namespace TrafficSimulation
             //from -> to
             //SN stands for south to north and so on
             //south
-            //Directions.Add(new Direction(sn, "SN"));
-            //Directions.Add(new Direction(se, "SE"));
-            //Directions.Add(new Direction(sw, "SW"));
+            Directions.Add(new Direction(sn, "South-North"));
+            Directions.Add(new Direction(se, "South-East"));
+            Directions.Add(new Direction(sw, "South-West"));
             ////East
-            //Directions.Add(new Direction(en, "EN"));
-            //Directions.Add(new Direction(es, "ES"));
-            //Directions.Add(new Direction(ew, "EW"));
+            Directions.Add(new Direction(en, "East-North"));
+            Directions.Add(new Direction(es, "East-South"));
+            Directions.Add(new Direction(ew, "East-West"));
             ////West
-            // Directions.Add(new Direction(we, "WE"));
-            // Directions.Add(new Direction(ws, "WS"));
-            // Directions.Add(new Direction(wn, "WN"));
+            Directions.Add(new Direction(we, "West-East"));
+            Directions.Add(new Direction(ws, "West-South"));
+            Directions.Add(new Direction(wn, "West-North"));
             //North
-            Directions.Add(new Direction(ns, "NS"));
-            Directions.Add(new Direction(ne, "NE"));
-            Directions.Add(new Direction(nw, "NW"));
+            Directions.Add(new Direction(ns, "North-South"));
+            Directions.Add(new Direction(ne, "North-East"));
+            Directions.Add(new Direction(nw, "North-West"));
 
 
         }

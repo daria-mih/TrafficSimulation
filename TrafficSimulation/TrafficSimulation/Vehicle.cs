@@ -29,6 +29,12 @@ namespace TrafficSimulation
             size = 5;
             currentPosition = startposition;
         }
+       //created by chiel
+        public Vehicle(List<Point> _route)
+        {
+            route = _route;
+            size = 5;
+        }
 
         public void Move()
         {

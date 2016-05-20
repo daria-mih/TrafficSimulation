@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -11,7 +13,7 @@ namespace TrafficSimulation
     {
         //fields
         static public bool ShouldStop =false;
-        //static private List<IMovables> Moveables;
+        static private List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints;
         public static Grid grid;
         private static List<Node> listOfNodes = new List<Node>();
@@ -43,6 +45,7 @@ namespace TrafficSimulation
         /// </summary>
         static public void FillEndPoints()
         {
+            BeginEndPoints = new List<Node>();
             foreach (Node crossNode in listOfNodes)
             {
                 if (crossNode.crossroad.North == null || crossNode.crossroad.West == null || crossNode.crossroad.South == null || crossNode.crossroad.East == null)
@@ -75,19 +78,19 @@ namespace TrafficSimulation
             // construct the road
             //pick a startpoint on the crossroad at random
             List<string> entrances = new List<string>();
-            if (Route[0].crossroad.North != null)
+            if (Route[0].crossroad.North == null)
             {
                 entrances.Add("North");
             }
-            if (Route[0].crossroad.East != null)
+            if (Route[0].crossroad.East == null)
             {
                 entrances.Add("East");
             }
-            if (Route[0].crossroad.South != null)
+            if (Route[0].crossroad.South == null)
             {
                 entrances.Add("South");
             }
-            if (Route[0].crossroad.West != null)
+            if (Route[0].crossroad.West == null)
             {
                 entrances.Add("West");
             }
@@ -108,7 +111,7 @@ namespace TrafficSimulation
                routeDirections.Add( Route[0].crossroad.FindDirection(directionName));
                 return routeDirections;
             }
-            directionName += "-" + Route[0].WhichNeighbour(listOfNodes, Route[1]);
+            directionName +=  Route[0].WhichNeighbour(listOfNodes, Route[1]);
             routeDirections.Add(Route[0].crossroad.FindDirection(directionName));
             //the directions with a parent crossroad and a child crossroad
             for (int i = 1; i < Route.Count -1; i++)
@@ -218,11 +221,24 @@ namespace TrafficSimulation
             {
                 node.SetDistance(startpnt, endpnt);
             }
-            GetShortestRoute(startpnt, endpnt);
+            List<Direction> dirlist = GetShortestRoute(startpnt, endpnt);
+            List<Point> pointlist = new List<Point>();
+            foreach (Direction dir in dirlist)
+            {
+                foreach (var item in dir.Points)
+                {
+                    pointlist.Add(item);
+                }
+            }
+            Moveables.Add( new Vehicle(pointlist ));
         }
         static public void MoveMovables()
         {
-
+            Thread.Sleep(2000);
+            foreach (IMoveable movable in Moveables)
+            {
+                movable.Move();
+            }
         }
         #endregion
         static private void ChangeTrafficLights()
@@ -234,10 +250,11 @@ namespace TrafficSimulation
         {
             GetNodes();
             FillEndPoints();
+            CreateMovables();
             while (!ShouldStop)
             {
-                CreateMovables();
-                //MoveMovables();
+                
+                MoveMovables();
                 //ChangeTrafficLights();
             }
         }
