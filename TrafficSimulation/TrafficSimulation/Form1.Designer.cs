@@ -83,7 +83,7 @@
             this.panel1.Controls.Add(this.btnOpen);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(5, 30);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(155, 76);
             this.panel1.TabIndex = 0;
@@ -92,7 +92,7 @@
             // 
             this.btnSave.Image = global::TrafficSimulation.Properties.Resources.save_icon;
             this.btnSave.Location = new System.Drawing.Point(80, 5);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 65);
             this.btnSave.TabIndex = 2;
@@ -105,7 +105,7 @@
             // 
             this.btnOpen.Image = global::TrafficSimulation.Properties.Resources.open_icon;
             this.btnOpen.Location = new System.Drawing.Point(5, 4);
-            this.btnOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(4);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(75, 65);
             this.btnOpen.TabIndex = 1;
@@ -127,7 +127,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.grid1);
             this.panel3.Location = new System.Drawing.Point(169, 30);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1066, 739);
             this.panel3.TabIndex = 2;
@@ -137,7 +137,7 @@
             this.grid1.AllowDrop = true;
             this.grid1.BackgroundImage = global::TrafficSimulation.Properties.Resources.grid;
             this.grid1.Location = new System.Drawing.Point(-1, -2);
-            this.grid1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grid1.Margin = new System.Windows.Forms.Padding(4);
             this.grid1.Name = "grid1";
             this.grid1.Placeholders = ((System.Collections.Generic.List<System.Drawing.Rectangle>)(resources.GetObject("grid1.Placeholders")));
             this.grid1.Size = new System.Drawing.Size(1067, 741);
@@ -153,7 +153,7 @@
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.Image = global::TrafficSimulation.Properties.Resources.close;
             this.btnClose.Location = new System.Drawing.Point(1201, 1);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(35, 31);
             this.btnClose.TabIndex = 0;
@@ -169,7 +169,7 @@
             this.panel2.Controls.Add(this.crossroadA1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(5, 113);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(155, 288);
             this.panel2.TabIndex = 0;
@@ -177,9 +177,10 @@
             // crossroadB1
             // 
             this.crossroadB1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad2bw;
+            this.crossroadB1.Directions = ((System.Collections.Generic.List<TrafficSimulation.Direction>)(resources.GetObject("crossroadB1.Directions")));
             this.crossroadB1.East = null;
             this.crossroadB1.Location = new System.Drawing.Point(5, 155);
-            this.crossroadB1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.crossroadB1.Margin = new System.Windows.Forms.Padding(4);
             this.crossroadB1.Name = "crossroadB1";
             this.crossroadB1.NoOfCars = 0;
             this.crossroadB1.NoOfTrafficLights = 0;
@@ -199,9 +200,10 @@
             // 
             this.crossroadA1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
             this.crossroadA1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.crossroadA1.Directions = ((System.Collections.Generic.List<TrafficSimulation.Direction>)(resources.GetObject("crossroadA1.Directions")));
             this.crossroadA1.East = null;
             this.crossroadA1.Location = new System.Drawing.Point(5, 26);
-            this.crossroadA1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.crossroadA1.Margin = new System.Windows.Forms.Padding(4);
             this.crossroadA1.Name = "crossroadA1";
             this.crossroadA1.NoOfCars = 0;
             this.crossroadA1.NoOfPedestrians = 0;
@@ -249,7 +251,7 @@
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Location = new System.Drawing.Point(5, 409);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(155, 280);
             this.panel4.TabIndex = 1;
@@ -257,7 +259,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(80, 247);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(68, 28);
             this.button2.TabIndex = 14;
@@ -267,12 +269,13 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(5, 247);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(69, 28);
             this.button1.TabIndex = 13;
             this.button1.Text = "Apply";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkBox4
             // 
@@ -280,7 +283,7 @@
             this.checkBox4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox4.ForeColor = System.Drawing.SystemColors.Control;
             this.checkBox4.Location = new System.Drawing.Point(28, 224);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(72, 27);
             this.checkBox4.TabIndex = 12;
@@ -293,7 +296,7 @@
             this.checkBox3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox3.ForeColor = System.Drawing.SystemColors.Control;
             this.checkBox3.Location = new System.Drawing.Point(28, 203);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(60, 27);
             this.checkBox3.TabIndex = 12;
@@ -306,7 +309,7 @@
             this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox2.ForeColor = System.Drawing.SystemColors.Control;
             this.checkBox2.Location = new System.Drawing.Point(28, 181);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(89, 27);
             this.checkBox2.TabIndex = 11;
@@ -319,9 +322,9 @@
             this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.ForeColor = System.Drawing.SystemColors.Control;
             this.checkBox1.Location = new System.Drawing.Point(28, 159);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(61, 27);
+            this.checkBox1.Size = new System.Drawing.Size(59, 27);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Top";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -341,7 +344,7 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(100, 98);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(48, 22);
             this.numericUpDown3.TabIndex = 8;
@@ -361,7 +364,7 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(100, 66);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(48, 22);
             this.numericUpDown2.TabIndex = 6;
@@ -374,14 +377,14 @@
             this.label6.Location = new System.Drawing.Point(-1, 66);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 23);
+            this.label6.Size = new System.Drawing.Size(100, 23);
             this.label6.TabIndex = 5;
             this.label6.Text = "Pedestrians:";
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(100, 34);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(48, 22);
             this.numericUpDown1.TabIndex = 4;
@@ -416,7 +419,7 @@
             this.panel5.Controls.Add(this.btnStop);
             this.panel5.Controls.Add(this.btnStart);
             this.panel5.Location = new System.Drawing.Point(5, 697);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(155, 73);
             this.panel5.TabIndex = 3;
@@ -425,7 +428,7 @@
             // 
             this.btnStop.Image = global::TrafficSimulation.Properties.Resources.stop;
             this.btnStop.Location = new System.Drawing.Point(80, 4);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 62);
             this.btnStop.TabIndex = 4;
@@ -438,7 +441,7 @@
             // 
             this.btnStart.Image = global::TrafficSimulation.Properties.Resources.start;
             this.btnStart.Location = new System.Drawing.Point(5, 4);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 62);
             this.btnStart.TabIndex = 3;
@@ -459,7 +462,7 @@
             this.label2.Location = new System.Drawing.Point(8, 6);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(185, 19);
+            this.label2.Size = new System.Drawing.Size(184, 19);
             this.label2.TabIndex = 4;
             this.label2.Text = "Traffic Simulation Application";
             // 
@@ -477,7 +480,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);

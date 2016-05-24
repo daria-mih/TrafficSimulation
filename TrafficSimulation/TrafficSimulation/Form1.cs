@@ -33,14 +33,19 @@ namespace TrafficSimulation
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
-        
+        List<Point> se = new List<Point>(new Point[] { new Point(130, 190), new Point(130, 150), new Point(135, 135), new Point(145, 130), new Point(170, 130), new Point(190, 130) });
+        Vehicle car;
+
         public Form1()
-        {
-            //selectedCrossroad = new Crossroad();
+        { 
+            selectedCrossroad = new Crossroad();
             this.ControlBox = false;
             this.Text = String.Empty;
             InitializeComponent();
+            //timer1.Start();
             Simulation.grid = grid1;
+            car = new Vehicle(se, new Point(127,0));
+            
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
@@ -182,7 +187,6 @@ namespace TrafficSimulation
                     A.MouseUp += crossroadA1_MouseUp;
                     A.delete.Click += (sender2, eventArgs2) =>
                     {
-                        selectedCrossroad = A;
                         grid1.Controls.Remove(A);
                     };
 
@@ -197,6 +201,7 @@ namespace TrafficSimulation
 
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
+                    A.AddCarToTheList(car);
 
                 }
                 else if (c.Name == "crossroadB1")
@@ -212,7 +217,6 @@ namespace TrafficSimulation
                     B.MouseDown += Crossroad_MouseDown;
                     B.delete.Click += (sender2, eventArgs2) =>
                     {
-                        selectedCrossroad = B;
                         grid1.Controls.Remove(B);
                     };
 
@@ -225,6 +229,7 @@ namespace TrafficSimulation
                     }
 
                     grid1.Controls.Add(B);
+                   
                 }
 
             }
@@ -233,7 +238,8 @@ namespace TrafficSimulation
         private void Crossroad_MouseDown(object sender, MouseEventArgs e)
         {
             Crossroad cr = (Crossroad)sender;
-            
+            selectedCrossroad = cr;
+          
             if (e.Button == MouseButtons.Left)
             {
                 //deletes the selected rectangle in all the other crossroads
@@ -336,7 +342,9 @@ namespace TrafficSimulation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            int r = car.route.Count;
+            car.Move();
+            this.Refresh();
             List<TrafficLight> trafficLights = new List<TrafficLight>();
             List<TrafficLight> temp = trafficLights;
             foreach (TrafficLight trafficlight in trafficLights)
@@ -349,6 +357,7 @@ namespace TrafficSimulation
                 //    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
                 //}
             }
+
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -573,6 +582,12 @@ namespace TrafficSimulation
         private void btnStop_Click(object sender, EventArgs e)
         {
             Simulation.ShouldStop = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Interval = 3000;
+            timer1.Start();
         }
     }
 }

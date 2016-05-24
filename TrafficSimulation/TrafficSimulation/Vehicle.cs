@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace TrafficSimulation
 {
@@ -11,7 +12,7 @@ namespace TrafficSimulation
     public class Vehicle : IMoveable
     {
         public Point currentPosition { get; set; }
-       
+
         public Point endPoint
         { get; set; }
 
@@ -20,20 +21,23 @@ namespace TrafficSimulation
         public List<Point> route
         { get; set; }
 
-        public int size
-        { get; set; }
+        public Color color { get; set; }
 
+
+        public Rectangle drawing { get; set; }
+
+        public const int car_height = 10;
+        public const int car_width = 10;
         public Vehicle(List<Point> _route, Point startposition)
         {
             route = _route;
-            size = 5;
             currentPosition = startposition;
+            color = Color.Green;
         }
-       //created by chiel
+        //created by chiel
         public Vehicle(List<Point> _route)
         {
             route = _route;
-            size = 5;
         }
 
         public void Move()
@@ -41,9 +45,17 @@ namespace TrafficSimulation
             //check if there is a car in front
             //check if there is red light in front
             //yet to be done
-            currentPosition = route[0];
-            route.Remove(route[0]); 
-            
+
+
+            if (route.Count > 0)
+            {
+                currentPosition = route[0];
+                route.Remove(route[0]);
+
+            }
+
         }
+
+
     }
 }

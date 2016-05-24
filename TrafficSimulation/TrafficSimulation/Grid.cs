@@ -9,7 +9,7 @@ using System.Drawing;
 namespace TrafficSimulation
 {
     [Serializable()]
-    class Grid : Control
+    public class Grid : Control
     {
         //guys u get the Crossroads now from grid1.Controls
         public List<Rectangle> Placeholders { get; set; }

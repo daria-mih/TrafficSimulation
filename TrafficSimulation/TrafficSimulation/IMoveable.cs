@@ -10,7 +10,6 @@ namespace TrafficSimulation
     //[Serializable()]
     public interface IMoveable
     {
-        int size { get; set; }
         Point endPoint { get; set; }
         Graphics icon { get; set; }
         Point currentPosition { get; set; }
