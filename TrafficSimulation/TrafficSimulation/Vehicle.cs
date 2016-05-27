@@ -32,7 +32,7 @@ namespace TrafficSimulation
         {
             route = _route;
             currentPosition = startposition;
-            color = Color.Green;
+            color = Color.Yellow;
         }
         //created by chiel
         public Vehicle(List<Point> _route)

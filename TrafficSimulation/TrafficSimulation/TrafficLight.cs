@@ -4,26 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-
+using System.Timers;
 namespace TrafficSimulation
 {
     [Serializable()]
-    class TrafficLight
+
+     public class TrafficLight
     {
         public int Id { get; set; }
-        public int Time { get; set; }
-        public Color State { get; set; }
 
-        public TrafficLight(int id, int time, Color state)
+        public Color state { get; set; }
+
+        public bool stateChanged { get; set; }
+
+
+
+        public TrafficLight(int id, Color _state)
         {
             Id = id;
-            Time = time;
-            State = state;
+            state = _state;
+
         }
 
-        public void ChangeState(Color state)
-        {
-            State = state;
-        }
+
+
+
     }
+
 }

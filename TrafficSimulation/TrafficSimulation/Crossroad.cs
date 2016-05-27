@@ -16,7 +16,9 @@ namespace TrafficSimulation
 
         public List<Direction> Directions { get; set; }
         public List<Vehicle> cars;
-
+        public List<TrafficLight> trafficLights;
+        private int counter;
+        private Timer lightTimer;
         public int NoOfCars { get; set; }
         public int NoOfTrafficLights { get; set; }
         public Crossroad North { get; set; }
@@ -35,9 +37,49 @@ namespace TrafficSimulation
             delete = new MenuItem();
             Directions = new List<Direction>();
             AddDirections();
+            trafficLights = new List<TrafficLight>();
+            lightTimer = new Timer();
             cars = new List<Vehicle>();
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
 
+            //do something here 
+            counter++;
+            ChangeState();
+
+        }
+
+        private void ChangeState()
+        {
+            TrafficLight tempLight = null;
+            if (counter >= 0)
+            {
+                tempLight = trafficLights[counter];
+                tempLight.state = Color.Lime;
+                foreach (TrafficLight trafficLight in trafficLights)
+                {
+                    if (trafficLight != tempLight)
+                    {
+                        trafficLight.state = Color.Red;
+                    }
+                }
+                if (counter == 3)
+                    counter = 0;
+                this.Refresh();
+            }
+
+        }
+
+        private void InitializeTimer()
+        {
+            counter = 0;
+            lightTimer.Interval = 3000;
+            lightTimer.Enabled = true;
+            timer1_Tick(null, null);
+
+            lightTimer.Tick += new EventHandler(timer1_Tick);
+        }
         
 
         /// <summary>
@@ -139,8 +181,59 @@ namespace TrafficSimulation
             //DrawDirections(pe);
             DrawCars(pe);
 
-            
-           
+            foreach (TrafficLight tl in trafficLights)
+            {
+                Brush b = new SolidBrush(tl.state);
+                switch (tl.Id)
+                {
+                    case 1:
+                    {
+                        pe.Graphics.FillEllipse(b, 80, 50, 9, 9);
+                        pe.Graphics.FillEllipse(b, 110, 140, 9, 9);
+                        break;
+                    }
+                    case 2:
+                    {
+                        //right
+                        pe.Graphics.FillEllipse(b, 65, 50, 9, 9);
+                        pe.Graphics.FillEllipse(b, 125, 140, 9, 9);
+
+                        break;
+                    }
+                    case 3:
+                    {
+
+                        pe.Graphics.FillEllipse(b, 50, 125, 9, 9);
+                        pe.Graphics.FillEllipse(b, 140, 65, 9, 9);
+                        break;
+                    }
+                    case 4:
+                    {
+
+                        pe.Graphics.FillEllipse(b, 50, 110, 9, 9);
+                        pe.Graphics.FillEllipse(b, 140, 80, 9, 9);
+                        break;
+                    }
+
+                }
+
+            }
+
+
+
+        }
+        public void PlaceTrafficLights(int timer)
+        {
+
+            for (int i = 0; i < 4; i++)
+            {
+                trafficLights.Add(new TrafficLight(i + 1, Color.Red));
+            }
+            InitializeTimer();
+        }
+        public void ChangeTimer(int seconds)
+        {
+            lightTimer.Interval = seconds * 1000;
         }
 
         protected override void OnMouseDown(MouseEventArgs e)

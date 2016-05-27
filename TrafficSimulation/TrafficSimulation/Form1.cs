@@ -33,7 +33,8 @@ namespace TrafficSimulation
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
-        List<Point> se = new List<Point>(new Point[] { new Point(130, 190), new Point(130, 150), new Point(135, 135), new Point(145, 130), new Point(170, 130), new Point(190, 130) });
+        List<Point> ns = new List<Point>(new Point[] { new Point(85, 10), new Point(85, 40), new Point(85, 70), new Point(85, 100), new Point(85, 150), new Point(85, 190) });
+            
         Vehicle car;
 
         public Form1()
@@ -44,7 +45,7 @@ namespace TrafficSimulation
             InitializeComponent();
             //timer1.Start();
             Simulation.grid = grid1;
-            car = new Vehicle(se, new Point(127,0));
+            car = new Vehicle(ns, new Point(83,0));
             
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
@@ -196,6 +197,10 @@ namespace TrafficSimulation
                         if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
                         {
                             A.Location = placeholder.Location;
+                        
+                            A.PlaceTrafficLights(3000);
+                           // A.Paint += new System.Windows.Forms.PaintEventHandler(this.grid1_Paint);
+
                         }
                     }
 
@@ -225,6 +230,7 @@ namespace TrafficSimulation
                         if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
                         {
                             B.Location = placeholder.Location;
+                            B.PlaceTrafficLights(3000);
                         }
                     }
 
