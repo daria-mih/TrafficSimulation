@@ -36,7 +36,7 @@ namespace TrafficSimulation
             }
         }
 
-        public void Move()
+        public bool Move()
         {
             throw new NotImplementedException();
         }

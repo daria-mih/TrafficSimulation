@@ -45,7 +45,7 @@ namespace TrafficSimulation
             InitializeComponent();
             //timer1.Start();
             Simulation.grid = grid1;
-            car = new Vehicle(ns, new Point(83,0));
+            car = new Vehicle(ns);
             
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;

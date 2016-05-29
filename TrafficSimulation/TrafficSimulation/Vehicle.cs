@@ -28,19 +28,13 @@ namespace TrafficSimulation
 
         public const int car_height = 10;
         public const int car_width = 10;
-        public Vehicle(List<Point> _route, Point startposition)
-        {
-            route = _route;
-            currentPosition = startposition;
-            color = Color.Yellow;
-        }
-        //created by chiel
         public Vehicle(List<Point> _route)
         {
             route = _route;
+            currentPosition = _route[0];
+            color = GenerateRandomCarColors();
         }
-
-        public void Move()
+        public bool Move()
         {
             //check if there is a car in front
             //check if there is red light in front
@@ -49,11 +43,22 @@ namespace TrafficSimulation
 
             if (route.Count > 0)
             {
-                currentPosition = route[0];
-                route.Remove(route[0]);
+                currentPosition = route[1];
+                route.Remove(route[1]);
+                return true;
 
             }
+            return false;
 
+        }
+
+        public Color GenerateRandomCarColors()
+        {
+            Random randomGen = new Random();
+            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+            KnownColor randomColorName = names[randomGen.Next(names.Length)];
+            Color randomColor = Color.FromKnownColor(randomColorName);
+            return randomColor;
         }
 
 
