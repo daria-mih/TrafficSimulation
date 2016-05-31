@@ -150,7 +150,7 @@ namespace TrafficSimulation
         //    return null; //for now
         //}
 
-
+/*
         void DrawDirections(PaintEventArgs pe)
         {
             foreach (Direction dir in Directions)
@@ -164,7 +164,8 @@ namespace TrafficSimulation
                 }
             }
         }
-        void DrawCars(PaintEventArgs pe)
+*/
+        public void DrawCars(PaintEventArgs pe)
         {
             foreach (Vehicle car in cars)
             {
@@ -178,7 +179,7 @@ namespace TrafficSimulation
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
-            //DrawDirections(pe);
+            if(cars.Count > 0)
             DrawCars(pe);
 
             foreach (TrafficLight tl in trafficLights)
@@ -187,39 +188,37 @@ namespace TrafficSimulation
                 switch (tl.Id)
                 {
                     case 1:
-                    {
-                        pe.Graphics.FillEllipse(b, 80, 50, 9, 9);
-                        pe.Graphics.FillEllipse(b, 110, 140, 9, 9);
-                        break;
-                    }
+                        {
+                            pe.Graphics.FillEllipse(b, 80, 50, 9, 9);
+                            pe.Graphics.FillEllipse(b, 110, 140, 9, 9);
+                            break;
+                        }
                     case 2:
-                    {
-                        //right
-                        pe.Graphics.FillEllipse(b, 65, 50, 9, 9);
-                        pe.Graphics.FillEllipse(b, 125, 140, 9, 9);
+                        {
+                            //right
+                            pe.Graphics.FillEllipse(b, 65, 50, 9, 9);
+                            pe.Graphics.FillEllipse(b, 125, 140, 9, 9);
 
-                        break;
-                    }
+                            break;
+                        }
                     case 3:
-                    {
+                        {
 
-                        pe.Graphics.FillEllipse(b, 50, 125, 9, 9);
-                        pe.Graphics.FillEllipse(b, 140, 65, 9, 9);
-                        break;
-                    }
+                            pe.Graphics.FillEllipse(b, 50, 125, 9, 9);
+                            pe.Graphics.FillEllipse(b, 140, 65, 9, 9);
+                            break;
+                        }
                     case 4:
-                    {
+                        {
 
-                        pe.Graphics.FillEllipse(b, 50, 110, 9, 9);
-                        pe.Graphics.FillEllipse(b, 140, 80, 9, 9);
-                        break;
-                    }
+                            pe.Graphics.FillEllipse(b, 50, 110, 9, 9);
+                            pe.Graphics.FillEllipse(b, 140, 80, 9, 9);
+                            break;
+                        }
 
                 }
 
             }
-
-
 
         }
         public void PlaceTrafficLights(int timer)
@@ -236,12 +235,12 @@ namespace TrafficSimulation
             lightTimer.Interval = seconds * 1000;
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            base.OnMouseDown(e);
+        //protected override void OnMouseDown(MouseEventArgs e)
+        //{
+        //    base.OnMouseDown(e);
            
             
-        }
+        //}
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
@@ -282,9 +281,6 @@ namespace TrafficSimulation
         public void AddCarToTheList(Vehicle car)
         {
             cars.Add(car);
-
         }
-
-
     }
 }

@@ -26,30 +26,43 @@ namespace TrafficSimulation
 
         public Rectangle drawing { get; set; }
 
-        public const int car_height = 10;
-        public const int car_width = 10;
         public Vehicle(List<Point> _route)
         {
             route = _route;
             currentPosition = _route[0];
             color = GenerateRandomCarColors();
         }
-        public bool Move()
+        public bool Move(List<Vehicle> carlist)
         {
             //check if there is a car in front
             //check if there is red light in front
             //yet to be done
-
-
-            if (route.Count > 0)
+            if (route.Count > 1)
             {
-                currentPosition = route[1];
-                route.Remove(route[1]);
-                return true;
-
+                if (carlist.Count > 1)
+                {
+                    foreach (Vehicle v in carlist)
+                    {
+                        if (v != this)
+                        {
+                            if (v.currentPosition != route[1])
+                            {
+                                currentPosition = route[1];
+                                route.Remove(route[1]);
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else if (carlist.Count == 1)
+                {
+                    currentPosition = route[1];
+                    route.Remove(route[1]);
+                    return true;
+                }
+                return false;
             }
             return false;
-
         }
 
         public Color GenerateRandomCarColors()

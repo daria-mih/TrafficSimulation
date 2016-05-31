@@ -1,4 +1,6 @@
-﻿namespace TrafficSimulation
+﻿using System.Windows.Forms;
+
+namespace TrafficSimulation
 {
     partial class Form1
     {
@@ -177,7 +179,7 @@
             // crossroadB1
             // 
             this.crossroadB1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad2bw;
-            this.crossroadB1.Directions = ((System.Collections.Generic.List<TrafficSimulation.Direction>)(resources.GetObject("crossroadB1.Directions")));
+            this.crossroadB1.Directions = null;
             this.crossroadB1.East = null;
             this.crossroadB1.Location = new System.Drawing.Point(5, 155);
             this.crossroadB1.Margin = new System.Windows.Forms.Padding(4);
@@ -200,7 +202,7 @@
             // 
             this.crossroadA1.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
             this.crossroadA1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.crossroadA1.Directions = ((System.Collections.Generic.List<TrafficSimulation.Direction>)(resources.GetObject("crossroadA1.Directions")));
+            this.crossroadA1.Directions = null;
             this.crossroadA1.East = null;
             this.crossroadA1.Location = new System.Drawing.Point(5, 26);
             this.crossroadA1.Margin = new System.Windows.Forms.Padding(4);

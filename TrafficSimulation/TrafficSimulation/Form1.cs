@@ -28,12 +28,13 @@ namespace TrafficSimulation
         public const int HT_CAPTION = 0x2;
         // Crossroad currentRoad;
         Point mousePoint;
+        private List<Vehicle> cars;
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
-        List<Point> ns = new List<Point>(new Point[] { new Point(85, 10), new Point(85, 40), new Point(85, 70), new Point(85, 100), new Point(85, 150), new Point(85, 190) });
+        List<Point> ns = new List<Point>(new Point[] { new Point(85, 10), new Point(85,15),new Point(85,25),   new Point(85, 40), new Point(85, 70), new Point(85, 100), new Point(85, 150), new Point(85, 190) });
             
         Vehicle car;
 
@@ -42,11 +43,13 @@ namespace TrafficSimulation
             selectedCrossroad = new Crossroad();
             this.ControlBox = false;
             this.Text = String.Empty;
+            this.DoubleBuffered = true;
+
             InitializeComponent();
             //timer1.Start();
             Simulation.grid = grid1;
             car = new Vehicle(ns);
-            
+            cars = new List<Vehicle>();
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
@@ -207,6 +210,7 @@ namespace TrafficSimulation
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
                     A.AddCarToTheList(car);
+                    cars.Add(car);
 
                 }
                 else if (c.Name == "crossroadB1")
@@ -348,21 +352,21 @@ namespace TrafficSimulation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int r = car.route.Count;
-            car.Move();
-            this.Refresh();
-            List<TrafficLight> trafficLights = new List<TrafficLight>();
-            List<TrafficLight> temp = trafficLights;
-            foreach (TrafficLight trafficlight in trafficLights)
-            {
-                //trafficlight.Interval--;
-                //break;
-                //if (trafficlight.Interval.Equals(0))
-                //{
-                //    Simulation.ChangeTrafficLights();
-                //    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
-                //}
-            }
+            car.Move(cars);
+            Invalidate();
+
+            // List<TrafficLight> trafficLights = new List<TrafficLight>();
+            //List<TrafficLight> temp = trafficLights;
+            // foreach (TrafficLight trafficlight in trafficLights)
+            //{
+            //trafficlight.Interval--;
+            //break;
+            //if (trafficlight.Interval.Equals(0))
+            //{
+            //    Simulation.ChangeTrafficLights();
+            //    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
+            //}
+            //}
 
         }
 
@@ -592,7 +596,7 @@ namespace TrafficSimulation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            timer1.Interval = 3000;
+            timer1.Interval = 2000;
             timer1.Start();
         }
     }

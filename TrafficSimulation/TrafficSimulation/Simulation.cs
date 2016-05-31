@@ -237,7 +237,7 @@ namespace TrafficSimulation
             Thread.Sleep(2000);
             foreach (IMoveable movable in Moveables)
             {
-                movable.Move();
+                //movable.Move();
             }
         }
         #endregion
