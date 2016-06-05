@@ -352,7 +352,7 @@ namespace TrafficSimulation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            car.Move(cars);
+            car.Move(cars, selectedCrossroad.trafficLights);
             Invalidate();
 
             // List<TrafficLight> trafficLights = new List<TrafficLight>();

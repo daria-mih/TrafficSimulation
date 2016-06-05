@@ -17,7 +17,8 @@ namespace TrafficSimulation
 
         public bool stateChanged { get; set; }
 
-
+        public Point currentPosition1 { get; set; }
+        public Point currentPosition2 { get; set; }
 
         public TrafficLight(int id, Color _state)
         {

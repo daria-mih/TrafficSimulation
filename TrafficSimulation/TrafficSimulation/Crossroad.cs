@@ -190,14 +190,18 @@ namespace TrafficSimulation
                     case 1:
                         {
                             pe.Graphics.FillEllipse(b, 80, 50, 9, 9);
+                            tl.currentPosition1 = new Point(80, 50);
                             pe.Graphics.FillEllipse(b, 110, 140, 9, 9);
+                            tl.currentPosition2 = new Point(110, 140);
                             break;
                         }
                     case 2:
                         {
                             //right
                             pe.Graphics.FillEllipse(b, 65, 50, 9, 9);
+                            tl.currentPosition1 = new Point(65, 50);
                             pe.Graphics.FillEllipse(b, 125, 140, 9, 9);
+                            tl.currentPosition2 = new Point(125, 140);
 
                             break;
                         }
@@ -205,14 +209,18 @@ namespace TrafficSimulation
                         {
 
                             pe.Graphics.FillEllipse(b, 50, 125, 9, 9);
+                            tl.currentPosition1 = new Point(50, 125);
                             pe.Graphics.FillEllipse(b, 140, 65, 9, 9);
+                            tl.currentPosition2 = new Point(140, 65);
                             break;
                         }
                     case 4:
                         {
 
                             pe.Graphics.FillEllipse(b, 50, 110, 9, 9);
+                            tl.currentPosition1 = new Point(50, 110);
                             pe.Graphics.FillEllipse(b, 140, 80, 9, 9);
+                            tl.currentPosition2 = new Point(140, 80);
                             break;
                         }
 

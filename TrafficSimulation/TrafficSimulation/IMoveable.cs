@@ -19,7 +19,7 @@ namespace TrafficSimulation
 
 
         //takes a route from the list for a moveable to follow
-       bool Move(List<Vehicle> carlist);
+       bool Move(List<Vehicle> carlist, List<TrafficLight> lights);
       
     }
 }

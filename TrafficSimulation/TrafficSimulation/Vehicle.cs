@@ -16,6 +16,8 @@ namespace TrafficSimulation
         public Point endPoint
         { get; set; }
 
+        public bool isStopped = false;
+
         public Graphics icon
         { get; set; }
         public List<Point> route
@@ -32,20 +34,29 @@ namespace TrafficSimulation
             currentPosition = _route[0];
             color = GenerateRandomCarColors();
         }
-        public bool Move(List<Vehicle> carlist)
+        public bool Move(List<Vehicle> carlist, List<TrafficLight> lights)
         {
             //check if there is a car in front
             //check if there is red light in front
             //yet to be done
             if (route.Count > 1)
             {
-                if (carlist.Count > 1)
+                   if (carlist.Count > 1)
                 {
                     foreach (Vehicle v in carlist)
                     {
                         if (v != this)
                         {
-                            if (v.currentPosition != route[1])
+                            if (!v.isStopped)
+                            {
+                                currentPosition = route[1];
+                                route.Remove(route[1]);
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            if (!checkForRed(lights))
                             {
                                 currentPosition = route[1];
                                 route.Remove(route[1]);
@@ -56,11 +67,13 @@ namespace TrafficSimulation
                 }
                 else if (carlist.Count == 1)
                 {
-                    currentPosition = route[1];
-                    route.Remove(route[1]);
-                    return true;
+                    if (checkForRed(lights))
+                    {
+                        currentPosition = route[1];
+                        route.Remove(route[1]);
+                        return true;
+                    }
                 }
-                return false;
             }
             return false;
         }
@@ -74,6 +87,85 @@ namespace TrafficSimulation
             return randomColor;
         }
 
+
+        public bool checkForRed(List<TrafficLight> lights)
+        {
+            Rectangle check;
+
+            if ((route[1].X - currentPosition.X) >0)
+            {
+                // cars go from the left to the right 
+                check = new Rectangle(currentPosition.X + 5, currentPosition.Y, 10, 10);
+              foreach (TrafficLight l in lights)
+                {
+                    if (check.Contains(l.currentPosition1))
+                    {
+                        if (l.state == Color.Red )
+                        {
+                            isStopped = true;
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            if ((route[1].X - currentPosition.X) < 0)
+                {
+                //cars go from the right to the left
+                check = new Rectangle(currentPosition.X - 5, currentPosition.Y, 10, 10);
+
+                foreach (TrafficLight l in lights)
+                {
+                    if (check.Contains(l.currentPosition1))
+                    {
+                        if (l.state == Color.Red)
+                        {
+                            isStopped = true;
+                            return true;
+                        }
+                    }
+                }
+
+            }
+
+            if ((route[1].Y - currentPosition.Y) > 0)
+            {
+                // cars go from top to bottom
+                check = new Rectangle(currentPosition.X, currentPosition.Y + 5, 10, 10);
+
+                foreach (TrafficLight l in lights)
+                {
+                    if (check.Contains(l.currentPosition1))
+                    {
+                        if (l.state == Color.Red)
+                        {
+                            isStopped = true;
+                            return true;
+                        }
+                    }
+                }
+
+
+            }
+            if ((route[1].Y - currentPosition.Y) < 0)
+            {
+                // cars go from bottom to top
+                check = new Rectangle(currentPosition.X, currentPosition.Y - 5, 10, 10);
+
+                foreach (TrafficLight l in lights)
+                {
+                    if (check.Contains(l.currentPosition1))
+                    {
+                        if (l.state == Color.Red)
+                        {
+                            isStopped = true;
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
 
     }
 }

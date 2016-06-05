@@ -36,7 +36,7 @@ namespace TrafficSimulation
             }
         }
 
-        public bool Move(List<Vehicle> carlist)
+        public bool Move(List<Vehicle> carlist, List<TrafficLight> lights)
         {
             throw new NotImplementedException();
         }
