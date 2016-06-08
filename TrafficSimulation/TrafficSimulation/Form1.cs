@@ -234,7 +234,7 @@ namespace TrafficSimulation
                         if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
                         {
                             B.Location = placeholder.Location;
-                            B.PlaceTrafficLights(3000);
+                             B.PlaceTrafficLights(3000);
                         }
                     }
 
@@ -353,6 +353,7 @@ namespace TrafficSimulation
         private void timer1_Tick(object sender, EventArgs e)
         {
             car.Move(cars, selectedCrossroad.trafficLights);
+            int count = selectedCrossroad.trafficLights.Count;
             Invalidate();
 
             // List<TrafficLight> trafficLights = new List<TrafficLight>();

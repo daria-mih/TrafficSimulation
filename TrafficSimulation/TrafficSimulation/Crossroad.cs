@@ -249,7 +249,6 @@ namespace TrafficSimulation
            
             
         //}
-
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
