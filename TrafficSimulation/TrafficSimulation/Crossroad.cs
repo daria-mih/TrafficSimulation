@@ -101,8 +101,8 @@ namespace TrafficSimulation
         public void AddDirections()
         {
             //South
-            //fix sn 
-            List<Point> sn = new List<Point>(new Point[] { new Point(130, 3), new Point(130, 40), new Point(130, 80), new Point(130, 120), new Point(130, 160), new Point(130, 200) });
+            //fixed sn
+            List<Point> sn = new List<Point>(new Point[] { new Point(130, 200), new Point(130, 160), new Point(130, 120), new Point(130, 80), new Point(130, 40), new Point(130, 3) });
             List<Point> sw = new List<Point>(new Point[] { new Point(110, 190), new Point(110, 160), new Point(95, 100), new Point(80, 95 ), new Point(40, 85), new Point(10, 85) });
             List<Point> se = new List<Point>(new Point[] { new Point(130, 190), new Point(130, 150), new Point(135, 135), new Point(145, 130), new Point(170, 130), new Point(190, 130) });
             //East
