@@ -34,9 +34,22 @@ namespace TrafficSimulation
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
-        List<Point> ns = new List<Point>(new Point[] { new Point(85, 10), new Point(85,15),new Point(85,25),   new Point(85, 40), new Point(85, 70), new Point(85, 100), new Point(85, 150), new Point(85, 190) });
-            
+        List<Point> sn = new List<Point>(new Point[] { new Point(125, 190), new Point(125, 185), new Point(125, 180), new Point(125, 175), new Point(125, 170),     new Point(125, 160), new Point(125, 130),   new Point(125, 120), new Point(125, 115), new Point(125, 110), new Point(125, 105), new Point(125, 100), new Point(125, 95), new Point(125, 90), new Point(125, 85),     new Point(125, 80), new Point(125, 75), new Point(125, 70), new Point(125, 65), new Point(125, 60), new Point(125, 55), new Point(125, 50), new Point(125, 45), new Point(125, 40), new Point(125, 35), new Point(125, 30), new Point(125, 25), new Point(125, 20), new Point(125, 15), new Point(125, 10), new Point(125, 5) });
+        List<Point> ns = new List<Point>(new Point[] { new Point(80, 10), new Point(80,15),new Point(80,25), new Point(80, 30), new Point(80, 70), new Point(80, 100), new Point(80, 150), new Point(80, 190) });
+        List<Point> nw = new List<Point>(new Point[] { new Point(65, 10), new Point(65, 15), new Point(65, 25), new Point(65, 30), new Point(65, 60), new Point(60, 65), new Point(50, 65),  new Point(40, 65), new Point(35, 65), new Point(30, 65), new Point(25, 65), new Point(20, 65), new Point(10, 65)  });
+        List<Point> sw = new List<Point>(new Point[] { new Point(110, 190), new Point(110, 185 ), new Point(110, 180), new Point(110, 175), new Point(110, 170), new Point(110, 160), new Point(110, 130), new Point(105, 120), new Point(100, 110), new Point(95, 100), new Point(80, 95), new Point(75, 95), new Point(70, 95), new Point(65, 90), new Point(55, 90), new Point(40, 85), new Point(35, 85), new Point(30, 85), new Point(25, 85), new Point(20, 85), new Point(15, 85), new Point(10, 85) });
+        List<Point> wn = new List<Point>(new Point[] { new Point(5, 110), new Point(15, 110),  new Point(30, 110), new Point(60, 110),  new Point(60, 110), new Point(100, 90), new Point(110, 50), new Point(110, 10) });
+        List<Point> ws = new List<Point>(new Point[] { new Point(5, 125), new Point(15, 110), new Point(30, 125), new Point(60, 130), new Point(65, 140), new Point(65, 155), new Point(65, 190) });
+        List<Point> en = new List<Point>(new Point[] { new Point(190, 65), new Point(185, 65), new Point(180, 65), new Point(175, 65), new Point(170, 65), new Point(165, 65), new Point(130, 55), new Point(125, 40), new Point(125, 20), new Point(125, 10) });
+        List<Point> es = new List<Point>(new Point[] { new Point(190, 80), new Point(185, 80), new Point(180, 80), new Point(175, 80), new Point(170, 80), new Point(165,80), new Point(120, 95), new Point(85, 120), new Point(85, 150), new Point(85, 190) });
+        Vehicle anothercar;
         Vehicle car;
+        Vehicle onemorecar;
+        private Vehicle car4;
+        private Vehicle car5;
+        private Vehicle car6;
+        Vehicle car7;
+        private Vehicle car8;
 
         public Form1()
         { 
@@ -50,6 +63,13 @@ namespace TrafficSimulation
             Simulation.grid = grid1;
             car = new Vehicle(ns);
             cars = new List<Vehicle>();
+            onemorecar = new Vehicle(sn);
+            car5 = new Vehicle(wn);
+            car6 = new Vehicle(ws);
+            anothercar = new Vehicle(nw);
+            car4 = new Vehicle(sw);
+            car7 = new Vehicle(en);
+            car8 = new Vehicle(es);
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
@@ -210,7 +230,21 @@ namespace TrafficSimulation
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
                     A.AddCarToTheList(car);
+                    A.AddCarToTheList(anothercar);
+                    A.AddCarToTheList(onemorecar);
+                    A.AddCarToTheList(car4);
+                    A.AddCarToTheList(car5);
+                    A.AddCarToTheList(car6);
+                    A.AddCarToTheList(car7);
+                    A.AddCarToTheList(car8);
                     cars.Add(car);
+                    cars.Add(anothercar);
+                    cars.Add(onemorecar);
+                    cars.Add(car4);
+                    cars.Add(car5);
+                    cars.Add(car6);
+                    cars.Add(car7);
+                    cars.Add(car8);
 
                 }
                 else if (c.Name == "crossroadB1")
@@ -352,8 +386,14 @@ namespace TrafficSimulation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            car.Move(cars, selectedCrossroad.trafficLights);
-            int count = selectedCrossroad.trafficLights.Count;
+            car.Move(cars, Crossroad.trafficLights);
+            anothercar.Move(cars, Crossroad.trafficLights);
+            onemorecar.Move(cars, Crossroad.trafficLights);
+            car4.Move(cars, Crossroad.trafficLights);
+            car5.Move(cars, Crossroad.trafficLights);
+            car6.Move(cars, Crossroad.trafficLights);
+            car7.Move(cars, Crossroad.trafficLights);
+            car8.Move(cars, Crossroad.trafficLights);
             Invalidate();
 
             // List<TrafficLight> trafficLights = new List<TrafficLight>();

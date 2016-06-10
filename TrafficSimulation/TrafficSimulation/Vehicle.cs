@@ -47,14 +47,17 @@ namespace TrafficSimulation
                     {
                         if (v != this)
                         {
-                            if (!v.isStopped)
+                            if (v.currentPosition == route[1])
                             {
-                                currentPosition = route[1];
-                                route.Remove(route[1]);
-                                isStopped = false;
-                                return true;
+                                if (!v.isStopped)
+                                {
+                                    currentPosition = route[1];
+                                    route.Remove(route[1]);
+                                    isStopped = false;
+                                    return true;
+                                }
+                                isStopped = true;
                             }
-                            isStopped = true;
                         }
                         else
                         {
@@ -101,7 +104,7 @@ namespace TrafficSimulation
             if ((route[1].X - currentPosition.X) >0)
             {
                 // cars go from the left to the right 
-                check = new Rectangle(currentPosition.X + 1, currentPosition.Y, 10, 10);
+                check = new Rectangle(currentPosition.X + 20, currentPosition.Y, 10, 10);
               foreach (TrafficLight l in lights)
                 {
                     if (check.Contains(l.currentPosition1))
@@ -118,11 +121,11 @@ namespace TrafficSimulation
             if ((route[1].X - currentPosition.X) < 0)
                 {
                 //cars go from the right to the left
-                check = new Rectangle(currentPosition.X - 1, currentPosition.Y, 10, 10);
+                check = new Rectangle(currentPosition.X - 20, currentPosition.Y, 10, 10);
 
                 foreach (TrafficLight l in lights)
                 {
-                    if (check.Contains(l.currentPosition1))
+                    if (check.Contains(l.currentPosition2))
                     {
                         if (l.state == Color.Red)
                         {
@@ -137,7 +140,7 @@ namespace TrafficSimulation
             if ((route[1].Y - currentPosition.Y) > 0)
             {
                 // cars go from top to bottom
-                check = new Rectangle(currentPosition.X, currentPosition.Y + 1, 10, 10);
+                check = new Rectangle(currentPosition.X, currentPosition.Y + 20, 10, 10);
 
                 foreach (TrafficLight l in lights)
                 {
@@ -156,11 +159,11 @@ namespace TrafficSimulation
             if ((route[1].Y - currentPosition.Y) < 0)
             {
                 // cars go from bottom to top
-                check = new Rectangle(currentPosition.X, currentPosition.Y - 1, 10, 10);
+                check = new Rectangle(currentPosition.X, currentPosition.Y - 20, 10, 10);
 
                 foreach (TrafficLight l in lights)
                 {
-                    if (check.Contains(l.currentPosition1))
+                    if (check.Contains(l.currentPosition2))
                     {
                         if (l.state == Color.Red)
                         {
