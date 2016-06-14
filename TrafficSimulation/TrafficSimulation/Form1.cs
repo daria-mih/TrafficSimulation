@@ -26,9 +26,12 @@ namespace TrafficSimulation
         public bool saved = false;
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
+        private int count;
+        int counter, counter1, counter2, counter3 = 0;
         // Crossroad currentRoad;
         Point mousePoint;
-        private List<Vehicle> cars;
+        public static List<Vehicle> Cars;
+
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
@@ -62,7 +65,7 @@ namespace TrafficSimulation
             //timer1.Start();
             Simulation.grid = grid1;
             car = new Vehicle(ns);
-            cars = new List<Vehicle>();
+            Cars = new List<Vehicle>();
             onemorecar = new Vehicle(sn);
             car5 = new Vehicle(wn);
             car6 = new Vehicle(ws);
@@ -229,22 +232,22 @@ namespace TrafficSimulation
 
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
-                    A.AddCarToTheList(car);
-                    A.AddCarToTheList(anothercar);
-                    A.AddCarToTheList(onemorecar);
-                    A.AddCarToTheList(car4);
-                    A.AddCarToTheList(car5);
-                    A.AddCarToTheList(car6);
-                    A.AddCarToTheList(car7);
-                    A.AddCarToTheList(car8);
-                    cars.Add(car);
-                    cars.Add(anothercar);
-                    cars.Add(onemorecar);
-                    cars.Add(car4);
-                    cars.Add(car5);
-                    cars.Add(car6);
-                    cars.Add(car7);
-                    cars.Add(car8);
+                    //A.AddCarToTheList(car);
+                    //A.AddCarToTheList(anothercar);
+                    //A.AddCarToTheList(onemorecar);
+                    //A.AddCarToTheList(car4);
+                    //A.AddCarToTheList(car5);
+                    //A.AddCarToTheList(car6);
+                    //A.AddCarToTheList(car7);
+                    //A.AddCarToTheList(car8);
+                    //A.AddCarToTheList(car);
+                    //cars.Add(anothercar);
+                    //cars.Add(onemorecar);
+                    //cars.Add(car4);
+                    //cars.Add(car5);
+                    //cars.Add(car6);
+                    //cars.Add(car7);
+                    //cars.Add(car8);
 
                 }
                 else if (c.Name == "crossroadB1")
@@ -386,14 +389,19 @@ namespace TrafficSimulation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            car.Move(cars, Crossroad.trafficLights);
-            anothercar.Move(cars, Crossroad.trafficLights);
-            onemorecar.Move(cars, Crossroad.trafficLights);
-            car4.Move(cars, Crossroad.trafficLights);
-            car5.Move(cars, Crossroad.trafficLights);
-            car6.Move(cars, Crossroad.trafficLights);
-            car7.Move(cars, Crossroad.trafficLights);
-            car8.Move(cars, Crossroad.trafficLights);
+            //car.Move(Cars, Crossroad.trafficLights);
+            //anothercar.Move(Cars, Crossroad.trafficLights);
+            //onemorecar.Move(Cars, Crossroad.trafficLights);
+            //car4.Move(Cars, Crossroad.trafficLights);
+            //car5.Move(Cars, Crossroad.trafficLights);
+            //car6.Move(Cars, Crossroad.trafficLights);
+            //car7.Move(Cars, Crossroad.trafficLights);
+            //car8.Move(Cars, Crossroad.trafficLights);
+            foreach (var c in Cars)
+            {
+                c.Move(Cars, Crossroad.trafficLights);
+            }
+            
             Invalidate();
 
             // List<TrafficLight> trafficLights = new List<TrafficLight>();
@@ -639,6 +647,234 @@ namespace TrafficSimulation
         {
             timer1.Interval = 2000;
             timer1.Start();
+            timer2.Interval = 3000;
+            timer2.Start();
+        }
+
+         private void timer2_Tick(object sender, EventArgs e)
+        {
+            count++;
+            //Vehicle c =
+            //       new Vehicle(
+            //           new List<Point>(new Point[]
+            //            {
+            //                new Point(85, 10), new Point(85, 15), new Point(85, 25), new Point(85, 40), new Point(85, 70),
+            //                new Point(85, 100), new Point(85, 150), new Point(85, 190)
+            //            }));
+            //cars.Add(c);
+
+            if (checkBox1.Checked)
+            {
+                counter++;
+
+                if (count % 2 == 0)
+                {
+                    if (counter % 4 == 0)
+                    {
+                        // north to south
+                        Vehicle c =
+                            new Vehicle(
+                                new List<Point>(new Point[]
+                                {
+                                                new Point(85, 10), new Point(85, 15), new Point(85, 25),
+                                                new Point(85, 40),
+                                                new Point(85, 70),
+                                                new Point(85, 100), new Point(85, 150), new Point(85, 190)
+                                }));
+
+                        Cars.Add(c);
+                    }
+                    else
+                    {
+                        //north to east
+                        Vehicle c =
+                            new Vehicle(
+                                new List<Point>(new Point[]
+                                {
+                                                new Point(85, 10), new Point(85, 15), new Point(85, 20), new Point(85, 25),
+                                                new Point(85, 30), new Point(95, 60), new Point(100, 80),  new Point(105, 100), new Point(115, 110), new Point(120, 110), new Point(125, 110), new Point(130, 110), new Point(135, 110), new Point(140, 110), new Point(145, 110), new Point(150, 110), new Point(155, 110), new Point(160, 110), new Point(165, 110), new Point(170, 110), new Point(175, 110), new Point(180, 110), new Point(185, 110), new Point(190, 110)
+                                }));
+
+                        Cars.Add(c);
+                    }
+                }
+                else if (count % 2 == 1)
+                {
+                    //north to west
+                    Vehicle c =
+                        new Vehicle(
+                            new List<Point>(new Point[]
+                            {
+                                            new Point(65, 10), new Point(65, 40), new Point(65, 55), new Point(60, 65),
+                                            new Point(40, 70),
+                                            new Point(10, 70)
+                            }));
+
+                    Cars.Add(c);
+                }
+
+            }
+
+            if (checkBox2.Checked)
+            {
+                counter1++;
+                if (count % 2 == 0)
+                {
+                    if (counter1 % 4 == 0)
+                    {
+                        // south to north
+                        Vehicle c =
+                            new Vehicle(
+                                 new List<Point>(new Point[] { new Point(110, 190), new Point(110, 185), new Point(110, 180),
+                                                 new Point(110, 175), new Point(110, 170), new Point(110, 165), new Point(110, 160), new Point(110, 130), new Point(110, 125),
+                                                 new Point(110, 120), new Point(110, 115), new Point(110, 110), new Point(110, 105), new Point(110, 100), new Point(110, 95), new Point(125, 90),
+                                                 new Point(110, 85), new Point(110, 80), new Point(110, 75), new Point(110, 70), new Point(110, 65), new Point(110, 60), new Point(110, 55), new Point(110, 50),
+                                                 new Point(110, 45), new Point(110, 40), new Point(110, 35), new Point(110, 30), new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10),
+                                                 new Point(110, 5) }));
+
+                        Cars.Add(c);
+                    }
+                    else
+                    {
+                        // south to west
+                        Vehicle c =
+                         new Vehicle(
+                              new List<Point>(new Point[]
+                              {
+                                              new Point(110, 190), new Point(110, 185), new Point(110, 180), new Point(110, 175),
+                                              new Point(110, 170), new Point(110, 160), new Point(110, 130), new Point(105, 120), new Point(100, 110), new Point(95, 100), new Point(80, 95),
+                                              new Point(75, 95), new Point(70, 95), new Point(65, 90), new Point(55, 90), new Point(40, 85), new Point(35, 85), new Point(30, 85), new Point(25, 85),
+                                              new Point(20, 85), new Point(15, 85), new Point(10, 85)
+                              }));
+
+                        Cars.Add(c);
+                    }
+                }
+
+                if (count % 2 == 1)
+                {
+                    //south to east
+                    Vehicle c =
+                        new Vehicle(
+                            new List<Point>(new Point[]
+                            {
+                                            new Point(130, 190), new Point(130, 150), new Point(135, 135),
+                                            new Point(145, 130),
+                                            new Point(170, 130), new Point(190, 130)
+                            }));
+
+                    Cars.Add(c);
+                }
+            }
+
+            if (checkBox3.Checked)
+            {
+                counter2++;
+                if (count % 2 == 0)
+                {
+                    if (counter2 % 4 == 0)
+                    {
+                        //west to east
+                        Vehicle c =
+                            new Vehicle(
+                                new List<Point>(new Point[]
+                                {
+                                                new Point(5, 108), new Point(30, 108), new Point(80, 108),
+                                                new Point(110, 108),
+                                                new Point(150, 108), new Point(190, 108)
+                                }));
+
+                        Cars.Add(c);
+                    }
+                    else
+                    {
+                        //west to north
+                        Vehicle c =
+                           new Vehicle(
+                               new List<Point>(new Point[]
+                               {
+                                               new Point(5, 110), new Point(10, 110), new Point(15, 110), new Point(20, 110),
+                                               new Point(25, 110), new Point(30, 110), new Point(60, 110), new Point(80, 100), new Point(100, 90),
+                                               new Point(105, 70), new Point(110, 50), new Point(110, 45), new Point(110, 40), new Point(110, 35), new Point(110, 30),
+                                               new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10)
+                               }));
+
+                        Cars.Add(c);
+                    }
+                }
+                if (count % 2 == 1)
+                {
+                    // west to south
+                    Vehicle c =
+                        new Vehicle(
+                            new List<Point>(new Point[]
+                            {
+                                            new Point(5, 125), new Point(30, 125), new Point(50, 130),
+                                            new Point(65, 140),
+                                            new Point(65, 155), new Point(65, 190)
+                            }));
+
+                    Cars.Add(c);
+                }
+            }
+
+            if (checkBox4.Checked)
+            {
+                counter3++;
+                if (count % 2 == 0)
+                {
+                    // east to north
+                    Vehicle c =
+                        new Vehicle(new List<Point>(new Point[]
+                        {
+                                        new Point(190, 65), new Point(155, 65), new Point(130, 55), new Point(125, 40),
+                                        new Point(125, 20), new Point(125, 10)
+                        }));
+
+                    Cars.Add(c);
+
+                }
+
+                if (count % 2 == 1)
+                {
+                    if (counter3%4 == 0)
+                    {
+                        //east to west
+                        Vehicle c =
+                            new Vehicle(new List<Point>(new Point[]
+                            {
+                                new Point(190, 65), new Point(185, 65), new Point(180, 65), new Point(175, 65),
+                                new Point(170, 65), new Point(165, 65),
+                                new Point(130, 65), new Point(125, 65), new Point(120, 65), new Point(115, 65),
+                                new Point(110, 65), new Point(105, 65), new Point(100, 65),
+                                new Point(95, 65), new Point(90, 65), new Point(85, 65), new Point(80, 65),
+                                new Point(75, 65), new Point(70, 65), new Point(65, 65),
+                                new Point(60, 65), new Point(55, 65), new Point(50, 65), new Point(45, 65),
+                                new Point(40, 65), new Point(35, 65), new Point(30, 65), new Point(25, 65),
+                                new Point(20, 65), new Point(15, 65), new Point(10, 65)
+                            }));
+
+                        Cars.Add(c);
+                    }
+                    else
+                    {
+                        // east to north
+                        Vehicle c =
+                            new Vehicle(new List<Point>(new Point[]
+                            {
+                                new Point(190, 82), new Point(170, 82), new Point(120, 95),
+                                new Point(85, 120),
+                                new Point(85, 150), new Point(85, 190)
+                            }))
+                    
+                    ;
+
+                        Cars.Add(c);
+                    }
+                }
+                
+            }
         }
     }
-}
+    }
+

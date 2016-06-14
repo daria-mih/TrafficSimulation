@@ -15,7 +15,6 @@ namespace TrafficSimulation
         //guys, we first put this method in direction but thought it would be better to use it in this class
 
         public List<Direction> Directions { get; set; }
-        public List<Vehicle> cars;
         public static List<TrafficLight> trafficLights;
         private int counter;
         private Timer lightTimer;
@@ -39,7 +38,6 @@ namespace TrafficSimulation
             AddDirections();
             trafficLights = new List<TrafficLight>();
             lightTimer = new Timer();
-            cars = new List<Vehicle>();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -167,7 +165,7 @@ namespace TrafficSimulation
 */
         public void DrawCars(PaintEventArgs pe)
         {
-            foreach (Vehicle car in cars)
+            foreach (Vehicle car in Form1.Cars)
             {
                 Color carColor = car.color;
                 Brush brush = new SolidBrush(carColor);
@@ -179,7 +177,7 @@ namespace TrafficSimulation
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
-            if(cars.Count > 0)
+            if(Form1.Cars.Count > 0)
             DrawCars(pe);
 
             foreach (TrafficLight tl in trafficLights)
@@ -287,7 +285,7 @@ namespace TrafficSimulation
 
         public void AddCarToTheList(Vehicle car)
         {
-            cars.Add(car);
+            Form1.Cars.Add(car);
         }
     }
 }
