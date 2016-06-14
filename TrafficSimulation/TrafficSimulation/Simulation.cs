@@ -13,7 +13,7 @@ namespace TrafficSimulation
     {
         //fields
         static public bool ShouldStop =false;
-        static private List<IMoveable> Moveables = new List<IMoveable>();
+        static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints;
         public static Grid grid;
         private static List<Node> listOfNodes = new List<Node>();
@@ -205,7 +205,7 @@ namespace TrafficSimulation
 
                     }
                 }
-
+                
             }
             return null;
         }
@@ -242,25 +242,28 @@ namespace TrafficSimulation
         }
         static public void MoveMovables()
         {
-            Thread.Sleep(1000);
-            foreach (IMoveable movable in Moveables)
-            {
-               // movable.Move(Moveables, null);
-            }
-        }
-
-        public static void DrawCars(PaintEventArgs pe)
-        {
-            foreach (Vehicle car in Moveables)
-            {
-                Color carColor = car.color;
-                Brush brush = new SolidBrush(carColor);
-
-                pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
-            }
+            //Thread.Sleep(1000);
+         
+          Moveables[0].Move( new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
+          
+           
         }
 
 
+
+       public static void DrawCars(PaintEventArgs pe) {
+            if (Moveables.Count > 0)
+            {
+                foreach (Vehicle car in Moveables.OfType<Vehicle>())
+                {
+                    Color carColor = car.color;
+                    Brush brush = new SolidBrush(carColor);
+
+                    pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
+                }
+            }
+
+        }
         #endregion
         static private void ChangeTrafficLights()
         {

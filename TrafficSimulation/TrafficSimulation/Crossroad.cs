@@ -163,22 +163,13 @@ namespace TrafficSimulation
             }
         }
 */
-        public void DrawCars(PaintEventArgs pe)
-        {
-            foreach (Vehicle car in Form1.Cars)
-            {
-                Color carColor = car.color;
-                Brush brush = new SolidBrush(carColor);
-
-                pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10,10);
-            }
-        }
+       
 
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
-            if(Form1.Cars.Count > 0)
-            DrawCars(pe);
+           // if(Form1.Cars.Count > 0)
+            Simulation.DrawCars(pe);
 
             foreach (TrafficLight tl in trafficLights)
             {

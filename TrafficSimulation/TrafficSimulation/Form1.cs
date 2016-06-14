@@ -397,10 +397,10 @@ namespace TrafficSimulation
             //car6.Move(Cars, Crossroad.trafficLights);
             //car7.Move(Cars, Crossroad.trafficLights);
             //car8.Move(Cars, Crossroad.trafficLights);
-            foreach (var c in Cars)
-            {
-                c.Move(Cars, Crossroad.trafficLights);
-            }
+            //foreach (var c in Simulation.Moveables)
+            //{
+            //    c.Move(Cars, Crossroad.trafficLights);
+            //}
             
             Invalidate();
 
@@ -500,7 +500,7 @@ namespace TrafficSimulation
             }
             return false;
         }
-
+        
         /// <summary>
         /// To load a grid from file
         /// </summary>
@@ -636,6 +636,12 @@ namespace TrafficSimulation
             Simulation.ShouldStop = false;
             simulation = new Thread(Simulation.Run);
             simulation.Start();
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Simulation.DrawCars(e);
+           
         }
 
         private void btnStop_Click(object sender, EventArgs e)
