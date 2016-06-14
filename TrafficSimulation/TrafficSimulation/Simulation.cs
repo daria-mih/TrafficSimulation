@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 
 namespace TrafficSimulation
 {
@@ -200,7 +200,7 @@ namespace TrafficSimulation
                         if (neighbour.parent == null)
                         {
                             neighbour.parent = current;
-                            neighbour.SetDistance(startPoint, endPoint);
+                            neighbour.SetDistance( endPoint);
                         }
 
                     }
@@ -213,7 +213,10 @@ namespace TrafficSimulation
         #region Movables
         static private void CreateMovables()
         {
+            for (int i = 0; i < 20; i++)
+            {
 
+            
             Random random = new Random();
             List<Point> pointlist = new List<Point>();
             while (pointlist.Count < 1)
@@ -235,15 +238,29 @@ namespace TrafficSimulation
                 }
             }
             Moveables.Add( new Vehicle(pointlist ));
+            }
         }
         static public void MoveMovables()
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             foreach (IMoveable movable in Moveables)
             {
-                //movable.Move();
+               // movable.Move(Moveables, null);
             }
         }
+
+        public static void DrawCars(PaintEventArgs pe)
+        {
+            foreach (Vehicle car in Moveables)
+            {
+                Color carColor = car.color;
+                Brush brush = new SolidBrush(carColor);
+
+                pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
+            }
+        }
+
+
         #endregion
         static private void ChangeTrafficLights()
         {
