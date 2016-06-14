@@ -213,21 +213,25 @@ namespace TrafficSimulation
         #region Movables
         static private void CreateMovables()
         {
-            
+
             Random random = new Random();
-            Node startpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
-            Node endpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
-            foreach (Node node in listOfNodes)
-            {
-                node.SetDistance(startpnt, endpnt);
-            }
-            List<Direction> dirlist = GetShortestRoute(startpnt, endpnt);
             List<Point> pointlist = new List<Point>();
-            foreach (Direction dir in dirlist)
+            while (pointlist.Count < 1)
             {
-                foreach (var item in dir.Points)
+                Node startpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
+                Node endpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
+                foreach (Node node in listOfNodes)
                 {
-                    pointlist.Add(item);
+                    node.SetDistance( endpnt);
+                }
+                List<Direction> dirlist = GetShortestRoute(startpnt, endpnt);
+                pointlist = new List<Point>();
+                foreach (Direction dir in dirlist)
+                {
+                    foreach (var item in dir.Points)
+                    {
+                        pointlist.Add(item);
+                    }
                 }
             }
             Moveables.Add( new Vehicle(pointlist ));

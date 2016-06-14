@@ -92,7 +92,7 @@ namespace TrafficSimulation
         /// </summary>
         /// <param name="startNode">*Not needed right now*</param>
         /// <param name="finishNode">the node the check the distance with</param>
-        public void SetDistance(Node startNode, Node finishNode)
+        public void SetDistance( Node finishNode)
         {
             /*if (parent != null)
                 sDistance = Math.Abs(Convert.ToDouble((crossNode.Location.X + crossNode.Location.Y) - (parent.crossNode.Location.X + parent.crossNode.Location.Y)));
