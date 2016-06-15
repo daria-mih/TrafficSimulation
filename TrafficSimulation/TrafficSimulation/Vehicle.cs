@@ -28,11 +28,29 @@ namespace TrafficSimulation
 
         public Rectangle drawing { get; set; }
 
+        public void SetCurrentPosition(List<Vehicle> cars)
+        {
+            foreach (Vehicle car in cars)
+            {
+                if (car != this && car.currentPosition == this.currentPosition)
+                {
+                    if(currentPosition.X <= 190 && currentPosition.X > 5)
+                    currentPosition = new Point(currentPosition.X +15, currentPosition.Y);
+                    else if(currentPosition.X <= 5)
+                        currentPosition = new Point(currentPosition.X - 15, currentPosition.Y);
+                    else if(currentPosition.Y <= 190 && currentPosition.Y > 10)
+                        currentPosition = new Point(currentPosition.X , currentPosition.Y + 15);
+                    else if(currentPosition.Y <= 10)
+                        currentPosition = new Point(currentPosition.X, currentPosition.Y - 15);
+                }
+            }
+        }
         public Vehicle(List<Point> _route)
         {
             route = _route;
             currentPosition = _route[0];
             color = GenerateRandomCarColors();
+            //int distance = 5;
         }
         public bool Move(List<Vehicle> carlist, List<TrafficLight> lights)
         {

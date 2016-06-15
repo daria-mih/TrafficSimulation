@@ -41,9 +41,8 @@ namespace TrafficSimulation
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-
-            //do something here 
-            counter++;
+            
+           // counter++;
             ChangeState();
 
         }
@@ -62,8 +61,13 @@ namespace TrafficSimulation
                         trafficLight.state = Color.Red;
                     }
                 }
-                if (counter == 3)
+               // counter++;
+                if (counter >=3)
                     counter = 0;
+                else
+                {
+                    counter++;
+                }
                 this.Refresh();
             }
 
@@ -72,7 +76,7 @@ namespace TrafficSimulation
         private void InitializeTimer()
         {
             counter = 0;
-            lightTimer.Interval = 3000;
+            lightTimer.Interval = 1000;
             lightTimer.Enabled = true;
             timer1_Tick(null, null);
 

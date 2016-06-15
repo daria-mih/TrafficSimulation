@@ -79,6 +79,7 @@ namespace TrafficSimulation
             //A.Height = 107;
             //A.Width = 101;
             //pictureBox1.Controls.Add(A);
+            
         }
 
 
@@ -634,7 +635,7 @@ namespace TrafficSimulation
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-               //  timer1.Start();
+            
             Simulation.ShouldStop = false;
             simulation = new Thread(Simulation.Run);
             simulation.Start();

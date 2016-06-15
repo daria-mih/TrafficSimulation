@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -21,21 +22,53 @@ namespace TrafficSimulation
         private static List<Node> listOfNodes = new List<Node>();
 
         private static System.Timers.Timer _carTimer = new System.Timers.Timer();
-        
 
+        private static int counter = 0;
+        private static int counter2 = 0;
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            foreach (Vehicle vehicle in Moveables.OfType<Vehicle>())
+            bool notWait = false;
+            if (counter > -1)
             {
-               vehicle.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
-                foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                for (int i = 0; i <= counter; i++)
                 {
-                    crossroad.Invalidate();
+                    notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
+                    foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                    {
+                        crossroad.Invalidate();
+                    }
+                    if (Moveables[i].route.Count == 1)
+                    {
+                        Moveables.Remove(Moveables[i]);
+                        counter--;
+                        i--;
+                    }
                 }
+               
+                //((Vehicle) Moveables[counter]).SetCurrentPosition(new List<Vehicle>(Moveables.OfType<Vehicle>()));
 
+                
+                counter2++;
+                if (counter2 >= 10)
+                {
+                    if (notWait)
+                    {
+                        if (counter >= Moveables.Count - 1)
+                        {
+                            counter = 0;
+                        }
+                        else
+                        {
+
+                            counter++;
+                        }
+                        
+                    }
+                    counter2 = 0;
+
+                }
             }
-            
         }
         //properties
         // public Grid FromGrid { get; set; }
@@ -232,10 +265,9 @@ namespace TrafficSimulation
         #region Movables
         static private void CreateMovables()
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
 
-            
             Random random = new Random();
             List<Point> pointlist = new List<Point>();
             while (pointlist.Count < 1)
@@ -256,7 +288,10 @@ namespace TrafficSimulation
                     }
                 }
             }
-            Moveables.Add( new Vehicle(pointlist ));
+            Vehicle temp = new Vehicle(pointlist);
+             
+            Moveables.Add( temp);
+            
             }
             _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             _carTimer.Interval = 50;
