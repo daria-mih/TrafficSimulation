@@ -168,7 +168,7 @@ namespace TrafficSimulation
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
-           // if(Form1.Cars.Count > 0)
+            // if(Form1.Cars.Count > 0)
             Simulation.DrawCars(pe);
 
             foreach (TrafficLight tl in trafficLights)

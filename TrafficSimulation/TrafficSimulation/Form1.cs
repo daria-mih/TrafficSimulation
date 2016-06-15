@@ -62,6 +62,7 @@ namespace TrafficSimulation
             this.DoubleBuffered = true;
 
             InitializeComponent();
+            //timer1.Interval = 500;
             //timer1.Start();
             Simulation.grid = grid1;
             car = new Vehicle(ns);
@@ -402,7 +403,7 @@ namespace TrafficSimulation
             //    c.Move(Cars, Crossroad.trafficLights);
             //}
             
-            Invalidate();
+            this.Invalidate();
 
             // List<TrafficLight> trafficLights = new List<TrafficLight>();
             //List<TrafficLight> temp = trafficLights;
@@ -633,14 +634,17 @@ namespace TrafficSimulation
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+               //  timer1.Start();
             Simulation.ShouldStop = false;
             simulation = new Thread(Simulation.Run);
             simulation.Start();
+       
         }
+
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Simulation.DrawCars(e);
+           // Simulation.DrawCars(e);
            
         }
 
@@ -652,7 +656,7 @@ namespace TrafficSimulation
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Interval = 2000;
-            timer1.Start();
+          
             timer2.Interval = 3000;
             timer2.Start();
         }
@@ -688,7 +692,7 @@ namespace TrafficSimulation
                                                 new Point(85, 100), new Point(85, 150), new Point(85, 190)
                                 }));
 
-                        Cars.Add(c);
+                       // Cars.Add(c);
                     }
                     else
                     {
@@ -701,7 +705,7 @@ namespace TrafficSimulation
                                                 new Point(85, 30), new Point(95, 60), new Point(100, 80),  new Point(105, 100), new Point(115, 110), new Point(120, 110), new Point(125, 110), new Point(130, 110), new Point(135, 110), new Point(140, 110), new Point(145, 110), new Point(150, 110), new Point(155, 110), new Point(160, 110), new Point(165, 110), new Point(170, 110), new Point(175, 110), new Point(180, 110), new Point(185, 110), new Point(190, 110)
                                 }));
 
-                        Cars.Add(c);
+                       // Cars.Add(c);
                     }
                 }
                 else if (count % 2 == 1)
@@ -716,7 +720,7 @@ namespace TrafficSimulation
                                             new Point(10, 70)
                             }));
 
-                    Cars.Add(c);
+                  //  Cars.Add(c);
                 }
 
             }
@@ -738,7 +742,7 @@ namespace TrafficSimulation
                                                  new Point(110, 45), new Point(110, 40), new Point(110, 35), new Point(110, 30), new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10),
                                                  new Point(110, 5) }));
 
-                        Cars.Add(c);
+                      //  Cars.Add(c);
                     }
                     else
                     {
@@ -753,7 +757,7 @@ namespace TrafficSimulation
                                               new Point(20, 85), new Point(15, 85), new Point(10, 85)
                               }));
 
-                        Cars.Add(c);
+                       // Cars.Add(c);
                     }
                 }
 
@@ -769,7 +773,7 @@ namespace TrafficSimulation
                                             new Point(170, 130), new Point(190, 130)
                             }));
 
-                    Cars.Add(c);
+                   // Cars.Add(c);
                 }
             }
 
@@ -790,7 +794,7 @@ namespace TrafficSimulation
                                                 new Point(150, 108), new Point(190, 108)
                                 }));
 
-                        Cars.Add(c);
+                      //  Cars.Add(c);
                     }
                     else
                     {
@@ -805,7 +809,7 @@ namespace TrafficSimulation
                                                new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10)
                                }));
 
-                        Cars.Add(c);
+                        //Cars.Add(c);
                     }
                 }
                 if (count % 2 == 1)
@@ -820,7 +824,7 @@ namespace TrafficSimulation
                                             new Point(65, 155), new Point(65, 190)
                             }));
 
-                    Cars.Add(c);
+                   // Cars.Add(c);
                 }
             }
 
@@ -837,7 +841,7 @@ namespace TrafficSimulation
                                         new Point(125, 20), new Point(125, 10)
                         }));
 
-                    Cars.Add(c);
+                   // Cars.Add(c);
 
                 }
 
@@ -860,7 +864,7 @@ namespace TrafficSimulation
                                 new Point(20, 65), new Point(15, 65), new Point(10, 65)
                             }));
 
-                        Cars.Add(c);
+                       // Cars.Add(c);
                     }
                     else
                     {
@@ -875,7 +879,7 @@ namespace TrafficSimulation
                     
                     ;
 
-                        Cars.Add(c);
+                       // Cars.Add(c);
                     }
                 }
                 

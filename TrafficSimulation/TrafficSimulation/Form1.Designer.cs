@@ -40,7 +40,6 @@ namespace TrafficSimulation
             this.grid1 = new TrafficSimulation.Grid();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.crossroadB1 = new TrafficSimulation.CrossroadB();
             this.crossroadA1 = new TrafficSimulation.CrossroadA();
             this.label1 = new System.Windows.Forms.Label();
@@ -162,7 +161,6 @@ namespace TrafficSimulation
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.dateTimePicker1);
             this.panel2.Controls.Add(this.crossroadB1);
             this.panel2.Controls.Add(this.crossroadA1);
             this.panel2.Controls.Add(this.label1);
@@ -170,14 +168,6 @@ namespace TrafficSimulation
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(117, 234);
             this.panel2.TabIndex = 0;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(35, 155);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker1.TabIndex = 4;
             // 
             // crossroadB1
             // 
@@ -525,7 +515,6 @@ namespace TrafficSimulation
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label2;
         private Timer timer2;
-        private DateTimePicker dateTimePicker1;
     }
 }
 

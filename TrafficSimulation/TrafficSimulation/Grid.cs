@@ -13,7 +13,7 @@ namespace TrafficSimulation
     {
         //guys u get the Crossroads now from grid1.Controls
         public List<Rectangle> Placeholders { get; set; }
-
+        
         public Grid()
         {
             Placeholders = new List<Rectangle>();
@@ -50,6 +50,7 @@ namespace TrafficSimulation
            // Crossroads.Remove(crossroad);
         }
 
+       
         public void AddNeighbors()
         {
             //json dictionary

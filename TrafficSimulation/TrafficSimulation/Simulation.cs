@@ -4,7 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
+using Timer = System.Threading.Timer;
 
 namespace TrafficSimulation
 {
@@ -18,14 +20,31 @@ namespace TrafficSimulation
         public static Grid grid;
         private static List<Node> listOfNodes = new List<Node>();
 
+        private static System.Timers.Timer _carTimer = new System.Timers.Timer();
+        
+
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            foreach (Vehicle vehicle in Moveables.OfType<Vehicle>())
+            {
+               vehicle.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
+                foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                {
+                    crossroad.Invalidate();
+                }
+
+            }
+            
+        }
         //properties
         // public Grid FromGrid { get; set; }
 
         //methods
         #region Route finding 
-            /// <summary>
-            /// takes all the crossroad from the grid and transforms them into a node
-            /// </summary>
+        /// <summary>
+        /// takes all the crossroad from the grid and transforms them into a node
+        /// </summary>
         static private void GetNodes()
         {
             //put all nodes in the list
@@ -114,7 +133,7 @@ namespace TrafficSimulation
             directionName +=  Route[0].WhichNeighbour(listOfNodes, Route[1]);
             routeDirections.Add(Route[0].crossroad.FindDirection(directionName));
             //the directions with a parent crossroad and a child crossroad
-            for (int i = 1; i < Route.Count -1; i++)
+            for (int i = 5; i < Route.Count -1; i++)
             {
                 directionName = "-";
                 directionName = Route[i-1].WhichNeighbour(listOfNodes, Route[i]) + directionName;
@@ -213,7 +232,7 @@ namespace TrafficSimulation
         #region Movables
         static private void CreateMovables()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 1; i++)
             {
 
             
@@ -239,14 +258,21 @@ namespace TrafficSimulation
             }
             Moveables.Add( new Vehicle(pointlist ));
             }
+            _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            _carTimer.Interval = 250;
+            
         }
         static public void MoveMovables()
         {
-            //Thread.Sleep(1000);
-         
-          Moveables[0].Move( new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
-          
-           
+            //Thread.Sleep(1000
+            bool result = false;
+            while (!result)
+            {
+                
+
+            }
+
+
         }
 
 
@@ -262,6 +288,7 @@ namespace TrafficSimulation
                     pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
                 }
             }
+        
 
         }
         #endregion
@@ -275,10 +302,11 @@ namespace TrafficSimulation
             GetNodes();
             FillEndPoints();
             CreateMovables();
+            _carTimer.Start();
             while (!ShouldStop)
             {
-                
-                MoveMovables();
+                //carTimer.
+                //MoveMovables();
                 //ChangeTrafficLights();
             }
         }
