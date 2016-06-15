@@ -259,7 +259,7 @@ namespace TrafficSimulation
             Moveables.Add( new Vehicle(pointlist ));
             }
             _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            _carTimer.Interval = 250;
+            _carTimer.Interval = 50;
             
         }
         static public void MoveMovables()
