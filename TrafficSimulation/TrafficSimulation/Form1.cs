@@ -38,14 +38,14 @@ namespace TrafficSimulation
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
-        List<Point> sn = new List<Point>(new Point[] { new Point(125, 190), new Point(125, 185), new Point(125, 180), new Point(125, 175), new Point(125, 170),     new Point(125, 160), new Point(125, 130),   new Point(125, 120), new Point(125, 115), new Point(125, 110), new Point(125, 105), new Point(125, 100), new Point(125, 95), new Point(125, 90), new Point(125, 85),     new Point(125, 80), new Point(125, 75), new Point(125, 70), new Point(125, 65), new Point(125, 60), new Point(125, 55), new Point(125, 50), new Point(125, 45), new Point(125, 40), new Point(125, 35), new Point(125, 30), new Point(125, 25), new Point(125, 20), new Point(125, 15), new Point(125, 10), new Point(125, 5) });
-        List<Point> ns = new List<Point>(new Point[] { new Point(80, 10), new Point(80,15),new Point(80,25), new Point(80, 30), new Point(80, 70), new Point(80, 100), new Point(80, 150), new Point(80, 190) });
-        List<Point> nw = new List<Point>(new Point[] { new Point(65, 10), new Point(65, 15), new Point(65, 25), new Point(65, 30), new Point(65, 60), new Point(60, 65), new Point(50, 65),  new Point(40, 65), new Point(35, 65), new Point(30, 65), new Point(25, 65), new Point(20, 65), new Point(10, 65)  });
-        List<Point> sw = new List<Point>(new Point[] { new Point(110, 190), new Point(110, 185 ), new Point(110, 180), new Point(110, 175), new Point(110, 170), new Point(110, 160), new Point(110, 130), new Point(105, 120), new Point(100, 110), new Point(95, 100), new Point(80, 95), new Point(75, 95), new Point(70, 95), new Point(65, 90), new Point(55, 90), new Point(40, 85), new Point(35, 85), new Point(30, 85), new Point(25, 85), new Point(20, 85), new Point(15, 85), new Point(10, 85) });
+        List<Point> sn = new List<Point>(new Point[] { new Point(125, 190), new Point(125, 185), new Point(125, 180), new Point(125, 175), new Point(125, 170), new Point(125, 160), new Point(125, 130), new Point(125, 120), new Point(125, 115), new Point(125, 110), new Point(125, 105), new Point(125, 100), new Point(125, 95), new Point(125, 90), new Point(125, 85), new Point(125, 80), new Point(125, 75), new Point(125, 70), new Point(125, 65), new Point(125, 60), new Point(125, 55), new Point(125, 50), new Point(125, 45), new Point(125, 40), new Point(125, 35), new Point(125, 30), new Point(125, 25), new Point(125, 20), new Point(125, 15), new Point(125, 10), new Point(125, 5) });
+        List<Point> ns = new List<Point>(new Point[] { new Point(80, 10), new Point(80, 15), new Point(80, 25), new Point(80, 30), new Point(80, 70), new Point(80, 100), new Point(80, 150), new Point(80, 190) });
+        List<Point> nw = new List<Point>(new Point[] { new Point(65, 10), new Point(65, 15), new Point(65, 25), new Point(65, 30), new Point(65, 60), new Point(60, 65), new Point(50, 65), new Point(40, 65), new Point(35, 65), new Point(30, 65), new Point(25, 65), new Point(20, 65), new Point(10, 65) });
+        List<Point> sw = new List<Point>(new Point[] { new Point(110, 190), new Point(110, 185), new Point(110, 180), new Point(110, 175), new Point(110, 170), new Point(110, 160), new Point(110, 130), new Point(105, 120), new Point(100, 110), new Point(95, 100), new Point(80, 95), new Point(75, 95), new Point(70, 95), new Point(65, 90), new Point(55, 90), new Point(40, 85), new Point(35, 85), new Point(30, 85), new Point(25, 85), new Point(20, 85), new Point(15, 85), new Point(10, 85) });
         List<Point> wn = new List<Point>(new Point[] { new Point(5, 110), new Point(10, 110), new Point(15, 110), new Point(20, 110), new Point(25, 110), new Point(30, 110), new Point(60, 110), new Point(80, 100), new Point(100, 90), new Point(105, 70), new Point(110, 50), new Point(110, 45), new Point(110, 40), new Point(110, 35), new Point(110, 30), new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10) });
         List<Point> ws = new List<Point>(new Point[] { new Point(5, 125), new Point(10, 125), new Point(15, 110), new Point(20, 110), new Point(25, 110), new Point(30, 125), new Point(60, 130), new Point(65, 140), new Point(65, 145), new Point(65, 150), new Point(65, 155), new Point(65, 160), new Point(65, 165), new Point(65, 170), new Point(65, 175), new Point(65, 180), new Point(65, 185), new Point(65, 190), });
         List<Point> en = new List<Point>(new Point[] { new Point(190, 65), new Point(185, 65), new Point(180, 65), new Point(175, 65), new Point(170, 65), new Point(165, 65), new Point(130, 55), new Point(125, 40), new Point(125, 20), new Point(125, 10) });
-        List<Point> es = new List<Point>(new Point[] { new Point(190, 80), new Point(185, 80), new Point(180, 80), new Point(175, 80), new Point(170, 80), new Point(165,80), new Point(120, 95), new Point(85, 120), new Point(85, 150), new Point(85, 190) });
+        List<Point> es = new List<Point>(new Point[] { new Point(190, 80), new Point(185, 80), new Point(180, 80), new Point(175, 80), new Point(170, 80), new Point(165, 80), new Point(120, 95), new Point(85, 120), new Point(85, 150), new Point(85, 190) });
         Vehicle anothercar;
         Vehicle car;
         Vehicle onemorecar;
@@ -56,7 +56,7 @@ namespace TrafficSimulation
         private Vehicle car8;
 
         public Form1()
-        { 
+        {
             selectedCrossroad = new Crossroad();
             this.ControlBox = false;
             this.Text = String.Empty;
@@ -84,6 +84,7 @@ namespace TrafficSimulation
             //A.Height = 107;
             //A.Width = 101;
             //pictureBox1.Controls.Add(A);
+
         }
 
 
@@ -229,9 +230,9 @@ namespace TrafficSimulation
                         if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
                         {
                             A.Location = placeholder.Location;
-                        
+
                             A.PlaceTrafficLights(3000);
-                           // A.Paint += new System.Windows.Forms.PaintEventHandler(this.grid1_Paint);
+                            // A.Paint += new System.Windows.Forms.PaintEventHandler(this.grid1_Paint);
 
                         }
                     }
@@ -277,12 +278,12 @@ namespace TrafficSimulation
                         if (placeholder.Contains(grid1.PointToClient(Cursor.Position)))
                         {
                             B.Location = placeholder.Location;
-                             B.PlaceTrafficLights(3000);
+                            B.PlaceTrafficLights(3000);
                         }
                     }
 
                     grid1.Controls.Add(B);
-                   
+
                 }
 
             }
@@ -292,7 +293,7 @@ namespace TrafficSimulation
         {
             Crossroad cr = (Crossroad)sender;
             selectedCrossroad = cr;
-          
+
             if (e.Button == MouseButtons.Left)
             {
                 //deletes the selected rectangle in all the other crossroads
@@ -309,7 +310,7 @@ namespace TrafficSimulation
             }
 
 
-           
+
         }
 
         private void AssignNeighbours(Crossroad c)
@@ -357,7 +358,7 @@ namespace TrafficSimulation
                 Console.WriteLine(c.West);
         }
 
-       
+
 
         private void Crossroad_DragOver(object sender, DragEventArgs e)
         {
@@ -407,7 +408,7 @@ namespace TrafficSimulation
             //{
             //    c.Move(Cars, Crossroad.trafficLights);
             //}
-            
+
             this.Invalidate();
            // p.Move(Pedestrians);
             // List<TrafficLight> trafficLights = new List<TrafficLight>();
@@ -506,7 +507,7 @@ namespace TrafficSimulation
             }
             return false;
         }
-        
+
         /// <summary>
         /// To load a grid from file
         /// </summary>
@@ -639,19 +640,17 @@ namespace TrafficSimulation
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-               //  timer1.Start();
+
             Simulation.ShouldStop = false;
             simulation = new Thread(Simulation.Run);
             simulation.Start();
-       
+
         }
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-           // Simulation.DrawCars(e);
-           
-       
+
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -661,15 +660,16 @@ namespace TrafficSimulation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            timer1.Interval = 10;
-          timer1.Start();
+
+            timer1.Interval = 2000;
+
             timer2.Interval = 3000;
             timer2.Start();
         }
 
-         private void timer2_Tick(object sender, EventArgs e)
-         {
-           
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
             count++;
             //Vehicle c =
             //       new Vehicle(
@@ -699,7 +699,7 @@ namespace TrafficSimulation
                                                 new Point(85, 100), new Point(85, 150), new Point(85, 190)
                                 }));
 
-                       // Cars.Add(c);
+                        // Cars.Add(c);
                     }
                     else
                     {
@@ -712,7 +712,7 @@ namespace TrafficSimulation
                                                 new Point(85, 30), new Point(95, 60), new Point(100, 80),  new Point(105, 100), new Point(115, 110), new Point(120, 110), new Point(125, 110), new Point(130, 110), new Point(135, 110), new Point(140, 110), new Point(145, 110), new Point(150, 110), new Point(155, 110), new Point(160, 110), new Point(165, 110), new Point(170, 110), new Point(175, 110), new Point(180, 110), new Point(185, 110), new Point(190, 110)
                                 }));
 
-                       // Cars.Add(c);
+                        // Cars.Add(c);
                     }
                 }
                 else if (count % 2 == 1)
@@ -727,7 +727,7 @@ namespace TrafficSimulation
                                             new Point(10, 70)
                             }));
 
-                  //  Cars.Add(c);
+                    //  Cars.Add(c);
                 }
 
             }
@@ -749,7 +749,7 @@ namespace TrafficSimulation
                                                  new Point(110, 45), new Point(110, 40), new Point(110, 35), new Point(110, 30), new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10),
                                                  new Point(110, 5) }));
 
-                      //  Cars.Add(c);
+                        //  Cars.Add(c);
                     }
                     else
                     {
@@ -764,7 +764,7 @@ namespace TrafficSimulation
                                               new Point(20, 85), new Point(15, 85), new Point(10, 85)
                               }));
 
-                       // Cars.Add(c);
+                        // Cars.Add(c);
                     }
                 }
 
@@ -780,7 +780,7 @@ namespace TrafficSimulation
                                             new Point(170, 130), new Point(190, 130)
                             }));
 
-                   // Cars.Add(c);
+                    // Cars.Add(c);
                 }
             }
 
@@ -801,7 +801,7 @@ namespace TrafficSimulation
                                                 new Point(150, 108), new Point(190, 108)
                                 }));
 
-                      //  Cars.Add(c);
+                        //  Cars.Add(c);
                     }
                     else
                     {
@@ -831,7 +831,7 @@ namespace TrafficSimulation
                                             new Point(65, 155), new Point(65, 190)
                             }));
 
-                   // Cars.Add(c);
+                    // Cars.Add(c);
                 }
             }
 
@@ -848,13 +848,13 @@ namespace TrafficSimulation
                                         new Point(125, 20), new Point(125, 10)
                         }));
 
-                   // Cars.Add(c);
+                    // Cars.Add(c);
 
                 }
 
                 if (count % 2 == 1)
                 {
-                    if (counter3%4 == 0)
+                    if (counter3 % 4 == 0)
                     {
                         //east to west
                         Vehicle c =
@@ -871,7 +871,7 @@ namespace TrafficSimulation
                                 new Point(20, 65), new Point(15, 65), new Point(10, 65)
                             }));
 
-                       // Cars.Add(c);
+                        // Cars.Add(c);
                     }
                     else
                     {
@@ -883,15 +883,14 @@ namespace TrafficSimulation
                                 new Point(85, 120),
                                 new Point(85, 150), new Point(85, 190)
                             }))
-                    
+
                     ;
 
-                       // Cars.Add(c);
+                        // Cars.Add(c);
                     }
                 }
-                
+
             }
         }
     }
-    }
-
+}

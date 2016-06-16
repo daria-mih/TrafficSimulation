@@ -76,6 +76,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphicalOverlay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicalOverlay.designer.cs">
+      <DependentUpon>GraphicalOverlay.cs</DependentUpon>
+    </Compile>
     <Compile Include="IMoveable.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Pedestrian.cs" />
