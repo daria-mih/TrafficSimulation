@@ -15,7 +15,6 @@ namespace TrafficSimulation
     static class Simulation
     {
         //fields
-        public static Form form1;
         static public bool ShouldStop = false;
         static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints;
@@ -29,47 +28,47 @@ namespace TrafficSimulation
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            //bool notWait = false;
-            //if (counter > -1)
-            //{
-            //    for (int i = 0; i <= counter; i++)
-            //    {
-            //        notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
-            //        foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
-            //        {
-            //            crossroad.Invalidate();
-            //        }
-            //        if (Moveables[i].route.Count == 1)
-            //        {
-            //            Moveables.Remove(Moveables[i]);
-            //            counter--;
-            //            i--;
-            //        }
-            //    }
+            bool notWait = false;
+            if (counter > -1)
+            {
+                for (int i = 0; i <= counter; i++)
+                {
+                    notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
+                    foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                    {
+                        crossroad.Invalidate();
+                    }
+                    if (Moveables[i].route.Count == 1)
+                    {
+                        Moveables.Remove(Moveables[i]);
+                        counter--;
+                        i--;
+                    }
+                }
 
-            //    //((Vehicle) Moveables[counter]).SetCurrentPosition(new List<Vehicle>(Moveables.OfType<Vehicle>()));
+                //((Vehicle) Moveables[counter]).SetCurrentPosition(new List<Vehicle>(Moveables.OfType<Vehicle>()));
 
 
-            //    counter2++;
-            //    if (counter2 >= 10)
-            //    {
-            //        if (notWait)
-            //        {
-            //            if (counter >= Moveables.Count - 1)
-            //            {
-            //                counter = 0;
-            //            }
-            //            else
-            //            {
+                counter2++;
+                if (counter2 >= 10)
+                {
+                    if (notWait)
+                    {
+                        if (counter >= Moveables.Count - 1)
+                        {
+                            counter = 0;
+                        }
+                        else
+                        {
 
-            //                counter++;
-            //            }
+                            counter++;
+                        }
 
-            //        }
-            //        counter2 = 0;
+                    }
+                    counter2 = 0;
 
-            //    }
-            //}
+                }
+            }
         }
         //properties
         // public Grid FromGrid { get; set; }
@@ -270,9 +269,8 @@ namespace TrafficSimulation
             {
 
                 Random random = new Random();
-
-                List<Direction> dirlist = null;
-                while (dirlist == null)
+                List<Point> pointlist = new List<Point>();
+                while (pointlist.Count < 1)
                 {
                     Node startpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
                     Node endpnt = listOfNodes[random.Next(0, listOfNodes.Count)];
@@ -280,17 +278,16 @@ namespace TrafficSimulation
                     {
                         node.SetDistance(endpnt);
                     }
-                    dirlist = GetShortestRoute(startpnt, endpnt);
-                }
-                List<Point> pointlist = new List<Point>();
-                foreach (Direction dir in dirlist)
-                {
-                    foreach (var item in dir.Points)
+                    List<Direction> dirlist = GetShortestRoute(startpnt, endpnt);
+                    pointlist = new List<Point>();
+                    foreach (Direction dir in dirlist)
                     {
-                        pointlist.Add(item);
+                        foreach (var item in dir.Points)
+                        {
+                            pointlist.Add(item);
+                        }
                     }
                 }
-
                 Vehicle temp = new Vehicle(pointlist);
 
                 Moveables.Add(temp);
@@ -302,42 +299,38 @@ namespace TrafficSimulation
         }
         static public void MoveMovables()
         {
-            Thread.Sleep(1000);
-            bool notWait = false;
-
-            for (int i = 0; i < Moveables.Count; i++)
+            //Thread.Sleep(1000
+            bool result = false;
+            while (!result)
             {
-                notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
-                
 
-               
-                if (Moveables[i].route.Count == 1)
-                {
-                    Moveables.Remove(Moveables[i]);
 
-                    i--;
-                }
             }
-            form1.Invoke((MethodInvoker)delegate
-            {
-                // Show the current time in the form's title bar.
-                form1.Refresh();
-            });
-
 
 
         }
 
 
 
+        public static void DrawCars(PaintEventArgs pe)
+        {
+            if (Moveables.Count > 0)
+            {
+                foreach (Vehicle car in Moveables.OfType<Vehicle>())
+                {
+                    Color carColor = car.color;
+                    Brush brush = new SolidBrush(carColor);
 
+                    pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
+                }
+            }
+
+
+        }
         #endregion
         static private void ChangeTrafficLights()
         {
-            foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
-            {
-                crossroad.Invalidate();
-            }
+
         }
 
         static public void Run()
@@ -349,8 +342,8 @@ namespace TrafficSimulation
             while (!ShouldStop)
             {
                 //carTimer.
-                MoveMovables();
-                ChangeTrafficLights();
+                //MoveMovables();
+                //ChangeTrafficLights();
             }
         }
 
