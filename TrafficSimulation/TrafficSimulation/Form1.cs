@@ -60,10 +60,11 @@ namespace TrafficSimulation
             this.ControlBox = false;
             this.Text = String.Empty;
             this.DoubleBuffered = true;
-
+            Simulation.form1 = this;
             InitializeComponent();
             //timer1.Interval = 500;
             //timer1.Start();
+            graphicalOverlay1.Owner = this;
             Simulation.grid = grid1;
             car = new Vehicle(ns);
             Cars = new List<Vehicle>();
@@ -647,6 +648,17 @@ namespace TrafficSimulation
         {
            // Simulation.DrawCars(e);
            
+        }
+
+        private void graphicalOverlay1_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (Vehicle car in Simulation.Moveables.OfType<Vehicle>().ToArray<Vehicle>())
+            {
+                Color carColor = car.color;
+                Brush brush = new SolidBrush(carColor);
+
+                e.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
