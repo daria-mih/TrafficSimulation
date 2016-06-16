@@ -645,7 +645,7 @@ namespace TrafficSimulation
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-           // Simulation.DrawCars(e);
+           //Simulation.DrawCars(e);
            
         }
 

@@ -278,9 +278,9 @@ namespace TrafficSimulation
 
         }
 
-        public void AddCarToTheList(Vehicle car)
-        {
-            Form1.Cars.Add(car);
-        }
+        //public void AddCarToTheList(Vehicle car)
+        //{
+        //    Form1.Cars.Add(car);
+        //}
     }
 }
