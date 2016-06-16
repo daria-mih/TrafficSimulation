@@ -26,6 +26,7 @@ namespace TrafficSimulation
         private static int counter = 0;
         private static int counter2 = 0;
 
+        // does the moving of cars on every tick
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             bool notWait = false;
@@ -33,9 +34,11 @@ namespace TrafficSimulation
             {
                 for (int i = 0; i <= counter; i++)
                 {
+                    //Step 1: moves one car
                     notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
                     foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
                     {
+                        //redraws cars that have been moved
                         crossroad.Invalidate();
                     }
                     if (Moveables[i].route.Count == 1)
@@ -50,6 +53,7 @@ namespace TrafficSimulation
 
 
                 counter2++;
+                //step 2: loops through at everytick - for ten times(delay) and then places next car
                 if (counter2 >= 10)
                 {
                     if (notWait)
@@ -299,19 +303,13 @@ namespace TrafficSimulation
         }
         static public void MoveMovables()
         {
-            //Thread.Sleep(1000
-            bool result = false;
-            while (!result)
-            {
-
-
-            }
+          
 
 
         }
 
 
-
+        //paints cars using PaintEventArgs of a crossroad
         public static void DrawCars(PaintEventArgs pe)
         {
             if (Moveables.Count > 0)
@@ -339,12 +337,7 @@ namespace TrafficSimulation
             FillEndPoints();
             CreateMovables();
             _carTimer.Start();
-            while (!ShouldStop)
-            {
-                //carTimer.
-                //MoveMovables();
-                //ChangeTrafficLights();
-            }
+          
         }
 
 
