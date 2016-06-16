@@ -18,10 +18,11 @@ namespace TrafficSimulation
         static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints;
         public static Grid grid;
+        private static bool pedestriansDone = false;
         private static List<Node> listOfNodes = new List<Node>();
-
+       static List<Pedestrian> pedestrians = new List<Pedestrian>(); 
         private static System.Timers.Timer _carTimer = new System.Timers.Timer();
-        
+        private static System.Timers.Timer _pedestrianTimer = new System.Timers.Timer();
 
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -36,6 +37,26 @@ namespace TrafficSimulation
 
             }
             
+        }
+
+        private static void TimedPedestriansEvent(object source, ElapsedEventArgs e)
+        {
+            if (pedestrians.Count != 0)
+            {
+                foreach (Pedestrian p in pedestrians)
+                {
+                    if (p.route.Count != 0)
+                    {
+                        p.Move(pedestrians);
+                    }
+                   
+                    foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                    {
+                        crossroad.Invalidate();
+                    }
+                }
+            }
+          
         }
         //properties
         // public Grid FromGrid { get; set; }
@@ -234,8 +255,6 @@ namespace TrafficSimulation
         {
             for (int i = 0; i < 1; i++)
             {
-
-            
             Random random = new Random();
             List<Point> pointlist = new List<Point>();
             while (pointlist.Count < 1)
@@ -248,6 +267,7 @@ namespace TrafficSimulation
                 }
                 List<Direction> dirlist = GetShortestRoute(startpnt, endpnt);
                 pointlist = new List<Point>();
+
                 foreach (Direction dir in dirlist)
                 {
                     foreach (var item in dir.Points)
@@ -258,9 +278,12 @@ namespace TrafficSimulation
             }
             Moveables.Add( new Vehicle(pointlist ));
             }
+            
+            
             _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             _carTimer.Interval = 50;
-            
+            _pedestrianTimer.Elapsed += TimedPedestriansEvent;
+            _pedestrianTimer.Interval = 100;
         }
         static public void MoveMovables()
         {
@@ -275,9 +298,28 @@ namespace TrafficSimulation
 
         }
 
+        public static void CreatePedestrians()
+        {
+            pedestrians.Clear();
+            foreach (Direction d in Crossroad.PedestrianDirections)
+            {
+                pedestrians.Add(new Pedestrian(d.Points));
+            }
+        }
+        public static void DrawPedestrians(PaintEventArgs pe)
+        {
+            Color pColor = Color.Beige;
+            SolidBrush p = new SolidBrush(pColor);
+            if (pedestrians.Count > 1)
+            {
+                foreach (Pedestrian pedestrian in pedestrians)
+                {
+                    pe.Graphics.FillEllipse(p, pedestrian.currentPosition.X, pedestrian.currentPosition.Y, 10, 10);
+                }
+            }
+        }
 
-
-       public static void DrawCars(PaintEventArgs pe) {
+        public static void DrawCars(PaintEventArgs pe) {
             if (Moveables.Count > 0)
             {
                 foreach (Vehicle car in Moveables.OfType<Vehicle>())
@@ -302,7 +344,9 @@ namespace TrafficSimulation
             GetNodes();
             FillEndPoints();
             CreateMovables();
+            CreatePedestrians();
             _carTimer.Start();
+            _pedestrianTimer.Start();
             while (!ShouldStop)
             {
                 //carTimer.

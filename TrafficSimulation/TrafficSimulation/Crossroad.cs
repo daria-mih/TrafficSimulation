@@ -15,7 +15,9 @@ namespace TrafficSimulation
         //guys, we first put this method in direction but thought it would be better to use it in this class
 
         public List<Direction> Directions { get; set; }
+        public static List<Direction> PedestrianDirections { get; set; } 
         public static List<TrafficLight> trafficLights;
+        public static List<TrafficLight> pedestrianLights; 
         private int counter;
         private Timer lightTimer;
         public int NoOfCars { get; set; }
@@ -35,17 +37,20 @@ namespace TrafficSimulation
             this.West = null;
             delete = new MenuItem();
             Directions = new List<Direction>();
+            PedestrianDirections = new List<Direction>();
             AddDirections();
+            AddPedestrianDirections();
             trafficLights = new List<TrafficLight>();
             lightTimer = new Timer();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            if (counter == 4)
+                counter = 0;
             //do something here 
-            counter++;
+            
             ChangeState();
-
+            counter++; 
         }
 
         private void ChangeState()
@@ -62,8 +67,7 @@ namespace TrafficSimulation
                         trafficLight.state = Color.Red;
                     }
                 }
-                if (counter == 3)
-                    counter = 0;
+                
                 this.Refresh();
             }
 
@@ -137,6 +141,19 @@ namespace TrafficSimulation
 
 
         }
+
+        public void AddPedestrianDirections()
+        {
+          List<Point> topwe =   new List<Point>(new Point[] { new Point(50, 50), new Point(50, 55), new Point(50, 60), new Point(50, 65), new Point(50, 70), new Point(50, 75), new Point(50, 80), new Point(50, 85), new Point(50, 90), new Point(50, 95), new Point(50, 100), new Point(50, 105), new Point(50, 110), new Point(50, 115), new Point(50, 120), new Point(50, 125), new Point(50, 130),  new Point(50, 135) });
+      List<Point> leftWS =  new List<Point>(new Point[] {new Point(50, 140), new Point(55, 140), new Point(60, 140), new Point(65, 140), new Point(70, 140), new Point(75, 140), new Point(80, 140),new Point(85, 140), new Point(90, 140), new Point(95, 140), new Point(100, 140), new Point(105, 140), new Point(110, 140), new Point(115, 140),new Point(120, 140),new Point(125, 140), new Point(130, 140), new Point(135, 140), new Point(140, 140)       });
+     List<Point> bottomWE =   new List<Point>(new Point[] {new Point(140, 140), new Point(140, 135), new Point(140, 130), new Point(140, 125), new Point(140, 120), new Point(140, 115), new Point(140, 110), new Point(140, 105), new Point(140, 100), new Point(140, 95), new Point(140, 90), new Point(140, 85), new Point(140, 80), new Point(140, 75), new Point(140, 70), new Point(140, 65), new Point(140, 60),new Point(140, 55), new Point(140, 50)   });
+       List<Point> topEW =new List<Point>(new Point[]{new Point(140, 50), new Point(135, 50), new Point(130, 50), new Point(125, 50), new Point(120, 50), new Point(115, 50), new Point(110, 50), new Point(105, 50), new Point(100, 50), new Point(95, 50), new Point(90, 50), new Point(85, 50), new Point(80, 50), new Point(75, 50), new Point(70, 50), new Point(65, 50), new Point(60, 50), new Point(55, 50), new Point(50, 50) });
+       
+            PedestrianDirections.Add(new Direction(topwe, "Top West-East"));
+            PedestrianDirections.Add(new Direction(leftWS, "Left-West-South"));
+            PedestrianDirections.Add(new Direction(bottomWE, "Bottom-West-East"));
+            PedestrianDirections.Add(new Direction(topEW, "Top-East-West"));
+        }
         public void Connect()
         { }
 
@@ -171,6 +188,12 @@ namespace TrafficSimulation
             // if(Form1.Cars.Count > 0)
             Simulation.DrawCars(pe);
 
+            if (this is CrossroadB)
+            {
+                Simulation.DrawPedestrians(pe);
+              
+                //pe.Graphics.FillPolygon(b, new Point[] {  new Point(50, 60), new Point(60, 60),new Point(55, 55), });
+            }
             foreach (TrafficLight tl in trafficLights)
             {
                 Brush b = new SolidBrush(tl.state);
@@ -226,6 +249,11 @@ namespace TrafficSimulation
                 trafficLights.Add(new TrafficLight(i + 1, Color.Red));
             }
             InitializeTimer();
+        }
+
+        public void PlacePedestrianLights()
+        {
+            
         }
         public void ChangeTimer(int seconds)
         {

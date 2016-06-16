@@ -17,12 +17,18 @@ namespace TrafficSimulation
 
         public Graphics icon
         { get; set; }
-        public List<Direction> route
+        public List<Point> route
         { get; set; }
 
         public int size
         { get; set; }
 
+        public Pedestrian(List<Point> _route)
+        {
+            this.route = _route;
+            currentPosition = route[0];
+          
+        }
         List<Point> IMoveable.route
         {
             get
@@ -46,5 +52,19 @@ namespace TrafficSimulation
            
             
         }
+        public void Move(List<Pedestrian> pedestrians)
+        {
+            foreach (Pedestrian pedestrian in pedestrians)
+            {
+                if (pedestrian.route.Count != 0)
+                {
+                    pedestrian.currentPosition = pedestrian.route[0];
+                    pedestrian.route.Remove(pedestrian.route[0]);
+                }
+            }
+
+        }
+
+
     }
 }

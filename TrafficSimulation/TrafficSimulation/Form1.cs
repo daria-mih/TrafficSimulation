@@ -19,6 +19,7 @@ namespace TrafficSimulation
     {
         FileStream fs;
         List<CrossroadProperties> properties;
+        public static List<Pedestrian> Pedestrians;
         Crossroad selectedCrossroad;
         BinaryFormatter bf;
         private SaveFileDialog saveGrid = new SaveFileDialog();
@@ -74,6 +75,10 @@ namespace TrafficSimulation
             car4 = new Vehicle(sw);
             car7 = new Vehicle(en);
             car8 = new Vehicle(es);
+
+            Pedestrians = new List<Pedestrian>();
+
+        
             //Crossroad A = new CrossroadA();
             //A.BackgroundImage = Properties.Resources.Crossroad2bw;
             //A.Height = 107;
@@ -404,7 +409,7 @@ namespace TrafficSimulation
             //}
             
             this.Invalidate();
-
+           // p.Move(Pedestrians);
             // List<TrafficLight> trafficLights = new List<TrafficLight>();
             //List<TrafficLight> temp = trafficLights;
             // foreach (TrafficLight trafficlight in trafficLights)
@@ -646,6 +651,7 @@ namespace TrafficSimulation
         {
            // Simulation.DrawCars(e);
            
+       
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -655,14 +661,15 @@ namespace TrafficSimulation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            timer1.Interval = 2000;
-          
+            timer1.Interval = 10;
+          timer1.Start();
             timer2.Interval = 3000;
             timer2.Start();
         }
 
          private void timer2_Tick(object sender, EventArgs e)
-        {
+         {
+           
             count++;
             //Vehicle c =
             //       new Vehicle(
