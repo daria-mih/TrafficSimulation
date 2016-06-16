@@ -83,19 +83,28 @@ namespace TrafficSimulation
         {
             if (pedestrians.Count != 0)
             {
-                foreach (Pedestrian p in pedestrians)
+                if (pedestrians[0].route.Count != 0)
                 {
-                    if (p.route.Count != 0)
+                    foreach (Pedestrian p in pedestrians)
                     {
-                        p.Move(pedestrians);
-                    }
-                   
-                    foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
-                    {
-                        crossroad.Invalidate();
+                        if (p.route.Count != 0)
+                        {
+                            p.Move(pedestrians);
+                        }
+
+                        foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                        {
+                            crossroad.Invalidate();
+                        }
                     }
                 }
+                else
+                {
+                    Crossroad.AddPedestrianDirections();
+                    CreatePedestrians();
+                }
             }
+          
           
         }
         //properties
@@ -329,7 +338,7 @@ namespace TrafficSimulation
             _carTimer.Interval = 50;
 
             _pedestrianTimer.Elapsed += TimedPedestriansEvent;
-            _pedestrianTimer.Interval = 100;
+            _pedestrianTimer.Interval = 200;
 
         }
         static public void MoveMovables()
@@ -342,11 +351,17 @@ namespace TrafficSimulation
         public static void CreatePedestrians()
         {
             pedestrians.Clear();
+            Crossroad.AddPedestrianDirections();
             foreach (Direction d in Crossroad.PedestrianDirections)
             {
-                pedestrians.Add(new Pedestrian(d.Points));
+                if (d.Points.Count != 0)
+                {
+                    pedestrians.Add(new Pedestrian(d.Points));
+                }
             }
+            
         }
+
         public static void DrawPedestrians(PaintEventArgs pe)
         {
             Color pColor = Color.Beige;

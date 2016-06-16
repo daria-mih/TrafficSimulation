@@ -15,7 +15,7 @@ namespace TrafficSimulation
         //guys, we first put this method in direction but thought it would be better to use it in this class
 
         public List<Direction> Directions { get; set; }
-        public static List<Direction> PedestrianDirections { get; set; } 
+        public static List<Direction> PedestrianDirections;
         public static List<TrafficLight> trafficLights;
         public static List<TrafficLight> pedestrianLights; 
         private int counter;
@@ -144,7 +144,7 @@ namespace TrafficSimulation
 
         }
 
-        public void AddPedestrianDirections()
+        public static  void AddPedestrianDirections()
         {
           List<Point> topwe =   new List<Point>(new Point[] { new Point(50, 50), new Point(50, 55), new Point(50, 60), new Point(50, 65), new Point(50, 70), new Point(50, 75), new Point(50, 80), new Point(50, 85), new Point(50, 90), new Point(50, 95), new Point(50, 100), new Point(50, 105), new Point(50, 110), new Point(50, 115), new Point(50, 120), new Point(50, 125), new Point(50, 130),  new Point(50, 135) });
       List<Point> leftWS =  new List<Point>(new Point[] {new Point(50, 140), new Point(55, 140), new Point(60, 140), new Point(65, 140), new Point(70, 140), new Point(75, 140), new Point(80, 140),new Point(85, 140), new Point(90, 140), new Point(95, 140), new Point(100, 140), new Point(105, 140), new Point(110, 140), new Point(115, 140),new Point(120, 140),new Point(125, 140), new Point(130, 140), new Point(135, 140), new Point(140, 140)       });
