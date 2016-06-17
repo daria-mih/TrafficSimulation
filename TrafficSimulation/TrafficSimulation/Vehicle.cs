@@ -63,6 +63,7 @@ namespace TrafficSimulation
                                 }
                                 //else do nothing and get status 'stopped'
                                 isStopped = true;
+                                return true;
                             }
                         }
                         else
@@ -76,6 +77,7 @@ namespace TrafficSimulation
                                 return true;
                             }
                             isStopped = true;
+                            return true;
                         }
                     }
                 }
@@ -90,6 +92,7 @@ namespace TrafficSimulation
                         return true;
                     }
                     isStopped = true;
+                    return true;
                 }
             }
 
