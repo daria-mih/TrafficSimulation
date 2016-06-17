@@ -34,10 +34,9 @@ namespace TrafficSimulation
         /// <param name="allNodes">the list that contains all the nodes</param>
         /// <param name="nextNode">the node on which direction you want to know of</param>
         /// <returns>"North", "East", "South" or "West"</returns>
-        public string WhichNeighbour(List<Node> allNodes, Node nextNode)
+        public string WhichNeighbour( Node nextNode)
         {
-            foreach (Node node in allNodes)
-            {
+            
                 if (nextNode.crossroad == crossroad.North)
                 {
                     return "North";
@@ -54,7 +53,7 @@ namespace TrafficSimulation
                 {
                     return "West";
                 }
-            }
+            
             return null;
         }
         /// <summary>
@@ -101,5 +100,9 @@ namespace TrafficSimulation
             fDistance = Math.Abs(Convert.ToDouble((crossroad.Location.X + crossroad.Location.Y) - (finishNode.crossroad.Location.X + finishNode.crossroad.Location.Y)));
         }
 
+        public override string ToString()
+        {
+            return crossroad.Location.ToString()+" "+this.GetHashCode();
+        }
     }
 }
