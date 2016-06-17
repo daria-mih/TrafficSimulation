@@ -64,7 +64,7 @@ namespace TrafficSimulation
                 for (int i = 0; i <= counter; i++)
                 {
                       //Step 1: moves one car
-                    notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), GetTrafficLight((Vehicle)Moveables[i]));
+                    notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
                     f1.Invalidate();
                     //redraws cars that have been moved
                     //crossroad.Invalidate();

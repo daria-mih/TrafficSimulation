@@ -110,12 +110,13 @@ namespace TrafficSimulation
         public bool checkForRed(List<TrafficLight> lights)
         {
             Rectangle check;
+            Point p = new Point(134,20);
 
             if ((route[1].X - currentPosition.X) >0)
             {
                 // cars go from the left to the right 
                 //draw a rectangle in front of the car
-                check = new Rectangle(currentPosition.X + 20, currentPosition.Y, 10, 10);
+                check = new Rectangle(p.X + currentPosition.X + 20, p.Y + currentPosition.Y, 10, 10);
               foreach (TrafficLight l in lights)
                 {
                     //check if there is a traffic light in the rectangle
@@ -134,7 +135,7 @@ namespace TrafficSimulation
             if ((route[1].X - currentPosition.X) < 0)
                 {
                 //cars go from the right to the left
-                check = new Rectangle(currentPosition.X - 20, currentPosition.Y, 10, 10);
+                check = new Rectangle(p.X + currentPosition.X - 20, p.Y + currentPosition.Y, 10, 10);
 
                 foreach (TrafficLight l in lights)
                 {
@@ -153,7 +154,7 @@ namespace TrafficSimulation
             if ((route[1].Y - currentPosition.Y) > 0)
             {
                 // cars go from top to bottom
-                check = new Rectangle(currentPosition.X, currentPosition.Y + 20, 10, 10);
+                check = new Rectangle(p.X + currentPosition.X, p.Y + currentPosition.Y + 20, 10, 10);
 
                 foreach (TrafficLight l in lights)
                 {
@@ -172,7 +173,7 @@ namespace TrafficSimulation
             if ((route[1].Y - currentPosition.Y) < 0)
             {
                 // cars go from bottom to top
-                check = new Rectangle(currentPosition.X, currentPosition.Y - 20, 10, 10);
+                check = new Rectangle(p.X + currentPosition.X, p.Y + currentPosition.Y - 20, 10, 10);
 
                 foreach (TrafficLight l in lights)
                 {
