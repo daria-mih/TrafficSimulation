@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CodeProject;
 
 namespace TrafficSimulation
 {
     public partial class Form1 : Form
     {
+        
         FileStream fs;
         List<CrossroadProperties> properties;
         public static List<Pedestrian> Pedestrians;
@@ -29,7 +31,8 @@ namespace TrafficSimulation
         public const int HT_CAPTION = 0x2;
         private int count;
         int counter, counter1, counter2, counter3 = 0;
-        // Crossroad currentRoad;
+        private List<TrafficLight> trafficLights;
+            // Crossroad currentRoad;
         Point mousePoint;
         public static List<Vehicle> Cars;
 
@@ -61,29 +64,17 @@ namespace TrafficSimulation
             this.ControlBox = false;
             this.Text = String.Empty;
             this.DoubleBuffered = true;
-
+            trafficLights = new List<TrafficLight>();
             InitializeComponent();
             //timer1.Interval = 500;
             //timer1.Start();
             Simulation.grid = grid1;
-            car = new Vehicle(ns);
-            Cars = new List<Vehicle>();
-            onemorecar = new Vehicle(sn);
-            car5 = new Vehicle(wn);
-            car6 = new Vehicle(ws);
-            anothercar = new Vehicle(nw);
-            car4 = new Vehicle(sw);
-            car7 = new Vehicle(en);
-            car8 = new Vehicle(es);
+
 
             Pedestrians = new List<Pedestrian>();
 
-        
-            //Crossroad A = new CrossroadA();
-            //A.BackgroundImage = Properties.Resources.Crossroad2bw;
-            //A.Height = 107;
-            //A.Width = 101;
-            //pictureBox1.Controls.Add(A);
+            graphicalOverlay1.Owner = this;
+
 
         }
 
@@ -239,22 +230,8 @@ namespace TrafficSimulation
 
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
-                    //A.AddCarToTheList(car);
-                    //A.AddCarToTheList(anothercar);
-                    //A.AddCarToTheList(onemorecar);
-                    //A.AddCarToTheList(car4);
-                    //A.AddCarToTheList(car5);
-                    //A.AddCarToTheList(car6);
-                    //A.AddCarToTheList(car7);
-                    //A.AddCarToTheList(car8);
-                    //A.AddCarToTheList(car);
-                    //cars.Add(anothercar);
-                    //cars.Add(onemorecar);
-                    //cars.Add(car4);
-                    //cars.Add(car5);
-                    //cars.Add(car6);
-                    //cars.Add(car7);
-                    //cars.Add(car8);
+                   
+                    //  trafficLights.Add(new TrafficLight());
 
                 }
                 else if (c.Name == "crossroadB1")
@@ -642,15 +619,142 @@ namespace TrafficSimulation
         {
 
             Simulation.ShouldStop = false;
+            Simulation.SetForm(this);
             simulation = new Thread(Simulation.Run);
             simulation.Start();
-
+            
+              this.started = true;
         }
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        //private void DrawTrafficLights(PaintEventArgs pe, TrafficLight tl)
+        //{
+
+        //    int crossroads = grid1.Controls.OfType<Crossroad>().Count();
+
+        //        Brush b = new SolidBrush(tl.state);
+        //        switch (tl.Id)
+        //        {
+        //            case 1:
+        //                {
+        //                    pe.Graphics.FillEllipse(b, 80, 50, 9, 9);
+        //                    tl.currentPosition1 = new Point(80, 50);
+        //                    pe.Graphics.FillEllipse(b, 110, 140, 9, 9);
+        //                    tl.currentPosition2 = new Point(110, 140);
+        //                    break;
+        //                }
+        //            case 2:
+        //                {
+        //                    //right
+        //                    pe.Graphics.FillEllipse(b, 65, 50, 9, 9);
+        //                    tl.currentPosition1 = new Point(65, 50);
+        //                    pe.Graphics.FillEllipse(b, 125, 140, 9, 9);
+        //                    tl.currentPosition2 = new Point(125, 140);
+
+        //                    break;
+        //                }
+        //            case 3:
+        //                {
+
+        //                    pe.Graphics.FillEllipse(b, 50, 125, 9, 9);
+        //                    tl.currentPosition1 = new Point(50, 125);
+        //                    pe.Graphics.FillEllipse(b, 140, 65, 9, 9);
+        //                    tl.currentPosition2 = new Point(140, 65);
+        //                    break;
+        //                }
+        //            case 4:
+        //                {
+
+        //                    pe.Graphics.FillEllipse(b, 50, 110, 9, 9);
+        //                    tl.currentPosition1 = new Point(50, 110);
+        //                    pe.Graphics.FillEllipse(b, 140, 80, 9, 9);
+        //                    tl.currentPosition2 = new Point(140, 80);
+        //                    break;
+        //                }
+
+                
+
+        //    }
+        //}
+        private bool started = false;
+        private void graphicalOverlay1_Paint(object sender, PaintEventArgs pe)
+        {
+            if(started)
+            {
+                DrawTrafficLights(pe);
+                if (Simulation.Moveables.Count > 0)
+            {
+
+                foreach (Vehicle car in Simulation.Moveables.OfType<Vehicle>())
+                {
+                    Color carColor = car.color;
+                    Brush brush = new SolidBrush(Color.Red);
+                    Rectangle carImage = new Rectangle(car.currentPosition.X + 123, car.currentPosition.Y + 20, 10, 10);
+                    pe.Graphics.FillRectangle(brush, carImage);
+
+                }
+
+            }
+              
+            }
+        }
+
+        private void DrawTrafficLights(PaintEventArgs pe)
+        {
+            foreach (Crossroad crossroad in grid1.Controls.OfType<Crossroad>())
+            {
+                foreach (TrafficLight tl in crossroad.trafficLights)
+                {
+
+                    Point p = new Point(crossroad.Location.X + 127, crossroad.Location.Y + 22);
+                    Brush b = new SolidBrush(tl.state);
+                    switch (tl.Id)
+                    {
+                        case 1:
+                            {
+                                pe.Graphics.FillEllipse(b, p.X + 80, p.Y + 50, 9, 9);
+                                tl.currentPosition1 = new Point(80, 50);
+                                pe.Graphics.FillEllipse(b, p.X + 110, p.Y + 140, 9, 9);
+                                tl.currentPosition2 = new Point(110, 140);
+                                break;
+                            }
+                        case 2:
+                            {
+                                //right
+                                pe.Graphics.FillEllipse(b, p.X + 65, p.Y + 50, 9, 9);
+                                tl.currentPosition1 = new Point(65, 50);
+                                pe.Graphics.FillEllipse(b, p.X + 125, p.Y + 140, 9, 9);
+                                tl.currentPosition2 = new Point(125, 140);
+
+                                break;
+                            }
+                        case 3:
+                            {
+
+                                pe.Graphics.FillEllipse(b, p.X + 50, p.Y + 125, 9, 9);
+                                tl.currentPosition1 = new Point(50, 125);
+                                pe.Graphics.FillEllipse(b, p.X + 140, p.Y + 65, 9, 9);
+                                tl.currentPosition2 = new Point(140, 65);
+                                break;
+                            }
+                        case 4:
+                            {
+
+                                pe.Graphics.FillEllipse(b, p.X + 50, p.Y + 110, 9, 9);
+                                tl.currentPosition1 = new Point(50, 110);
+                                pe.Graphics.FillEllipse(b, p.X + 140, p.Y + 80, 9, 9);
+                                tl.currentPosition2 = new Point(140, 80);
+                                break;
+                            }
+                    }
+                }
+
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -665,20 +769,15 @@ namespace TrafficSimulation
 
             timer2.Interval = 3000;
             timer2.Start();
+          
+            this.Invalidate();
         }
 
 
         private void timer2_Tick(object sender, EventArgs e)
         {
             count++;
-            //Vehicle c =
-            //       new Vehicle(
-            //           new List<Point>(new Point[]
-            //            {
-            //                new Point(85, 10), new Point(85, 15), new Point(85, 25), new Point(85, 40), new Point(85, 70),
-            //                new Point(85, 100), new Point(85, 150), new Point(85, 190)
-            //            }));
-            //cars.Add(c);
+          
 
             if (checkBox1.Checked)
             {

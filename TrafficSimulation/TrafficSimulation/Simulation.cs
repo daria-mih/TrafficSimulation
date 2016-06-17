@@ -29,7 +29,32 @@ namespace TrafficSimulation
 
         private static int counter = 0;
         private static int counter2 = 0;
+        static List<TrafficLight> allTrafficLights = new List<TrafficLight>();
 
+        private static void GetAllTrafficLights()
+        {
+            foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+            {
+                foreach (TrafficLight trafficLight in crossroad.trafficLights)
+                {
+                    allTrafficLights.Add(trafficLight);
+                }
+            }
+        }
+
+        private static List<TrafficLight> GetTrafficLight(Vehicle car)
+        {
+            Rectangle area;
+            foreach (Crossroad c in grid.Controls.OfType<Crossroad>())
+            {
+                area = new Rectangle(c.Location, new Size(200,200));
+                if (area.Contains(car.currentPosition))
+                {
+                    return c.trafficLights;
+                }
+            }
+            return null;
+        }
         // does the moving of cars on every tick
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
@@ -38,13 +63,11 @@ namespace TrafficSimulation
             {
                 for (int i = 0; i <= counter; i++)
                 {
-                    //Step 1: moves one car
-                    notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), Crossroad.trafficLights);
-                    foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
-                    {
-                        //redraws cars that have been moved
-                        crossroad.Invalidate();
-                    }
+                      //Step 1: moves one car
+                    notWait = Moveables[i].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), GetTrafficLight((Vehicle)Moveables[i]));
+                    f1.Invalidate();
+                    //redraws cars that have been moved
+                    //crossroad.Invalidate();
                     if (Moveables[i].route.Count == 1)
                     {
                         Moveables.Remove(Moveables[i]);
@@ -52,15 +75,12 @@ namespace TrafficSimulation
                         i--;
                     }
                 }
-
-                //((Vehicle) Moveables[counter]).SetCurrentPosition(new List<Vehicle>(Moveables.OfType<Vehicle>()));
-
-
+                
                 counter2++;
                 //step 2: loops through at everytick - for ten times(delay) and then places next car
                 if (counter2 >= 10)
                 {
-                    if (notWait)
+                   if (notWait)
                     {
                         if (counter >= Moveables.Count - 1)
                         {
@@ -77,6 +97,26 @@ namespace TrafficSimulation
 
                 }
             }
+
+            //int temp = 0;
+            //for (int i = 0; i <= Moveables.Count * 10; i++)
+            //{
+            //    if (i%10 == 0)
+            //    {
+            //        temp = i/10;
+            //    }
+            //    if (i == Moveables.Count*10)
+            //    {
+            //        i = 0;
+            //        temp = 0;
+            //    }
+
+            //    Moveables[temp].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
+                
+            //}
+           
+
+
         }
 
         private static void TimedPedestriansEvent(object source, ElapsedEventArgs e)
@@ -330,12 +370,12 @@ namespace TrafficSimulation
                 Vehicle temp = new Vehicle(pointlist);
 
                 Moveables.Add(temp);
-
+                int x = Moveables.Count;
             }
-            
-            
-            _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            _carTimer.Interval = 50;
+
+           // _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            //_carTimer.Interval = 50;
+
 
             _pedestrianTimer.Elapsed += TimedPedestriansEvent;
             _pedestrianTimer.Interval = 200;
@@ -375,28 +415,16 @@ namespace TrafficSimulation
             }
         }
 
-
-        //paints cars using PaintEventArgs of a crossroad
-        public static void DrawCars(PaintEventArgs pe)
-        {
-
-            if (Moveables.Count > 0)
-            {
-                foreach (Vehicle car in Moveables.OfType<Vehicle>())
-                {
-                    Color carColor = car.color;
-                    Brush brush = new SolidBrush(carColor);
-
-                    pe.Graphics.FillRectangle(brush, car.currentPosition.X, car.currentPosition.Y, 10, 10);
-                }
-            }
-
-
-        }
         #endregion
         static private void ChangeTrafficLights()
         {
 
+        }
+
+        private static Form1 f1;
+        public static void SetForm(Form1 form1)
+        {
+            f1 = form1;
         }
 
         static public void Run()
@@ -404,19 +432,49 @@ namespace TrafficSimulation
             GetNodes();
             FillEndPoints();
             CreateMovables();
+
             CreatePedestrians();
             _carTimer.Start();
 
             _pedestrianTimer.Start();
-            while (!ShouldStop)
-            {
-                //carTimer.
-                //MoveMovables();
-                //ChangeTrafficLights();
-            }
+          
+     GetAllTrafficLights();
+            _carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            _carTimer.Interval = 50;
+            _carTimer.Start();
+          
+           // MoveMoveables();
 
         }
 
+        //static private void MoveMoveables()
+        //{
+        //    List<TrafficLight> allTrafficLights = new List<TrafficLight>();
+        //    //Step 1: moves one car
+        //    foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+        //    {
+        //        foreach (TrafficLight trafficLight in crossroad.trafficLights)
+        //        {
+        //            allTrafficLights.Add(trafficLight);
+        //        }
+        //    }
+        //    int temp = 0;
+        //    for (int i = 0; i <= Moveables.Count * 10; i++)
+        //    {
+        //        if (i % 10 == 0)
+        //        {
+        //            temp = i / 10;
+        //        }
+        //        if (i == Moveables.Count * 10)
+        //        {
+        //            i = 0;
+        //            temp = 0;
+        //        }
+
+        //        Moveables[temp].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
+        //        f1.Invalidate();
+        //    }
+        //}
 
 
     }

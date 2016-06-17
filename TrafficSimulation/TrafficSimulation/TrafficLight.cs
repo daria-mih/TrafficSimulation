@@ -19,6 +19,7 @@ namespace TrafficSimulation
 
         public Point currentPosition1 { get; set; }
         public Point currentPosition2 { get; set; }
+        
 
         public TrafficLight(int id, Color _state)
         {
@@ -26,6 +27,7 @@ namespace TrafficSimulation
             state = _state;
 
         }
+       
 
 
 
