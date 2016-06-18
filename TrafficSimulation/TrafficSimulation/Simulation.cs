@@ -15,8 +15,7 @@ namespace TrafficSimulation
     static class Simulation
     {
         //fields
-        static private Thread refreshment = new Thread(Refresh);
-        static private Thread createcars = new Thread(Create);
+        
         static public bool ShouldStop = false;
         static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints = new List<Node>();
@@ -431,8 +430,8 @@ namespace TrafficSimulation
             while (dirlist == null)
 
             {
-                Node startpnt = listOfNodes[random.Next(0, BeginEndPoints.Count)];
-                Node endpnt = listOfNodes[random.Next(0, BeginEndPoints.Count)];
+                Node startpnt = BeginEndPoints[random.Next(0, BeginEndPoints.Count)];
+                Node endpnt = BeginEndPoints[random.Next(0, BeginEndPoints.Count)];
                 foreach (Node node in listOfNodes)
                 {
                     node.SetDistance(endpnt);
@@ -521,8 +520,7 @@ namespace TrafficSimulation
             CreateMovables();
             // _pedestrianTimer.Start();
            // refreshment.Start();
-           createcars=new Thread(Create);
-            createcars.Start();
+          
             GetAllTrafficLights();
            
             //_carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
@@ -530,8 +528,10 @@ namespace TrafficSimulation
             //_carTimer.Start();
             while (!ShouldStop)
             {
-
-               // MoveMoveables();
+                CreateMovables();
+                MoveMoveables();
+                Refresh();
+               
             }
             _carTimer.Stop();
             _pedestrianTimer.Stop();
@@ -539,16 +539,7 @@ namespace TrafficSimulation
 
         }
 
-        static private void Create()
-        {
-            while (!ShouldStop)
-            {
-                
-                CreateMovables();
-                MoveMoveables();
-                Refresh();
-            }
-        }
+      
 
         static private void MoveMoveables()
         {
