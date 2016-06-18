@@ -695,8 +695,8 @@ namespace TrafficSimulation
                     try
                     
                     {
-                      
-                    
+
+                       
 
                     foreach (Vehicle car in Simulation.Moveables.OfType<Vehicle>())
                     {

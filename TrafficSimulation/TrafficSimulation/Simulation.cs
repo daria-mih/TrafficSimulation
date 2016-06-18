@@ -15,7 +15,7 @@ namespace TrafficSimulation
     static class Simulation
     {
         //fields
-        
+        private static bool hasAssigned = false;
         static public bool ShouldStop = false;
         static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints = new List<Node>();
@@ -327,6 +327,8 @@ namespace TrafficSimulation
         /// <returns></returns>
         static private void AssignPoints()
         {
+            if (hasAssigned)
+                return;
             foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
             {
 
@@ -343,6 +345,7 @@ namespace TrafficSimulation
                 }
 
             }
+            hasAssigned = true;
         }
 
         /// <summary>
