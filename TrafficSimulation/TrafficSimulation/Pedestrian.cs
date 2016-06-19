@@ -10,6 +10,7 @@ namespace TrafficSimulation
     [Serializable()]
     public class Pedestrian : IMoveable
     {
+        int count = 0;
         public Point currentPosition
         { get; set; }
         public Point endPoint
@@ -52,16 +53,26 @@ namespace TrafficSimulation
            
             
         }
-        public void Move(List<Pedestrian> pedestrians)
+        public void Move()
         {
-            foreach (Pedestrian pedestrian in pedestrians)
-            {
-                if (pedestrian.route.Count != 0)
+            if (route.Count != 0)
                 {
-                    pedestrian.currentPosition = pedestrian.route[0];
-                    pedestrian.route.Remove(pedestrian.route[0]);
+                    
+                    foreach (var trafficLight in Form1.trafficLights)
+                    {
+                        if (trafficLight.state == Color.Red)
+                        {
+                            count++;
+                        }
+                    }
+                    if
+                        (count == Form1.trafficLights.Count)
+                    {
+                       currentPosition = route[0];
+                        route.Remove(route[0]);
+                    }
                 }
-            }
+            
 
         }
 

@@ -77,6 +77,14 @@ namespace TrafficSimulation
 
                 this.Refresh();
             }
+            if (counter == 3)
+            {
+                foreach (var light in trafficLights)
+                {
+                    light.state = Color.Red;
+                }
+                Refresh();
+            }
 
         }
 
@@ -323,7 +331,7 @@ namespace TrafficSimulation
 
         protected override void OnPaint(PaintEventArgs pe)
         {
-           
+
             if (this is CrossroadB)
             {
                 Simulation.DrawPedestrians(pe);
@@ -383,7 +391,7 @@ namespace TrafficSimulation
 
         }
 
-    public void PlaceTrafficLights(int timer)
+        public void PlaceTrafficLights(int timer)
         {
 
             for (int i = 0; i < 4; i++)
@@ -395,7 +403,7 @@ namespace TrafficSimulation
 
         public void PlacePedestrianLights()
         {
-            
+
         }
         public void ChangeTimer(int seconds)
         {

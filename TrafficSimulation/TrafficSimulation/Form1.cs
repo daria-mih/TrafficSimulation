@@ -31,7 +31,7 @@ namespace TrafficSimulation
         public const int HT_CAPTION = 0x2;
         private int count;
         int counter, counter1, counter2, counter3 = 0;
-        private List<TrafficLight> trafficLights;
+        public static List<TrafficLight> trafficLights;
             // Crossroad currentRoad;
         Point mousePoint;
         public static List<Vehicle> Cars;
