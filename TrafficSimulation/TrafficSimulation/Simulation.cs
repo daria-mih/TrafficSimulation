@@ -15,8 +15,7 @@ namespace TrafficSimulation
     static class Simulation
     {
         //fields
-        static private Thread refreshment = new Thread(Refresh);
-        static private Thread createcars = new Thread(Create);
+        private static bool hasAssigned = false;
         static public bool ShouldStop = false;
         static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints = new List<Node>();
@@ -256,10 +255,7 @@ namespace TrafficSimulation
             Random rnd = new Random();
             List<Direction> routeDirections = new List<Direction>();
             string directionName = "-";
-            if (entrances.Count==0)
-            {
-                return null;
-            }
+            
             directionName = entrances[rnd.Next(0, entrances.Count)] + directionName;
             //the first direction
             //if there is only one crossroad
@@ -331,6 +327,8 @@ namespace TrafficSimulation
         /// <returns></returns>
         static private void AssignPoints()
         {
+            if (hasAssigned)
+                return;
             foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
             {
 
@@ -347,6 +345,7 @@ namespace TrafficSimulation
                 }
 
             }
+            hasAssigned = true;
         }
 
         /// <summary>
@@ -357,6 +356,10 @@ namespace TrafficSimulation
         /// <returns></returns>
         static private List<Direction> GetShortestRoute(Node startPoint, Node endPoint)
         {
+            foreach (Node node in listOfNodes)
+            {
+                node.parent = null;
+            }
             //nodes to be processed
             List<Node> openNodes = new List<Node>();
             //nodes that are already processed
@@ -378,7 +381,7 @@ namespace TrafficSimulation
                         current = node;
                         continue;
                     }
-                    if (current.fDistance >= node.fDistance)
+                    if (current.fDistance > node.fDistance)
                     {
                         current = node;
                     }
@@ -431,8 +434,8 @@ namespace TrafficSimulation
             while (dirlist == null)
 
             {
-                Node startpnt = listOfNodes[random.Next(0, BeginEndPoints.Count)];
-                Node endpnt = listOfNodes[random.Next(0, BeginEndPoints.Count)];
+                Node startpnt = BeginEndPoints[random.Next(0, BeginEndPoints.Count)];
+                Node endpnt = BeginEndPoints[random.Next(0, BeginEndPoints.Count)];
                 foreach (Node node in listOfNodes)
                 {
                     node.SetDistance(endpnt);
@@ -466,7 +469,43 @@ namespace TrafficSimulation
 
         }
 
+        static private void MoveMoveables()
+        {
 
+            try
+            {
+
+
+
+
+                List<Vehicle> tempCars = new List<Vehicle>();
+                foreach (Vehicle car in Moveables.OfType<Vehicle>())
+                {
+
+
+                    car.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
+
+
+                    //redraws cars that have been moved
+                    //crossroad.Invalidate();
+                    if (car.route.Count == 1)
+                    {
+                        tempCars.Add(car);
+
+                    }
+                }
+                foreach (Vehicle v in tempCars)
+                {
+                    Moveables.Remove(v);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
 
         public static void CreatePedestrians()
         {
@@ -511,6 +550,10 @@ namespace TrafficSimulation
 
         static public void Run()
         {
+            Moveables = new List<IMoveable>();
+            BeginEndPoints = new List<Node>();
+            listOfNodes = new List<Node>();
+            pedestrians = new List<Pedestrian>();
             GetNodes();
             FillEndPoints();
             AssignPoints();
@@ -521,8 +564,7 @@ namespace TrafficSimulation
             CreateMovables();
             _pedestrianTimer.Start();
            // refreshment.Start();
-           createcars=new Thread(Create);
-            createcars.Start();
+          
             GetAllTrafficLights();
 
             //_carTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
@@ -530,8 +572,10 @@ namespace TrafficSimulation
             //_carTimer.Start();
             while (!ShouldStop)
             {
-
-               // MoveMoveables();
+                CreateMovables();
+                MoveMoveables();
+                Refresh();
+               
             }
             _carTimer.Stop();
             _pedestrianTimer.Stop();
@@ -539,54 +583,9 @@ namespace TrafficSimulation
 
         }
 
-        static private void Create()
-        {
-            while (!ShouldStop)
-            {
-                
-                CreateMovables();
-                MoveMoveables();
-                Refresh();
-            }
-        }
+      
 
-        static private void MoveMoveables()
-        {
-
-            try
-            {
-
-              
-            
-
-            List<Vehicle> tempCars = new List<Vehicle>();
-            foreach (Vehicle car in Moveables.OfType<Vehicle>())
-            {
-
-
-                car.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
-
-
-                //redraws cars that have been moved
-                //crossroad.Invalidate();
-                if (car.route.Count == 1)
-                {
-                    tempCars.Add(car);
-
-                }
-            }
-            foreach (Vehicle v in tempCars)
-            {
-                Moveables.Remove(v);
-            }
-            }
-            catch (Exception ex)
-            {
-
-                Debug.WriteLine(ex.Message);
-            }
-            
-        }
+    
     }
 
 }
