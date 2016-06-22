@@ -623,6 +623,7 @@ namespace TrafficSimulation
             Simulation.ShouldStop = false;
             Simulation.SetForm(this);
             simulation = new Thread(Simulation.Run);
+            Simulation.AmountOfCars = Convert.ToInt32(numericUpDown1.Value);
             simulation.Start();
             
               this.started = true;
@@ -718,7 +719,12 @@ namespace TrafficSimulation
             }
               
             }
-        
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+           
+             
+        }
 
         private void DrawTrafficLights(PaintEventArgs pe)
         {

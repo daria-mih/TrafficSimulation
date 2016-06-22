@@ -23,7 +23,7 @@ namespace TrafficSimulation
 
         private int counter;
         private Timer lightTimer;
-        public int NoOfCars { get; set; }
+        public bool HasAssignedPoints = false;
         public int NoOfTrafficLights { get; set; }
         public Crossroad North { get; set; }
         public Crossroad South { get; set; }
@@ -33,7 +33,7 @@ namespace TrafficSimulation
 
         public Crossroad()
         {
-            this.NoOfCars = 0;
+            
             this.NoOfTrafficLights = 0;
             this.North = null;
             this.South = null;
