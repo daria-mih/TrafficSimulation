@@ -434,10 +434,8 @@ namespace TrafficSimulation
         static private void CreateMovables()
         {
             if (AmountOfCars == 0)
-            {
-                ShouldStop = true;
-                return;
-            }
+             return;
+            
             if (Moveables.Count > listOfNodes.Count * 5)
                 return;
             
@@ -472,7 +470,9 @@ namespace TrafficSimulation
 
         static private void MoveMoveables()
         {
-
+            if (AmountOfCars == 0)
+             ShouldStop = true;
+            
             try
             {
                  List<Vehicle> tempCars = new List<Vehicle>();
