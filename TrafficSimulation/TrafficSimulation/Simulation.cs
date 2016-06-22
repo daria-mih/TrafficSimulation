@@ -470,7 +470,7 @@ namespace TrafficSimulation
 
         static private void MoveMoveables()
         {
-            if (AmountOfCars == 0)
+            if (Moveables.Count == 0)
              ShouldStop = true;
             
             try
