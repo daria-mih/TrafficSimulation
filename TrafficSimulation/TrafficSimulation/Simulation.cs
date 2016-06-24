@@ -34,15 +34,22 @@ namespace TrafficSimulation
         private static void Refresh()
         {
             // f1.Invalidate();
-            
-            f1.Invoke((MethodInvoker) delegate
+            try
+            {
+                if (f1 != null)
                 {
-                    // Show the current time in the form's title bar.
-                   // f1.Invalidate();
-                   // f1.Refresh();
-                   f1.Refresh();
-                });
-            
+                    f1.Invoke((MethodInvoker)delegate
+                        {
+                            // Show the current time in the form's title bar.
+
+                            f1.Refresh();
+                        });
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         private static void GetAllTrafficLights()
@@ -51,7 +58,7 @@ namespace TrafficSimulation
             {
                 foreach (TrafficLight trafficLight in crossroad.trafficLights)
                 {
-                    allTrafficLights.Add(trafficLight);
+                   // allTrafficLights.Add(trafficLight);
                 }
             }
         }
@@ -70,109 +77,6 @@ namespace TrafficSimulation
             return null;
         }
 
-        // does the moving of cars on every tick
-        //private static void OnTimedEvent(object source, ElapsedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        List<IMoveable> copyMoveables = new List<IMoveable>(Moveables);
-
-
-        //        bool notWait = false;
-        //        if (counter > -1)
-        //        {
-        //            for (int i = 0; i <= counter; i++)
-        //            {
-
-        //                //Step 1: moves one car
-        //                notWait = copyMoveables[i].Move(new List<Vehicle>(copyMoveables.OfType<Vehicle>()), allTrafficLights);
-        //                f1.Invalidate();
-        //                //redraws cars that have been moved
-        //                //crossroad.Invalidate();
-        //                if (Moveables[i].route.Count == 1)
-        //                {
-        //                    Moveables.Remove(Moveables[i]);
-        //                    counter--;
-        //                    i--;
-        //                }
-        //            }
-
-        //            counter2++;
-        //            //step 2: loops through at everytick - for ten times(delay) and then places next car
-        //            if (counter2 >= 10)
-        //            {
-        //                if (notWait)
-        //                {
-        //                    if (counter >= copyMoveables.Count - 1)
-        //                    {
-        //                        counter = 0;
-        //                    }
-        //                    else
-        //                    {
-
-        //                        counter++;
-        //                    }
-
-        //                }
-        //                counter2 = 0;
-
-        //            }
-        //        }
-
-        //        int temp = 0;
-        //        for (int i = 0; i <= Moveables.Count * 10; i++)
-        //        {
-        //            if (i % 10 == 0)
-        //            {
-        //                temp = i / 10;
-        //            }
-        //            if (i == Moveables.Count * 10)
-        //            {
-        //                i = 0;
-        //                temp = 0;
-        //            }
-
-        //            Moveables[temp].Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
-
-        //        }
-
-        //    }
-        //    catch (Exception exception)
-        //    {
-
-        //        MessageBox.Show(exception.Message);
-        //    }
-
-        //}
-
-        private static void TimedPedestriansEvent(object source, ElapsedEventArgs e)
-        {
-            if (pedestrians.Count != 0)
-            {
-                if (pedestrians[0].route.Count != 0)
-                {
-                    foreach (Pedestrian p in pedestrians)
-                    {
-                        if (p.route.Count != 0)
-                        {
-                            p.Move();
-                        }
-
-                        foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
-                        {
-                            crossroad.Invalidate();
-                        }
-                    }
-                }
-                else
-                {
-                    Crossroad.AddPedestrianDirections();
-                   CreatePedestrians();
-                }
-            }
-
-
-        }
 
         //properties
         // public Grid FromGrid { get; set; }
@@ -341,6 +245,7 @@ namespace TrafficSimulation
                             crossroad.Location.Y + direction.Points[i].Y);
                     }
                 }
+                
                 foreach (TrafficLight trafficlight in crossroad.trafficLights)
                 {
                     if (trafficlight == null)
@@ -349,6 +254,7 @@ namespace TrafficSimulation
                             crossroad.Location.Y + trafficlight.currentPosition1.Y);
                     trafficlight.currentPosition2 = new Point(crossroad.Location.X + trafficlight.currentPosition2.X,
                             crossroad.Location.Y + trafficlight.currentPosition2.Y);
+                    allTrafficLights.Add(trafficlight);
                 }
                 crossroad.HasAssignedPoints = true;
             }
@@ -478,6 +384,7 @@ namespace TrafficSimulation
                  List<Vehicle> tempCars = new List<Vehicle>();
                 foreach (Vehicle car in Moveables.OfType<Vehicle>())
                 {
+                    
                     car.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
 
 
@@ -501,16 +408,53 @@ namespace TrafficSimulation
             }
 
         }
+        private static void TimedPedestriansEvent(object source, ElapsedEventArgs e)
+        {
+            if (pedestrians.Count != 0)
+            {
+                if (pedestrians[0].route.Count != 0)
+                {
+                    foreach (Pedestrian p in pedestrians)
+                    {
+                        if (p.route.Count != 0)
+                        {
+                            p.MovePedestrian(new List<Crossroad> (grid.Controls.OfType<Crossroad>()), allTrafficLights);
+                        }
 
+                        foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                        {
+                            crossroad.Invalidate();
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i =0; i < pedestrians.Count; i++)
+                    {
+                        pedestrians[i].SetPoints(Crossroad.PedestrianDirections[i].Points);
+                            if(i > 4)
+                            {
+                                i = 0;
+                            }
+                    }
+                }
+            }
+
+
+        }
+   
         public static void CreatePedestrians()
         {
-            pedestrians.Clear();
-            Crossroad.AddPedestrianDirections();
+         pedestrians.Clear();
+         Crossroad.AddPedestrianDirections();
+
             foreach (Direction d in Crossroad.PedestrianDirections)
             {
                 if (d.Points.Count != 0)
                 {
-                    pedestrians.Add(new Pedestrian(d.Points));
+                    Pedestrian p = new Pedestrian();
+                    pedestrians.Add(p);
+                    p.SetPoints(d.Points);
                 }
             }
 
@@ -522,9 +466,12 @@ namespace TrafficSimulation
             SolidBrush p = new SolidBrush(pColor);
             if (pedestrians.Count > 1)
             {
-                foreach (Pedestrian pedestrian in pedestrians)
+
+                for (int i = 0; i < pedestrians.Count; i++)
                 {
-                    pe.Graphics.FillEllipse(p, pedestrian.currentPosition.X, pedestrian.currentPosition.Y, 10, 10);
+                    {
+                        pe.Graphics.FillEllipse(p, pedestrians[i].currentPosition.X, pedestrians[i].currentPosition.Y, 10, 10);
+                    }
                 }
             }
         }
@@ -556,7 +503,8 @@ namespace TrafficSimulation
 
 
              CreatePedestrians();
-           
+             _pedestrianTimer.Elapsed += TimedPedestriansEvent;
+             _pedestrianTimer.Interval = 150;
             _pedestrianTimer.Start();
            // refreshment.Start();
           

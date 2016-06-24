@@ -23,11 +23,10 @@ namespace TrafficSimulation
 
         public int size
         { get; set; }
-
-        public Pedestrian(List<Point> _route)
+        public Pedestrian()
         {
-            this.route = _route;
-            currentPosition = route[0];
+            route = new List<Point>();
+            
           
         }
         List<Point> IMoveable.route
@@ -53,28 +52,53 @@ namespace TrafficSimulation
            
             
         }
-        public void Move()
+        public void MovePedestrian(List<Crossroad> crossroads, List<TrafficLight> trafficlights)
         {
             if (route.Count != 0)
-                {
-                    
-                    foreach (var trafficLight in Form1.trafficLights)
-                    {
-                        if (trafficLight.state == Color.Red)
+            {
+                //foreach (Crossroad c in crossroads)
+                //{
+                //    foreach (var trafficLight in trafficlights)
+                //    {
+                //        Rectangle area = new Rectangle(c.Location, new Size(200, 200));
+                //        if (area.Contains(trafficLight.currentPosition1) || area.Contains(trafficLight.currentPosition2))
+                //        {
+                //            if (trafficLight.state == Color.Red)
+                //            {
+                //                count++;
+                //            }
+                //        }
+                //    }}
+
+                //        if
+                //            (count == trafficlights.Count)
                         {
-                            count++;
+                            if (this.route.Count > 0 && this.route.Count < 500)
+                            {
+                                currentPosition = this.route[0];
+
+                                this.route.Remove(this.route[0]);
+                            }
                         }
-                    }
-                    if
-                        (count == Form1.trafficLights.Count)
-                    {
-                       currentPosition = route[0];
-                        route.Remove(route[0]);
-                    }
-                }
+                    
+                
+            }
             
 
         }
+        public void SetPoints(List<Point> points)
+        {
+            this.route.Clear();
+            if (points != null)
+            {
+                foreach (Point p in points)
+                {
+                    this.route.Add(p);
+                }
+            }
+            currentPosition = route[0];
+        }
+
 
 
     }

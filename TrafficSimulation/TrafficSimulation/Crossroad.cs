@@ -43,7 +43,6 @@ namespace TrafficSimulation
             Directions = new List<Direction>();
             PedestrianDirections = new List<Direction>();
             AddDirections();
-            AddPedestrianDirections();
             trafficLights = new List<TrafficLight>();
             lightTimer = new Timer();
         }
@@ -77,7 +76,7 @@ namespace TrafficSimulation
 
                 this.Refresh();
             }
-            if (counter == 3)
+            if (counter == 4)
             {
                 foreach (var light in trafficLights)
                 {

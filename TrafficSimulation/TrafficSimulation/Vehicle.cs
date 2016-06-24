@@ -194,5 +194,11 @@ namespace TrafficSimulation
             return false;
         }
 
+
+
+        public void Move(List<Crossroad> crossroads, List<TrafficLight> trafficlights)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
