@@ -199,7 +199,6 @@ namespace TrafficSimulation
             this.crossroadB1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.crossroadB1_MouseDown);
             this.crossroadB1.MouseEnter += new System.EventHandler(this.btnCrossroad2_MouseEnter);
             this.crossroadB1.MouseLeave += new System.EventHandler(this.btnCrossroad2_MouseLeave);
-            this.crossroadB1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.crossroadB1_MouseUp);
             // 
             // crossroadA1
             // 
@@ -222,7 +221,6 @@ namespace TrafficSimulation
             this.crossroadA1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.crossroadA1_MouseDown);
             this.crossroadA1.MouseEnter += new System.EventHandler(this.btnCrossroad1_MouseEnter);
             this.crossroadA1.MouseLeave += new System.EventHandler(this.btnCrossroad1_MouseLeave);
-            this.crossroadA1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.crossroadA1_MouseUp);
             // 
             // label1
             // 

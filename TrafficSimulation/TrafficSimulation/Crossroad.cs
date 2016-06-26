@@ -12,7 +12,6 @@ namespace TrafficSimulation
     public class Crossroad : Control
     {
         public MenuItem delete { get; set; }
-        //guys, we first put this method in direction but thought it would be better to use it in this class
 
         public List<Direction> Directions { get; set; }
 
@@ -303,31 +302,6 @@ namespace TrafficSimulation
         {
         }
 
-        //public Direction NextDirection()
-        //{
-        //    //just an example ;)
-        //    //direction dir = new Direction( [Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0), Point(0, 0)])
-        //    //return dir;
-        //    return null; //for now
-        //}
-
-        /*
-                void DrawDirections(PaintEventArgs pe)
-                {
-                    foreach (Direction dir in Directions)
-                    {
-                        foreach (Point p in dir.Points)
-                        {
-                            Brush aBrush = (Brush)Brushes.Red;
-
-                            pe.Graphics.FillRectangle(aBrush, p.X, p.Y, 5, 5);
-
-                        }
-                    }
-                }
-        */
-
-
         protected override void OnPaint(PaintEventArgs pe)
         {
 
@@ -336,57 +310,7 @@ namespace TrafficSimulation
                 Simulation.DrawPedestrians(pe);
             }
             base.OnPaint(pe);
-            //{
-
-            //    // if(Form1.Cars.Count > 0)
-            //    //Simulation.DrawCars(pe);
-            //    Point p = new Point(123,20);
-            //    foreach (TrafficLight tl in trafficLights)
-            //    {
-            //        Brush b = new SolidBrush(tl.state);
-            //        switch (tl.Id)
-            //        {
-            //            case 1:
-            //                {
-            //                    pe.Graphics.FillEllipse(b, 80, 50, 9, 9);
-            //                    tl.currentPosition1 = PointToClient(new Point(p.X+80,p.Y+ 50));
-            //                    pe.Graphics.FillEllipse(b, 110, 140, 9, 9);
-            //                    tl.currentPosition2 = new Point(p.X + 110,p.Y + 140);
-            //                    break;
-            //                }
-            //            case 2:
-            //                {
-            //                    //right
-            //                    pe.Graphics.FillEllipse(b, 65, 50, 9, 9);
-            //                    tl.currentPosition1 = new Point(65, 50);
-            //                    pe.Graphics.FillEllipse(b, 125, 140, 9, 9);
-            //                    tl.currentPosition2 = new Point(125, 140);
-
-            //                    break;
-            //                }
-            //            case 3:
-            //                {
-
-            //                    pe.Graphics.FillEllipse(b, 50, 125, 9, 9);
-            //                    tl.currentPosition1 = new Point(50, 125);
-            //                    pe.Graphics.FillEllipse(b, 140, 65, 9, 9);
-            //                    tl.currentPosition2 = new Point(140, 65);
-            //                    break;
-            //                }
-            //            case 4:
-            //                {
-
-            //                    pe.Graphics.FillEllipse(b, 50, 110, 9, 9);
-            //                    tl.currentPosition1 = new Point(50, 110);
-            //                    pe.Graphics.FillEllipse(b, 140, 80, 9, 9);
-            //                    tl.currentPosition2 = new Point(140, 80);
-            //                    break;
-            //                }
-
-            //        }
-
-            //    }
-
+           
 
         }
 
@@ -409,12 +333,6 @@ namespace TrafficSimulation
             lightTimer.Interval = seconds * 1000;
         }
 
-        //protected override void OnMouseDown(MouseEventArgs e)
-        //{
-        //    base.OnMouseDown(e);
-
-
-        //}
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -451,9 +369,5 @@ namespace TrafficSimulation
 
         }
 
-        //public void AddCarToTheList(Vehicle car)
-        //{
-        //    Form1.Cars.Add(car);
-        //}
     }
 }

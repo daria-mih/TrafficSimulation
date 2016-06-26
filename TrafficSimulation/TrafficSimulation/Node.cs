@@ -8,25 +8,14 @@ namespace TrafficSimulation
 {
     class Node
     {
-        //fields
         public Crossroad crossroad;
         public double fDistance;
-        // public double sDistance;
         public List<Node> neighbours = new List<Node>();
-        //properties
-        //public double Distance
-        //{
-        //    get { return /*sDistance +*/ fDistance; }
-        //}
         public Node parent;
-
-        //constructors
-            public Node(Crossroad nodeRoad)
-            {
+        public Node(Crossroad nodeRoad)
+        {
             crossroad = nodeRoad;
-            }
-
-        //methods
+        }
 
         /// <summary>
         /// returns the cardinal direction form the current node to the next node
@@ -34,26 +23,26 @@ namespace TrafficSimulation
         /// <param name="allNodes">the list that contains all the nodes</param>
         /// <param name="nextNode">the node on which direction you want to know of</param>
         /// <returns>"North", "East", "South" or "West"</returns>
-        public string WhichNeighbour( Node nextNode)
+        public string WhichNeighbour(Node nextNode)
         {
-            
-                if (nextNode.crossroad == crossroad.North)
-                {
-                    return "North";
-                }
-                if (nextNode.crossroad == crossroad.East)
-                {
-                    return "East";
-                }
-                if (nextNode.crossroad == crossroad.South)
-                {
-                    return "South";
-                }
-                if (nextNode.crossroad == crossroad.West)
-                {
-                    return "West";
-                }
-            
+
+            if (nextNode.crossroad == crossroad.North)
+            {
+                return "North";
+            }
+            if (nextNode.crossroad == crossroad.East)
+            {
+                return "East";
+            }
+            if (nextNode.crossroad == crossroad.South)
+            {
+                return "South";
+            }
+            if (nextNode.crossroad == crossroad.West)
+            {
+                return "West";
+            }
+
             return null;
         }
         /// <summary>
@@ -91,18 +80,15 @@ namespace TrafficSimulation
         /// </summary>
         /// <param name="startNode">*Not needed right now*</param>
         /// <param name="finishNode">the node the check the distance with</param>
-        public void SetDistance( Node finishNode)
+        public void SetDistance(Node finishNode)
         {
-            /*if (parent != null)
-                sDistance = Math.Abs(Convert.ToDouble((crossNode.Location.X + crossNode.Location.Y) - (parent.crossNode.Location.X + parent.crossNode.Location.Y)));
-            else
-                sDistance = 0;*/
+
             fDistance = Math.Abs(Convert.ToDouble((crossroad.Location.X + crossroad.Location.Y) - (finishNode.crossroad.Location.X + finishNode.crossroad.Location.Y)));
         }
 
         public override string ToString()
         {
-            return crossroad.Location.ToString()+" "+this.GetHashCode();
+            return crossroad.Location.ToString() + " " + this.GetHashCode();
         }
     }
 }

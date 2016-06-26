@@ -26,7 +26,7 @@
         public Form Owner
         {
             get { return form; }
-            set 
+            set
             {
                 // The owner form cannot be set to null.
                 if (value == null)

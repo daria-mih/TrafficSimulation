@@ -11,16 +11,8 @@ namespace TrafficSimulation
     public interface IMoveable
     {
         Point endPoint { get; set; }
-        Graphics icon { get; set; }
         Point currentPosition { get; set; }
-
-        //the whole route that the moveable should follow 
         List<Point> route { get; set; }
-
-
-        //takes a route from the list for a moveable to follow
-       bool Move(List<Vehicle> carlist, List<TrafficLight> lights);
-
-      // void Move(List<Crossroad> crossroads, List<TrafficLight> trafficlights);
+        bool Move(List<Vehicle> carlist, List<TrafficLight> lights);
     }
 }

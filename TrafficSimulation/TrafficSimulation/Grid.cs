@@ -11,7 +11,6 @@ namespace TrafficSimulation
     [Serializable()]
     public class Grid : Control
     {
-        //guys u get the Crossroads now from grid1.Controls
         public List<Rectangle> Placeholders { get; set; }
         
         public Grid()
@@ -35,47 +34,5 @@ namespace TrafficSimulation
 
         }
 
-        public void Draw()
-        {
-                
-        }
-
-        public void AddCrossroad(Crossroad crossroad)
-        {
-            //Crossroads.Add(crossroad);
-        }
-
-        public void RemoveCrossroad(Crossroad crossroad)
-        {
-           // Crossroads.Remove(crossroad);
-        }
-
-       
-        public void AddNeighbors()
-        {
-            //json dictionary
-         // [
-	        //"0,0": {
-
-         //       north: null,
-         //       south: "200,0",
-         //       east: "0,200",
-         //       west: null
-         //   }, 
-         //   "0,200": {
-		       // north: "0,0",
-		       // south: "0,400",
-		       // east: "200,200",
-		       // west: null
-	        //}
-         //   ]
-            foreach (Crossroad c in Controls)
-            {
-                if (true)
-                {
-
-                }
-            }
-        }
     }
 }

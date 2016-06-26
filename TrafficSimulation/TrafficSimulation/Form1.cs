@@ -32,31 +32,13 @@ namespace TrafficSimulation
         private int count;
         int counter, counter1, counter2, counter3 = 0;
         public static List<TrafficLight> trafficLights;
-            // Crossroad currentRoad;
         Point mousePoint;
         public static List<Vehicle> Cars;
-
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
-        List<Point> sn = new List<Point>(new Point[] { new Point(125, 190), new Point(125, 185), new Point(125, 180), new Point(125, 175), new Point(125, 170), new Point(125, 160), new Point(125, 130), new Point(125, 120), new Point(125, 115), new Point(125, 110), new Point(125, 105), new Point(125, 100), new Point(125, 95), new Point(125, 90), new Point(125, 85), new Point(125, 80), new Point(125, 75), new Point(125, 70), new Point(125, 65), new Point(125, 60), new Point(125, 55), new Point(125, 50), new Point(125, 45), new Point(125, 40), new Point(125, 35), new Point(125, 30), new Point(125, 25), new Point(125, 20), new Point(125, 15), new Point(125, 10), new Point(125, 5) });
-        List<Point> ns = new List<Point>(new Point[] { new Point(80, 10), new Point(80, 15), new Point(80, 25), new Point(80, 30), new Point(80, 70), new Point(80, 100), new Point(80, 150), new Point(80, 190) });
-        List<Point> nw = new List<Point>(new Point[] { new Point(65, 10), new Point(65, 15), new Point(65, 25), new Point(65, 30), new Point(65, 60), new Point(60, 65), new Point(50, 65), new Point(40, 65), new Point(35, 65), new Point(30, 65), new Point(25, 65), new Point(20, 65), new Point(10, 65) });
-        List<Point> sw = new List<Point>(new Point[] { new Point(110, 190), new Point(110, 185), new Point(110, 180), new Point(110, 175), new Point(110, 170), new Point(110, 160), new Point(110, 130), new Point(105, 120), new Point(100, 110), new Point(95, 100), new Point(80, 95), new Point(75, 95), new Point(70, 95), new Point(65, 90), new Point(55, 90), new Point(40, 85), new Point(35, 85), new Point(30, 85), new Point(25, 85), new Point(20, 85), new Point(15, 85), new Point(10, 85) });
-        List<Point> wn = new List<Point>(new Point[] { new Point(5, 110), new Point(10, 110), new Point(15, 110), new Point(20, 110), new Point(25, 110), new Point(30, 110), new Point(60, 110), new Point(80, 100), new Point(100, 90), new Point(105, 70), new Point(110, 50), new Point(110, 45), new Point(110, 40), new Point(110, 35), new Point(110, 30), new Point(110, 25), new Point(110, 20), new Point(110, 15), new Point(110, 10) });
-        List<Point> ws = new List<Point>(new Point[] { new Point(5, 125), new Point(10, 125), new Point(15, 110), new Point(20, 110), new Point(25, 110), new Point(30, 125), new Point(60, 130), new Point(65, 140), new Point(65, 145), new Point(65, 150), new Point(65, 155), new Point(65, 160), new Point(65, 165), new Point(65, 170), new Point(65, 175), new Point(65, 180), new Point(65, 185), new Point(65, 190), });
-        List<Point> en = new List<Point>(new Point[] { new Point(190, 65), new Point(185, 65), new Point(180, 65), new Point(175, 65), new Point(170, 65), new Point(165, 65), new Point(130, 55), new Point(125, 40), new Point(125, 20), new Point(125, 10) });
-        List<Point> es = new List<Point>(new Point[] { new Point(190, 80), new Point(185, 80), new Point(180, 80), new Point(175, 80), new Point(170, 80), new Point(165, 80), new Point(120, 95), new Point(85, 120), new Point(85, 150), new Point(85, 190) });
-        Vehicle anothercar;
-        Vehicle car;
-        Vehicle onemorecar;
-        private Vehicle car4;
-        private Vehicle car5;
-        private Vehicle car6;
-        Vehicle car7;
-        private Vehicle car8;
 
         public Form1()
         {
@@ -187,9 +169,6 @@ namespace TrafficSimulation
             btnClose.Image = Properties.Resources.close;
         }
 
-        //DRAG & DROP
-
-        //Grid Events
         private void pictureBox1_DragDrop(object sender, DragEventArgs e)
         {
             Crossroad c = (Crossroad)(e.Data.GetData(e.Data.GetFormats()[0]));
@@ -211,7 +190,6 @@ namespace TrafficSimulation
 
                     A.MouseDown += Crossroad_MouseDown;
 
-                    A.MouseUp += crossroadA1_MouseUp;
                     A.delete.Click += (sender2, eventArgs2) =>
                     {
                         grid1.Controls.Remove(A);
@@ -225,7 +203,6 @@ namespace TrafficSimulation
                             A.Location = placeholder.Location;
 
                             A.PlaceTrafficLights(3000);
-                            // A.Paint += new System.Windows.Forms.PaintEventHandler(this.grid1_Paint);
 
                         }
                     }
@@ -233,7 +210,6 @@ namespace TrafficSimulation
                     //adds the crossroad to the grid
                     grid1.Controls.Add(A);
                    
-                    //  trafficLights.Add(new TrafficLight());
 
                 }
                 else if (c.Name == "crossroadB1")
@@ -349,8 +325,6 @@ namespace TrafficSimulation
             e.Effect = DragDropEffects.Copy;
         }
 
-        //Crossroad Events
-
         private void crossroadA1_MouseDown(object sender, MouseEventArgs e)
         {
             crossroadA1.DoDragDrop(crossroadA1, DragDropEffects.Copy);
@@ -362,47 +336,10 @@ namespace TrafficSimulation
             crossroadB1.DoDragDrop(crossroadB1, DragDropEffects.Copy);
         }
 
-        private void crossroadA1_MouseUp(object sender, MouseEventArgs e)
-        {
-            //pump.DoDragDrop(pump, DragDropEffects.Copy);
-        }
-
-        private void crossroadB1_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //car.Move(Cars, Crossroad.trafficLights);
-            //anothercar.Move(Cars, Crossroad.trafficLights);
-            //onemorecar.Move(Cars, Crossroad.trafficLights);
-            //car4.Move(Cars, Crossroad.trafficLights);
-            //car5.Move(Cars, Crossroad.trafficLights);
-            //car6.Move(Cars, Crossroad.trafficLights);
-            //car7.Move(Cars, Crossroad.trafficLights);
-            //car8.Move(Cars, Crossroad.trafficLights);
-            //foreach (var c in Simulation.Moveables)
-            //{
-            //    c.Move(Cars, Crossroad.trafficLights);
-            //}
-
             this.Invalidate();
-           // p.Move(Pedestrians);
-            // List<TrafficLight> trafficLights = new List<TrafficLight>();
-            //List<TrafficLight> temp = trafficLights;
-            // foreach (TrafficLight trafficlight in trafficLights)
-            //{
-            //trafficlight.Interval--;
-            //break;
-            //if (trafficlight.Interval.Equals(0))
-            //{
-            //    Simulation.ChangeTrafficLights();
-            //    trafficlight.Interval = temp.IndexOf(trafficlight).Interval;
-            //}
-            //}
-
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -432,7 +369,6 @@ namespace TrafficSimulation
                         saved = false;
                     }
                 }
-                //  this.Refresh();
             }
         }
         /// <summary>
@@ -526,7 +462,6 @@ namespace TrafficSimulation
 
                             A.BackgroundImageLayout = ImageLayout.Stretch;
                             A.MouseClick += crossroadA1_MouseDown;
-                            A.MouseUp += crossroadA1_MouseUp;
                             A.delete.Click += (sender2, eventArgs2) =>
                             {
                                 grid1.Controls.Remove(A);
@@ -619,7 +554,6 @@ namespace TrafficSimulation
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-
             Simulation.ShouldStop = false;
             Simulation.SetForm(this);
             simulation = new Thread(Simulation.Run);
@@ -627,10 +561,8 @@ namespace TrafficSimulation
             pbCrossroadA.Visible = true;
             pbCrossroadB.Visible = true;
             grid1.BackgroundImage = null;
-
             simulation.Start();
-            
-              this.started = true;
+            this.started = true;
         }
 
 
@@ -652,9 +584,6 @@ namespace TrafficSimulation
                     try
                     
                     {
-
-                       
-
                     foreach (Vehicle car in Simulation.Moveables.OfType<Vehicle>())
                     {
                         Color carColor = car.color;
@@ -662,14 +591,12 @@ namespace TrafficSimulation
                         Rectangle carImage = new Rectangle(car.currentPosition.X + 123, car.currentPosition.Y + 20, 10,
                             10);
                         pe.Graphics.FillRectangle(brush, carImage);
-
                     }
                     }
                     
                     catch (Exception)
                     {
 
-                      
                     }
                 }
             }
@@ -746,10 +673,7 @@ namespace TrafficSimulation
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             timer1.Interval = 2000;
-
-         
             this.Invalidate();
         }
 

@@ -15,7 +15,6 @@ namespace TrafficSimulation
     static class Simulation
     {
         //fields
-        private static bool  pedestriansDone = false;
         static public bool ShouldStop = false;
         static public List<IMoveable> Moveables = new List<IMoveable>();
         static List<Node> BeginEndPoints = new List<Node>();
@@ -23,17 +22,14 @@ namespace TrafficSimulation
         private static List<Node> listOfNodes = new List<Node>();
         static List<Pedestrian> pedestrians = new List<Pedestrian>();
         public static int AmountOfCars;
-
         private static System.Timers.Timer _pedestrianTimer = new System.Timers.Timer();
-
-
-     
         static List<TrafficLight> allTrafficLights = new List<TrafficLight>();
+        private static Form1 f1;
 
+        //methods 
 
         private static void Refresh()
         {
-            // f1.Invalidate();
             try
             {
                 if (f1 != null)
@@ -46,7 +42,7 @@ namespace TrafficSimulation
                         });
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -58,30 +54,10 @@ namespace TrafficSimulation
             {
                 foreach (TrafficLight trafficLight in crossroad.trafficLights)
                 {
-                   // allTrafficLights.Add(trafficLight);
+                    // allTrafficLights.Add(trafficLight);
                 }
             }
         }
-
-        private static List<TrafficLight> GetTrafficLight(Vehicle car)
-        {
-            Rectangle area;
-            foreach (Crossroad c in grid.Controls.OfType<Crossroad>())
-            {
-                area = new Rectangle(c.Location, new Size(200, 200));
-                if (area.Contains(car.currentPosition))
-                {
-                    return c.trafficLights;
-                }
-            }
-            return null;
-        }
-
-
-        //properties
-        // public Grid FromGrid { get; set; }
-
-        //methods
 
         #region Route finding 
 
@@ -157,7 +133,7 @@ namespace TrafficSimulation
             Random rnd = new Random();
             List<Direction> routeDirections = new List<Direction>();
             string directionName = "-";
-            
+
             directionName = entrances[rnd.Next(0, entrances.Count)] + directionName;
             //the first direction
             //if there is only one crossroad
@@ -229,7 +205,7 @@ namespace TrafficSimulation
         /// <returns></returns>
         static private void AssignPoints()
         {
-            
+
             foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
             {
                 if (crossroad.HasAssignedPoints)
@@ -245,7 +221,7 @@ namespace TrafficSimulation
                             crossroad.Location.Y + direction.Points[i].Y);
                     }
                 }
-                
+
                 foreach (TrafficLight trafficlight in crossroad.trafficLights)
                 {
                     if (trafficlight == null)
@@ -258,7 +234,7 @@ namespace TrafficSimulation
                 }
                 crossroad.HasAssignedPoints = true;
             }
-            
+
         }
 
         /// <summary>
@@ -340,11 +316,11 @@ namespace TrafficSimulation
         static private void CreateMovables()
         {
             if (AmountOfCars == 0)
-             return;
-            
+                return;
+
             if (Moveables.Count > listOfNodes.Count * 5)
                 return;
-            
+
             Random random = new Random();
             List<Direction> dirlist = null;
             while (dirlist == null)
@@ -368,28 +344,25 @@ namespace TrafficSimulation
             }
 
             Vehicle temp = new Vehicle(new List<Point>(pointlist));
-           
 
-                Moveables.Add(temp);
+
+            Moveables.Add(temp);
             AmountOfCars--;
         }
 
         static private void MoveMoveables()
         {
             if (Moveables.Count == 0)
-             ShouldStop = true;
-            
+                ShouldStop = true;
+
             try
             {
-                 List<Vehicle> tempCars = new List<Vehicle>();
+                List<Vehicle> tempCars = new List<Vehicle>();
                 foreach (Vehicle car in Moveables.OfType<Vehicle>())
                 {
-                    
+
                     car.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
 
-
-                    //redraws cars that have been moved
-                    //crossroad.Invalidate();
                     if (car.route.Count == 1)
                     {
                         tempCars.Add(car);
@@ -418,7 +391,7 @@ namespace TrafficSimulation
                     {
                         if (p.route.Count != 0)
                         {
-                            p.MovePedestrian(new List<Crossroad> (grid.Controls.OfType<Crossroad>()), allTrafficLights);
+                            p.MovePedestrian(new List<Crossroad>(grid.Controls.OfType<Crossroad>()), allTrafficLights);
                         }
 
                         foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
@@ -429,24 +402,24 @@ namespace TrafficSimulation
                 }
                 else
                 {
-                    for (int i =0; i < pedestrians.Count; i++)
+                    for (int i = 0; i < pedestrians.Count; i++)
                     {
                         pedestrians[i].SetPoints(Crossroad.PedestrianDirections[i].Points);
-                            if(i > 4)
-                            {
-                                i = 0;
-                            }
+                        if (i > 4)
+                        {
+                            i = 0;
+                        }
                     }
                 }
             }
 
 
         }
-   
+
         public static void CreatePedestrians()
         {
-         pedestrians.Clear();
-         Crossroad.AddPedestrianDirections();
+            pedestrians.Clear();
+            Crossroad.AddPedestrianDirections();
 
             foreach (Direction d in Crossroad.PedestrianDirections)
             {
@@ -478,12 +451,7 @@ namespace TrafficSimulation
 
         #endregion
 
-        static private void ChangeTrafficLights()
-        {
 
-        }
-
-        private static Form1 f1;
 
         public static void SetForm(Form1 form1)
         {
@@ -502,12 +470,11 @@ namespace TrafficSimulation
             AssignPoints();
 
 
-             CreatePedestrians();
-             _pedestrianTimer.Elapsed += TimedPedestriansEvent;
-             _pedestrianTimer.Interval = 150;
+            CreatePedestrians();
+            _pedestrianTimer.Elapsed += TimedPedestriansEvent;
+            _pedestrianTimer.Interval = 150;
             _pedestrianTimer.Start();
-           // refreshment.Start();
-          
+
             GetAllTrafficLights();
 
             // Execution
@@ -516,17 +483,17 @@ namespace TrafficSimulation
                 CreateMovables();
                 MoveMoveables();
                 Refresh();
-               
+
             }
-            
+
             _pedestrianTimer.Stop();
 
 
         }
 
-      
 
-    
+
+
     }
 
 }

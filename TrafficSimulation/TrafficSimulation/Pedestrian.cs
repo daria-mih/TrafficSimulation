@@ -15,19 +15,15 @@ namespace TrafficSimulation
         { get; set; }
         public Point endPoint
         { get; set; }
-
-        public Graphics icon
-        { get; set; }
         public List<Point> route
         { get; set; }
-
         public int size
         { get; set; }
         public Pedestrian()
         {
             route = new List<Point>();
-            
-          
+
+
         }
         List<Point> IMoveable.route
         {
@@ -49,41 +45,25 @@ namespace TrafficSimulation
 
         public void Move(Direction direction)
         {
-           
-            
+
+
         }
         public void MovePedestrian(List<Crossroad> crossroads, List<TrafficLight> trafficlights)
         {
             if (route.Count != 0)
             {
-                //foreach (Crossroad c in crossroads)
-                //{
-                //    foreach (var trafficLight in trafficlights)
-                //    {
-                //        Rectangle area = new Rectangle(c.Location, new Size(200, 200));
-                //        if (area.Contains(trafficLight.currentPosition1) || area.Contains(trafficLight.currentPosition2))
-                //        {
-                //            if (trafficLight.state == Color.Red)
-                //            {
-                //                count++;
-                //            }
-                //        }
-                //    }}
+                {
+                    if (this.route.Count > 0 && this.route.Count < 500)
+                    {
+                        currentPosition = this.route[0];
 
-                //        if
-                //            (count == trafficlights.Count)
-                        {
-                            if (this.route.Count > 0 && this.route.Count < 500)
-                            {
-                                currentPosition = this.route[0];
+                        this.route.Remove(this.route[0]);
+                    }
+                }
 
-                                this.route.Remove(this.route[0]);
-                            }
-                        }
-                    
-                
+
             }
-            
+
 
         }
         public void SetPoints(List<Point> points)
