@@ -108,7 +108,7 @@ namespace TrafficSimulation
                 foreach (TrafficLight l in lights)
                 {
                     //check if there is a traffic light in the rectangle
-                    if (check.Contains(l.currentPosition1))
+                    if (check.Contains(l.currentPosition1)|| check.Contains(l.currentPosition2))
                     {
                         //check if the traffic light is red
                         if (l.state == Color.Red)
@@ -127,7 +127,7 @@ namespace TrafficSimulation
 
                 foreach (TrafficLight l in lights)
                 {
-                    if (check.Contains(l.currentPosition2))
+                    if (check.Contains(l.currentPosition2)|| check.Contains(l.currentPosition1))
                     {
                         if (l.state == Color.Red)
                         {
@@ -146,7 +146,7 @@ namespace TrafficSimulation
 
                 foreach (TrafficLight l in lights)
                 {
-                    if (check.Contains(l.currentPosition1))
+                    if (check.Contains(l.currentPosition1)|| check.Contains(l.currentPosition2))
                     {
                         if (l.state == Color.Red)
                         {
@@ -165,7 +165,7 @@ namespace TrafficSimulation
 
                 foreach (TrafficLight l in lights)
                 {
-                    if (check.Contains(l.currentPosition2))
+                    if (check.Contains(l.currentPosition2)|| check.Contains(l.currentPosition1))
                     {
                         if (l.state == Color.Red)
                         {
