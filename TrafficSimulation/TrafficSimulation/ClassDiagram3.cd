@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="TrafficSimulation.Crossroad">
+    <Position X="3.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAIJAAkCACEAYBAEEAAIAEADiAAQAADgAQ=</HashCode>
+      <FileName>Crossroad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.CrossroadA">
+    <Position X="3.5" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossroadA.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.CrossroadB">
+    <Position X="5.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossroadB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.CrossroadProperties">
+    <Position X="1.25" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAAAAQACAAAAAAAAAAIAAAAAAAAAAAAAAwAAAAAAAAA=</HashCode>
+      <FileName>CrossroadProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Direction">
+    <Position X="1.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Direction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Form1">
+    <Position X="11.25" Y="0.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>JAZQgIAeAmESPNBARDGCbygaKgIYIFEuIsgAQWYQiKA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Grid">
+    <Position X="7.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Node">
+    <Position X="18.75" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAEAAAAADEACgAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Pedestrian" BaseTypeListCollapsed="true">
+    <Position X="18" Y="11" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAoAAAAAARMAAAABCAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pedestrian.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation">
+    <Position X="15" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>UAggACAAgAJAQAACAACBAAAAAACAgQAAAgAAQoAAICI=</HashCode>
+      <FileName>Simulation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.TrafficLight">
+    <Position X="1.25" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAAAQAIAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>TrafficLight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Vehicle" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="11" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAEAAAABCAAAAAACAgBAAgAAAAAA=</HashCode>
+      <FileName>Vehicle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CodeProject.GraphicalOverlay">
+    <Position X="7.5" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AQCAAACAACAggAABAACAAAACAAABAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>GraphicalOverlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="TrafficSimulation.IMoveable">
+    <Position X="14.75" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAEAAAABCAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMoveable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TrafficSimulation.FeederLane">
+    <Position X="1.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAACACAAAAAAAA=</HashCode>
+      <FileName>CrossroadProperties.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
