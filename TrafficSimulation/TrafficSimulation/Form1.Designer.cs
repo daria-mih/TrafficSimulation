@@ -41,10 +41,12 @@ namespace TrafficSimulation
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pbCrossroadB = new System.Windows.Forms.PictureBox();
+            this.pbCrossroadA = new System.Windows.Forms.PictureBox();
             this.crossroadB1 = new TrafficSimulation.CrossroadB();
             this.crossroadA1 = new TrafficSimulation.CrossroadA();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
@@ -61,7 +63,6 @@ namespace TrafficSimulation
             this.label2 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.graphicalOverlay1 = new CodeProject.GraphicalOverlay(this.components);
-            this.pbCrossroadA = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).BeginInit();
@@ -69,6 +70,7 @@ namespace TrafficSimulation
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrossroadB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCrossroadA)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -76,7 +78,6 @@ namespace TrafficSimulation
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCrossroadA)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -154,6 +155,7 @@ namespace TrafficSimulation
             this.btnClose.Size = new System.Drawing.Size(26, 25);
             this.btnClose.TabIndex = 0;
             this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             this.btnClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnClose_MouseClick);
             this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
             this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
@@ -180,6 +182,16 @@ namespace TrafficSimulation
             this.pbCrossroadB.TabIndex = 5;
             this.pbCrossroadB.TabStop = false;
             this.pbCrossroadB.Visible = false;
+            // 
+            // pbCrossroadA
+            // 
+            this.pbCrossroadA.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
+            this.pbCrossroadA.Location = new System.Drawing.Point(4, 21);
+            this.pbCrossroadA.Name = "pbCrossroadA";
+            this.pbCrossroadA.Size = new System.Drawing.Size(107, 101);
+            this.pbCrossroadA.TabIndex = 4;
+            this.pbCrossroadA.TabStop = false;
+            this.pbCrossroadA.Visible = false;
             // 
             // crossroadB1
             // 
@@ -236,6 +248,7 @@ namespace TrafficSimulation
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.button3);
             this.panel4.Controls.Add(this.button2);
             this.panel4.Controls.Add(this.button1);
             this.panel4.Controls.Add(this.numericUpDown3);
@@ -250,9 +263,19 @@ namespace TrafficSimulation
             this.panel4.Size = new System.Drawing.Size(117, 228);
             this.panel4.TabIndex = 1;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(3, 200);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(108, 23);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "Reset Grid";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(60, 201);
+            this.button2.Location = new System.Drawing.Point(59, 171);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(51, 23);
             this.button2.TabIndex = 14;
@@ -261,7 +284,7 @@ namespace TrafficSimulation
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(4, 201);
+            this.button1.Location = new System.Drawing.Point(3, 171);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 23);
             this.button1.TabIndex = 13;
@@ -272,9 +295,19 @@ namespace TrafficSimulation
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(75, 81);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(36, 20);
             this.numericUpDown3.TabIndex = 8;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
             // label7
             // 
@@ -385,23 +418,13 @@ namespace TrafficSimulation
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(6, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 13);
+            this.label2.Size = new System.Drawing.Size(157, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Traffic Simulation Application";
             // 
             // graphicalOverlay1
             // 
             this.graphicalOverlay1.Paint += new System.EventHandler<System.Windows.Forms.PaintEventArgs>(this.graphicalOverlay1_Paint);
-            // 
-            // pbCrossroadA
-            // 
-            this.pbCrossroadA.BackgroundImage = global::TrafficSimulation.Properties.Resources.Crossroad1bw;
-            this.pbCrossroadA.Location = new System.Drawing.Point(4, 21);
-            this.pbCrossroadA.Name = "pbCrossroadA";
-            this.pbCrossroadA.Size = new System.Drawing.Size(107, 101);
-            this.pbCrossroadA.TabIndex = 4;
-            this.pbCrossroadA.TabStop = false;
-            this.pbCrossroadA.Visible = false;
             // 
             // Form1
             // 
@@ -430,6 +453,7 @@ namespace TrafficSimulation
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrossroadB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCrossroadA)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -438,7 +462,6 @@ namespace TrafficSimulation
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCrossroadA)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,5 +499,6 @@ namespace TrafficSimulation
         private CodeProject.GraphicalOverlay graphicalOverlay1;
         private PictureBox pbCrossroadB;
         private PictureBox pbCrossroadA;
+        private Button button3;
     }
 }

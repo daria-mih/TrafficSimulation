@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static TrafficSimulation.IMoveable;
 
 namespace TrafficSimulation
 {
@@ -15,28 +16,18 @@ namespace TrafficSimulation
         { get; set; }
         public Point endPoint
         { get; set; }
-        public List<Point> route
-        { get; set; }
+        //public List<Point> route
+        //{ get; set; }
         public int size
         { get; set; }
+        public List<Point> route { get; set; }
         public Pedestrian()
         {
             route = new List<Point>();
 
 
         }
-        List<Point> IMoveable.route
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        
 
         public bool Move(List<Vehicle> carlist, List<TrafficLight> lights)
         {
@@ -48,37 +39,56 @@ namespace TrafficSimulation
 
 
         }
+        private Object thisLock = new Object();
         public void MovePedestrian(List<Crossroad> crossroads, List<TrafficLight> trafficlights)
         {
-            if (route.Count != 0)
+            try
             {
+                lock (thisLock)
                 {
-                    if (this.route.Count > 0 && this.route.Count < 500)
+                    if (this.route.Count >= 1)
                     {
-                        currentPosition = this.route[0];
-
-                        this.route.Remove(this.route[0]);
+                        currentPosition = this.route[route.Count - 1];
+                        this.route.Remove(this.route[route.Count - 1]);
                     }
                 }
-
-
+                
             }
+            catch (Exception)
+            {
+                Console.WriteLine("not moving");
+            }
+            
+           
 
 
         }
         public void SetPoints(List<Point> points)
         {
-            this.route.Clear();
-            if (points != null)
+            try
             {
-                foreach (Point p in points)
+                lock (thisLock)
                 {
-                    this.route.Add(p);
+                    this.route.Clear();
+                    if (points != null)
+                    {
+                        foreach (Point p in points)
+                        {
+                            this.route.Add(p);
+                        }
+                    }
+                    currentPosition = route[route.Count - 1];
+                    
                 }
+               
             }
-            currentPosition = route[0];
+            catch (Exception)
+            {
+               Console.WriteLine("not setting");
+            }
+            
         }
-
+        
 
 
     }

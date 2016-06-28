@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace TrafficSimulation
@@ -89,7 +90,7 @@ namespace TrafficSimulation
         private void InitializeTimer()
         {
             counter = 0;
-            lightTimer.Interval = 1000;
+            lightTimer.Interval = 3000;
             lightTimer.Enabled = true;
             timer1_Tick(null, null);
 
@@ -344,6 +345,11 @@ namespace TrafficSimulation
             }
 
             base.OnMouseUp(e);
+        }
+
+        public void SetTimerInterval(int i)
+        {
+            this.lightTimer.Interval = i*1000;
         }
 
         public override string ToString()

@@ -39,6 +39,7 @@ namespace TrafficSimulation
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         Thread simulation;
+        public bool closing = false;
 
         public Form1()
         {
@@ -142,6 +143,7 @@ namespace TrafficSimulation
 
         private void btnClose_MouseClick(object sender, MouseEventArgs e)
         {
+            closing = true;
             this.Close();
         }
 
@@ -386,11 +388,11 @@ namespace TrafficSimulation
                     if (c is CrossroadA)
                     {
                         //this is only a test, will update all properties such as noOfCars etc when everything has been fully implemented
-                        properties.Add(new CrossroadProperties() { Location = c.Location, Type = 1 });
+                        properties.Add(new CrossroadProperties() { Location = c.Location, Type = 1, TrafficLightTimer = Convert.ToInt32(numericUpDown3.Value), Cars = Convert.ToInt32(numericUpDown1.Value) });
                     }
                     else
                     {
-                        properties.Add(new CrossroadProperties() { Location = c.Location, Type = 2 });
+                        properties.Add(new CrossroadProperties() { Location = c.Location, Type = 2, TrafficLightTimer = Convert.ToInt32(numericUpDown3.Value), Cars = Convert.ToInt32(numericUpDown1.Value) });
                     }
                 }
             }
@@ -432,6 +434,7 @@ namespace TrafficSimulation
             List<CrossroadProperties> newProperties = new List<CrossroadProperties>();
             bf = null;
             fs = null;
+            int timer = 3;
             try
             {
                 DialogResult dr = openGrid.ShowDialog();
@@ -467,6 +470,8 @@ namespace TrafficSimulation
                                 grid1.Controls.Remove(A);
                             };
                             A.Location = prop.Location;
+                            A.PlaceTrafficLights(3000);
+                            
                             grid1.Controls.Add(A);
                         }
                         else
@@ -484,13 +489,23 @@ namespace TrafficSimulation
                                 grid1.Controls.Remove(B);
                             };
                             B.Location = prop.Location;
+                            B.PlaceTrafficLights(3000);
                             grid1.Controls.Add(B);
 
                         }
+                        timer = prop.TrafficLightTimer;
+                        numericUpDown1.Value = prop.Cars;
+                        numericUpDown3.Value = prop.TrafficLightTimer;
+
                     }
-                    int controls = grid1.Controls.Count;
+
+                    foreach (Crossroad c in grid1.Controls.OfType<Crossroad>())
+                    {
+                        c.SetTimerInterval(timer);
+                    }
 
                 }
+
             }
             catch (SerializationException) { }
             finally
@@ -554,15 +569,28 @@ namespace TrafficSimulation
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            Simulation.ShouldStop = false;
-            Simulation.SetForm(this);
-            simulation = new Thread(Simulation.Run);
-            Simulation.AmountOfCars = Convert.ToInt32(numericUpDown1.Value);
-            pbCrossroadA.Visible = true;
-            pbCrossroadB.Visible = true;
-            grid1.BackgroundImage = null;
-            simulation.Start();
-            this.started = true;
+            try
+            {
+                if (this.grid1.Controls.Count > 0)
+                {
+                    Simulation.ShouldStop = false;
+                    Simulation.SetForm(this);
+                    simulation = new Thread(Simulation.Run);
+                    Simulation.AmountOfCars = Convert.ToInt32(numericUpDown1.Value);
+                    pbCrossroadA.Visible = true;
+                    pbCrossroadB.Visible = true;
+                    grid1.BackgroundImage = null;
+                    simulation.Start();
+                    this.started = true;
+                    button3.Enabled = false;
+                    
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Starting interrupted");
+            }
+           
         }
 
 
@@ -609,6 +637,17 @@ namespace TrafficSimulation
              
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+           this.grid1.Controls.Clear();
+            Simulation.Moveables = new List<IMoveable>();
+        }
+
         private void DrawTrafficLights(PaintEventArgs pe)
         {
             foreach (Crossroad crossroad in grid1.Controls.OfType<Crossroad>())
@@ -624,36 +663,37 @@ namespace TrafficSimulation
                             {
                                 pe.Graphics.FillEllipse(b, p.X + 80, p.Y + 50, 9, 9);
                                 if (tl.currentPosition1 == new Point(0, 0)) tl.currentPosition1 = new Point(80, 50);
-                                pe.Graphics.FillEllipse(b, p.X + 110, p.Y + 140, 9, 9);
-                                if (tl.currentPosition2 == new Point(0, 0)) tl.currentPosition2 = new Point(110, 140);
+                                pe.Graphics.FillEllipse(b, p.X + 65, p.Y + 50, 9, 9);
+                                if (tl.currentPosition2 == new Point(0, 0)) tl.currentPosition2 = new Point(65, 50);
                                 break;
                             }
                         case 2:
                             {
                                 //right
-                                pe.Graphics.FillEllipse(b, p.X + 65, p.Y + 50, 9, 9);
-                                if (tl.currentPosition1 == new Point(0,0)) tl.currentPosition1 = new Point(65, 50);
+                               
                                 pe.Graphics.FillEllipse(b, p.X + 125, p.Y + 140, 9, 9);
                                 if (tl.currentPosition2 == new Point(0, 0)) tl.currentPosition2 = new Point(125, 140);
-
+                                pe.Graphics.FillEllipse(b, p.X + 110, p.Y + 140, 9, 9);
+                                if (tl.currentPosition1 == new Point(0, 0)) tl.currentPosition1 = new Point(110, 140);
                                 break;
+                               
                             }
                         case 3:
                             {
 
                                 pe.Graphics.FillEllipse(b, p.X + 50, p.Y + 125, 9, 9);
                                 if (tl.currentPosition1 == new Point(0, 0)) tl.currentPosition1 = new Point(50, 125);
-                                pe.Graphics.FillEllipse(b, p.X + 140, p.Y + 65, 9, 9);
-                                if (tl.currentPosition2 == new Point(0, 0)) tl.currentPosition2 = new Point(140, 65);
+                                pe.Graphics.FillEllipse(b, p.X + 50, p.Y + 110, 9, 9);
+                                if (tl.currentPosition2 == new Point(0, 0)) tl.currentPosition2 = new Point(50, 110);
                                 break;
                             }
                         case 4:
                             {
 
-                                pe.Graphics.FillEllipse(b, p.X + 50, p.Y + 110, 9, 9);
-                                if (tl.currentPosition1 == new Point(0, 0)) tl.currentPosition1 = new Point(50, 110);
                                 pe.Graphics.FillEllipse(b, p.X + 140, p.Y + 80, 9, 9);
                                 if (tl.currentPosition2 == new Point(0, 0)) tl.currentPosition2 = new Point(140, 80);
+                                pe.Graphics.FillEllipse(b, p.X + 140, p.Y + 65, 9, 9);
+                                if (tl.currentPosition1 == new Point(0, 0)) tl.currentPosition1 = new Point(140, 65);
                                 break;
                             }
                     }
@@ -669,11 +709,19 @@ namespace TrafficSimulation
             pbCrossroadB.Visible = false;
             grid1.BackgroundImage = Properties.Resources.grid;
             Simulation.ShouldStop = true;
+            button3.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            timer1.Interval = 2000;
+            if (Convert.ToInt32(numericUpDown3.Value) >0)
+            {
+                foreach (Crossroad c in grid1.Controls.OfType<Crossroad>())
+                {
+                    c.SetTimerInterval(Convert.ToInt32(numericUpDown3.Value));
+                }
+            }
+            
             this.Invalidate();
         }
 

@@ -32,7 +32,7 @@ namespace TrafficSimulation
         {
             try
             {
-                if (f1 != null)
+                if (!f1.closing)
                 {
                     f1.Invoke((MethodInvoker)delegate
                         {
@@ -54,7 +54,7 @@ namespace TrafficSimulation
             {
                 foreach (TrafficLight trafficLight in crossroad.trafficLights)
                 {
-                    // allTrafficLights.Add(trafficLight);
+                    allTrafficLights.Add(trafficLight);
                 }
             }
         }
@@ -360,9 +360,8 @@ namespace TrafficSimulation
                 List<Vehicle> tempCars = new List<Vehicle>();
                 foreach (Vehicle car in Moveables.OfType<Vehicle>())
                 {
-
+                    
                     car.Move(new List<Vehicle>(Moveables.OfType<Vehicle>()), allTrafficLights);
-
                     if (car.route.Count == 1)
                     {
                         tempCars.Add(car);
@@ -383,36 +382,44 @@ namespace TrafficSimulation
         }
         private static void TimedPedestriansEvent(object source, ElapsedEventArgs e)
         {
-            if (pedestrians.Count != 0)
+            try
             {
-                if (pedestrians[0].route.Count != 0)
+                if (pedestrians.Count != 0)
                 {
-                    foreach (Pedestrian p in pedestrians)
+                    if (pedestrians[0].route.Count != 0)
                     {
-                        if (p.route.Count != 0)
+                        foreach (Pedestrian p in pedestrians)
                         {
-                            p.MovePedestrian(new List<Crossroad>(grid.Controls.OfType<Crossroad>()), allTrafficLights);
-                        }
+                            if (p.route.Count != 0)
+                            {
+                                p.MovePedestrian(new List<Crossroad>(grid.Controls.OfType<Crossroad>()), allTrafficLights);
+                            }
 
-                        foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
-                        {
-                            crossroad.Invalidate();
+                            foreach (Crossroad crossroad in grid.Controls.OfType<Crossroad>())
+                            {
+                                crossroad.Invalidate();
+                            }
                         }
                     }
-                }
-                else
-                {
-                    for (int i = 0; i < pedestrians.Count; i++)
+                    else
                     {
-                        pedestrians[i].SetPoints(Crossroad.PedestrianDirections[i].Points);
-                        if (i > 4)
+                        for (int i = 0; i < pedestrians.Count; i++)
                         {
-                            i = 0;
+                            pedestrians[i].SetPoints(Crossroad.PedestrianDirections[i].Points);
+                            if (i > 4)
+                            {
+                                i = 0;
+                            }
                         }
                     }
                 }
+
             }
-
+            catch (Exception)
+            {
+                Console.WriteLine("Timer disrupted");
+             }
+            
 
         }
 
@@ -420,7 +427,7 @@ namespace TrafficSimulation
         {
             pedestrians.Clear();
             Crossroad.AddPedestrianDirections();
-
+            Random rand = new Random();
             foreach (Direction d in Crossroad.PedestrianDirections)
             {
                 if (d.Points.Count != 0)
@@ -431,6 +438,7 @@ namespace TrafficSimulation
                 }
             }
 
+            
         }
 
         public static void DrawPedestrians(PaintEventArgs pe)
@@ -474,10 +482,7 @@ namespace TrafficSimulation
             _pedestrianTimer.Elapsed += TimedPedestriansEvent;
             _pedestrianTimer.Interval = 150;
             _pedestrianTimer.Start();
-
-            GetAllTrafficLights();
-
-            // Execution
+            
             while (!ShouldStop)
             {
                 CreateMovables();
@@ -485,10 +490,11 @@ namespace TrafficSimulation
                 Refresh();
 
             }
+            if (ShouldStop)
+            {
+                _pedestrianTimer.Stop();
 
-            _pedestrianTimer.Stop();
-
-
+            }
         }
 
 
