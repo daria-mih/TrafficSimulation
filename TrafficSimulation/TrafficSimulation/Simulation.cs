@@ -490,10 +490,25 @@ namespace TrafficSimulation
                 Refresh();
 
             }
-            if (ShouldStop)
+            try
             {
-                _pedestrianTimer.Stop();
 
+            
+            Moveables.Clear();
+                _pedestrianTimer.Stop();
+            foreach (Crossroad cross in grid.Controls)
+            {
+                cross.KillTrafficTimer();
+            }
+            f1.Invoke((MethodInvoker)delegate {
+                f1.stopRunning();
+            });
+            f1.Invoke((MethodInvoker)delegate { Refresh(); });
+            }
+            catch (Exception)
+            {
+
+                
             }
         }
 

@@ -143,6 +143,9 @@ namespace TrafficSimulation
 
         private void btnClose_MouseClick(object sender, MouseEventArgs e)
         {
+            
+            Simulation.ShouldStop = true;
+            
             closing = true;
             this.Close();
         }
@@ -705,13 +708,20 @@ namespace TrafficSimulation
         private void btnStop_Click(object sender, EventArgs e)
         {
            
-            pbCrossroadA.Visible = false;
-            pbCrossroadB.Visible = false;
-            grid1.BackgroundImage = Properties.Resources.grid;
+            
             Simulation.ShouldStop = true;
-            button3.Enabled = true;
+            
         }
-
+        public void stopRunning()
+        {
+            
+                pbCrossroadA.Visible = false;
+                pbCrossroadB.Visible = false;
+                grid1.BackgroundImage = Properties.Resources.grid;
+                button3.Enabled = true;
+           
+            
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             if (Convert.ToInt32(numericUpDown3.Value) >0)

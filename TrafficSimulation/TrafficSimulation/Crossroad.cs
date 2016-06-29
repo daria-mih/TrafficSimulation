@@ -58,7 +58,10 @@ namespace TrafficSimulation
             ChangeState();
             counter++;
         }
-
+        public void KillTrafficTimer()
+        {
+            lightTimer.Stop();
+        }
         private void ChangeState()
         {
             TrafficLight tempLight = null;
